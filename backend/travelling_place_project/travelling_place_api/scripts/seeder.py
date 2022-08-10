@@ -6,9 +6,8 @@ import numpy as np
 travelling_places_csv = os.path.join(os.path.dirname(__file__), "tourism_with_id.csv")
 travelling_places_rating_csv = os.path.join(os.path.dirname(__file__), "tourism_rating.csv") 
 
-def run():
+def seed_travelling_places():
     travelling_places_df = pd.read_csv(travelling_places_csv, delimiter = ';')
-    travelling_places_rating_df = pd.read_csv(travelling_places_rating_csv, delimiter = ',')
 
     travelling_places_df = travelling_places_df.replace(np.NaN, "N/A")
     
@@ -40,7 +39,8 @@ def run():
             summarized_description
         )
         travelling_place.save()
-
+def seed_travelling_places_rating():
+    travelling_places_rating_df = pd.read_csv(travelling_places_rating_csv, delimiter = ',')
     print("Seeding Travelling Places Rating...")
     index = 0
     for label, series in travelling_places_rating_df.iterrows():
@@ -57,3 +57,9 @@ def run():
         )
 
         travelling_place_rating.save()
+
+def run():
+    seed_travelling_places()
+    seed_travelling_places_rating()
+
+    
