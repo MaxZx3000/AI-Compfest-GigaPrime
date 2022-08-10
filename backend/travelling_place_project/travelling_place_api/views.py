@@ -3,24 +3,29 @@ from rest_framework.views import APIView
 
 # Create your views here.
 # News API
-class NewsFetch(APIView):
+
+class NewsFetchLinksAPI():
     def get(self, request):
         pass
 
-class NewsTopicModelling(APIView):
+class NewsFetchDetailsAPI(APIView):
     def get(self, request):
         pass
 
-class TourismDescription(APIView):
+class NewsTopicModellingAPI(APIView):
+    def get(self, request):
+        pass
+
+class TourismAPI(APIView):
     def get(self, request):
         pass
 
 # Content Based Filtering
-class ContentBasedRecommendationTourismPlace():
+class ContentBasedRecommendationAPI():
     def get(self, request):
         pass
 
 # Colab Based Filtering
-class ColabBasedRecommedationTourismPlace():
+class ColabBasedRecommedationAPI():
     def get(self, request):
         pass
