@@ -11,7 +11,7 @@ import pandas as pd
 
 # Create your views here.
 # News API
-class PreprocessingTemplate():
+class PreprocessingTemplate(APIView):
     @staticmethod
     def convert_queryset_data_to_df(queryset_data, fields):
         query_values = queryset_data.values(fields)
@@ -26,7 +26,7 @@ class PreprocessingTemplate():
             tokenized_sentence = indo_lemmatizer.lemmatize(description)
             tokenized_descriptions.append(tokenized_sentence)
 
-class NewsFetchLinksAPI():
+class NewsFetchLinksAPI(APIView):
     def get(self, request):
         data = request.data
         pass
@@ -42,7 +42,7 @@ class NewsKeywordExtractionAPI(APIView):
         pass
 
 # Content Based Filtering
-class ContentBasedRecommendationAPI():
+class ContentBasedRecommendationAPI(APIView):
     def get_descriptions(self, data_df, sample_description):        
         indonesian_stopwords = stopwords.words("indonesian")
         tf_idf_vectorizer = TfidfVectorizer(stop_words = indonesian_stopwords)
@@ -66,14 +66,17 @@ class ContentBasedRecommendationAPI():
     def get(self, request):
         data = request.data
         query_result = data["query"]
+        print(f"Query Result: {query_result}")
         travelling_places_query_set = TravellingPlaces.objects.all()
-        data_df = PreprocessingTemplate.convert_queryset_data_to_df(travelling_places_query_set)
+        print(f"Query Set: {travelling_places_query_set}")
+        data_df = PreprocessingTemplate.convert_queryset_data_to_df(travelling_places_query_set, "description")
+        
         print(data_df)
-         
+
         pass
 
 # Colab Based Filtering
-class ColabBasedRecommedationAPI():
+class ColabBasedRecommedationAPI(APIView):
     def get(self, request):
         data = request.data
         pass

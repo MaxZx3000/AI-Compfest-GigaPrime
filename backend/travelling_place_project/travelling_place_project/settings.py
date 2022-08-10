@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'travelling_place_api'
+    'travelling_place_api',
+    'django_extensions',
+    'django_seed',
 ]
 
 MIDDLEWARE = [
