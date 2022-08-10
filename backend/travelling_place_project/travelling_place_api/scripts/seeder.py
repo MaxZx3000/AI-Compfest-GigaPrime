@@ -7,7 +7,7 @@ travelling_places_csv = os.path.join(os.path.dirname(__file__), "datasets/summar
 travelling_places_rating_csv = os.path.join(os.path.dirname(__file__), "datasets/tourism_rating.csv") 
 
 def seed_travelling_places():
-    travelling_places_df = pd.read_csv(travelling_places_csv, delimiter = ',')
+    travelling_places_df = pd.read_csv(travelling_places_csv, delimiter = ';')
 
     travelling_places_df = travelling_places_df.replace(np.NaN, "N/A")
     
