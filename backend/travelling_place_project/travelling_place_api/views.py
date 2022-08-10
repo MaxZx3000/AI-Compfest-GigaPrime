@@ -15,7 +15,7 @@ class NewsFetchDetailsAPI(APIView):
         data = request.data
         pass
 
-class NewsTopicModellingAPI(APIView):
+class NewsKeywordExtractionAPI(APIView):
     def get(self, request):
         data = request.data
         pass
