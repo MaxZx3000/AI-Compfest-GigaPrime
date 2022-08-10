@@ -6,26 +6,33 @@ from rest_framework.views import APIView
 
 class NewsFetchLinksAPI():
     def get(self, request):
+        data = request.data
+
         pass
 
 class NewsFetchDetailsAPI(APIView):
     def get(self, request):
+        data = request.data
         pass
 
 class NewsTopicModellingAPI(APIView):
     def get(self, request):
+        data = request.data
         pass
 
 class TourismAPI(APIView):
     def get(self, request):
+        data = request.data
         pass
 
 # Content Based Filtering
 class ContentBasedRecommendationAPI():
     def get(self, request):
+        data = request.data
         pass
 
 # Colab Based Filtering
 class ColabBasedRecommedationAPI():
     def get(self, request):
+        data = request.data
         pass
