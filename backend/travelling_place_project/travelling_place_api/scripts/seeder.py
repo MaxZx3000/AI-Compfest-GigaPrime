@@ -3,7 +3,7 @@ import pandas as pd
 from ..models import TravellingPlaces, TravellingPlacesRating
 import numpy as np
 
-travelling_places_csv = os.path.join(os.path.dirname(__file__), "datasets/summarized_tourism_with_id.csv")
+travelling_places_csv = os.path.join(os.path.dirname(__file__), "datasets/tourism_summarized.csv")
 travelling_places_rating_csv = os.path.join(os.path.dirname(__file__), "datasets/tourism_rating.csv") 
 
 def seed_travelling_places():
