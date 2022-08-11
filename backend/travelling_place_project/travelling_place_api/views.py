@@ -1,5 +1,5 @@
 import json
-from django.http import JsonResponse
+from django.http import HttpResponse
 from rest_framework import status
 from rest_framework.views import APIView
 from .models import TravellingPlaces, TravellingPlacesRating
@@ -12,20 +12,22 @@ import pandas as pd
 
 # Create your views here.
 # News API
-class PreprocessingTemplate(APIView):
+class PreprocessingTemplate():
     @staticmethod
-    def convert_queryset_data_to_df(queryset_data, fields):
-        query_values = queryset_data.values(fields)
+    def convert_queryset_data_to_df(queryset_data):
+        query_values = queryset_data.values()
         return pd.DataFrame.from_records(query_values)
 
     @staticmethod
-    def lemmarize_texts(data_df, fields):
+    def lemmatize_texts(data_df, fields):
         tokenized_descriptions = []
         indo_lemmatizer = Lemmatizer()
         for index, row in data_df.iterrows():
             description = row[fields]
             tokenized_sentence = indo_lemmatizer.lemmatize(description)
             tokenized_descriptions.append(tokenized_sentence)
+
+        return tokenized_descriptions
 
 class NewsFetchLinksAPI(APIView):
     def get(self, request):
@@ -44,7 +46,7 @@ class NewsKeywordExtractionAPI(APIView):
 
 # Content Based Filtering
 class ContentBasedRecommendationAPI(APIView):
-    def get_descriptions(self, data_df, sample_description):        
+    def _get_descriptions(self, data_df, sample_description):        
         indonesian_stopwords = stopwords.words("indonesian")
         tf_idf_vectorizer = TfidfVectorizer(stop_words = indonesian_stopwords)
         vector_components = tf_idf_vectorizer.fit_transform(data_df)
@@ -65,18 +67,25 @@ class ContentBasedRecommendationAPI(APIView):
         return top_n_df
 
     def get(self, request):
+        print("Processing...")
         data = request.data
         query_result = data["query"]
-        print(f"Query Result: {query_result}")
         travelling_places_query_set = TravellingPlaces.objects.all()
-        print(f"Query Set: {travelling_places_query_set}")
-        data_df = PreprocessingTemplate.convert_queryset_data_to_df(travelling_places_query_set, "description")
+
+        description_field = "description"
+
+        data_df = PreprocessingTemplate.convert_queryset_data_to_df(travelling_places_query_set)
+        lemmatized_texts = PreprocessingTemplate.lemmatize_texts(data_df, description_field)
+        data_df[description_field] = lemmatized_texts
         
-        print(data_df)
+        vector_components, sample_description_vector_components, index_to_word_mapping = self._get_descriptions(data_df[description_field], query_result)
 
-        json_data = json.dumps({"sample": "Sample Data"})
+        top_n_distances, top_n_indexes_ranking = self._recommend_travelling_places_using_knn(vector_components, sample_description_vector_components)
+        
+        top_n_df = self._get_top_n_recommendations_based_on_similarity_scores(data_df, top_n_indexes_ranking.flatten())
 
-        return JsonResponse(json_data, content_type = "application/json", status = status.HTTP_200_OK)
+        json_result = top_n_df.to_json(orient = "records")
+        return HttpResponse(json_result, content_type = "application/json", status = status.HTTP_200_OK)
 
 # Colab Based Filtering
 class ColabBasedRecommedationAPI(APIView):
