@@ -5,5 +5,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path(r'travelling_places_list', ContentBasedRecommendationAPI.as_view(), name = "list_of_travelling_places"),
-    path(r'news_list', NewsFetchLinksAPI, name = "news_list"),
+    path(r'news_list', NewsFetchLinksAPI.as_view(), name = "news_list"),
 ]
