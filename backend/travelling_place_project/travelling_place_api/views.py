@@ -8,6 +8,10 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from nlp_id.tokenizer import Tokenizer
 from nlp_id.lemmatizer import Lemmatizer
 from nltk.corpus import stopwords
+
+from .templates.google_link_fetch import GoogleLinkFetch
+from .templates.web_scrapper import WebScraper
+
 import pandas as pd
 
 # Create your views here.
@@ -32,6 +36,12 @@ class PreprocessingTemplate():
 class NewsFetchLinksAPI(APIView):
     def get(self, request):
         data = request.data
+        query = data["title"]
+        news_query = f"{query} Berita"
+        google_link_fetch = GoogleLinkFetch()
+        json_response = google_link_fetch.fetch_json_from_search_api(news_query)
+        link_urls = google_link_fetch.get_all_links(json_response, LIMIT_LINK_NUMBER = 10)
+        print(link_urls)
         pass
 
 class NewsFetchDetailsAPI(APIView):
