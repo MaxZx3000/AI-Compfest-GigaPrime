@@ -1,5 +1,5 @@
 import json
-from django.http import HttpResponse
+from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.views import APIView
 from .models import TravellingPlaces, TravellingPlacesRating
@@ -76,7 +76,7 @@ class ContentBasedRecommendationAPI(APIView):
 
         json_data = json.dumps({"sample": "Sample Data"})
 
-        return HttpResponse(json_data, status = status.HTTP_200_OK)
+        return JsonResponse(json_data, content_type = "application/json", status = status.HTTP_200_OK)
 
 # Colab Based Filtering
 class ColabBasedRecommedationAPI(APIView):
