@@ -57,11 +57,8 @@ class NewsFetchLinksAPI(APIView):
 class NewsFetchDetailsAPI(APIView):
     def get(self, request):
         data = request.data
-
-class NewsKeywordExtractionAPI(APIView):
-    def get(self, request):
-        data = request.data
-        pass
+        url_link = data["url_link"]
+        
 
 # Content Based Filtering
 class ContentBasedRecommendationAPI(APIView):
