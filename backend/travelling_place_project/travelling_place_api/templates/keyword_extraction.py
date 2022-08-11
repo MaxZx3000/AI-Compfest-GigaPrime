@@ -3,7 +3,7 @@ from sklearn.decomposition import NMF
 import numpy as np
 
 class KeywordExtraction:
-    def get_top_words_from_range_of_topics(self, model, feature_names, n_top_words = 10):
+    def _get_top_words_from_range_of_topics(self, model, feature_names, n_top_words = 10):
         top_features_per_document = []
         for topic_idx, topic in enumerate(model.components_):
             top_features_ind = topic.argsort()[: -n_top_words - 1 : -1]
@@ -31,6 +31,6 @@ class KeywordExtraction:
 
         nmf.fit(x)
         top_topic_indexes = self._get_most_relevant_topic_from_sentences(nmf, x)
-        top_words = self.get_top_words_from_range_of_topics(nmf, feature_names)
+        top_words = self._get_top_words_from_range_of_topics(nmf, feature_names)
 
         return top_words[top_topic_indexes]
