@@ -30,7 +30,6 @@ class PreprocessingTemplate():
         return tokenized_descriptions
 
 class NewsFetchLinksAPI(APIView):
-
     def get(self, request):
         data = request.data
         pass
@@ -38,8 +37,6 @@ class NewsFetchLinksAPI(APIView):
 class NewsFetchDetailsAPI(APIView):
     def get(self, request):
         data = request.data
-
-        pass
 
 class NewsKeywordExtractionAPI(APIView):
     def get(self, request):

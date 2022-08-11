@@ -14,6 +14,8 @@ class GoogleLinkFetch():
             link_urls.append(link)
             print(link)
 
+        return link_urls
+
     def fetch_json_from_search_api(self, query):
         BASE_LINK = "https://www.googleapis.com/customsearch/v1"
         CX_KEY = "e34228993d08f4238"
