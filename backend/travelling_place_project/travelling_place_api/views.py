@@ -31,12 +31,14 @@ class PreprocessingTemplate():
 
 class NewsFetchLinksAPI(APIView):
     def get(self, request):
+        
         data = request.data
         pass
 
 class NewsFetchDetailsAPI(APIView):
     def get(self, request):
         data = request.data
+        
         pass
 
 class NewsKeywordExtractionAPI(APIView):
