@@ -8,3 +8,10 @@ class WebScraper():
         request = requests.get(web_url)
         return request.text
 
+    def get_relevant_paragraphs_only(web_content):
+        beautiful_soup = BeautifulSoup(web_content)
+        texts = [element.text for element in beautiful_soup.find_all('p')]
+        texts += [element.text for element in beautiful_soup.find_all('p span')]
+        texts += [element.text for element in beautiful_soup.find_all('div', {"class": "post-body-inner"})]
+        
+        return texts
