@@ -65,6 +65,9 @@ class NewsFetchDetailsAPI(APIView):
         sentence_filtered_tokenized = [sentence for sentence in sentence_dot_tokenized if len(sentence) >= word_length_threshold]
         return sentence_filtered_tokenized
     
+    def _get_summarized_news(self, relevant_paragraphs):
+        pass
+
     def _get_news_data(self, url_link):
         web_scraper = WebScraper()
         web_content = web_scraper.retrieve_content_from_scraper_api(url_link)
@@ -77,6 +80,7 @@ class NewsFetchDetailsAPI(APIView):
         
         relevant_paragraphs = self._get_news_data(url_link)
         preprocessed_relevant_paragraphs = self._preprocess_text(relevant_paragraphs)
+        summarized_news = self._get_summarized_news(preprocessed_relevant_paragraphs)
         
 
         print(preprocessed_relevant_paragraphs)
