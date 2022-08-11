@@ -40,9 +40,12 @@ class NewsFetchLinksAPI(APIView):
         news_query = f"{query} Berita"
         google_link_fetch = GoogleLinkFetch()
         json_response = google_link_fetch.fetch_json_from_search_api(news_query)
-        link_urls = google_link_fetch.get_all_links(json_response, LIMIT_LINK_NUMBER = 10)
-        print(link_urls)
-        pass
+        header_news_infos = google_link_fetch.get_header_info(json_response, LIMIT_LINK_NUMBER = 10)
+        header_news_json = {
+            'info': json.dumps(header_news_infos)
+        }
+
+        return HttpResponse(header_news_json, content_type = "application/json", status = status.HTTP_200_OK)
 
 class NewsFetchDetailsAPI(APIView):
     def get(self, request):
