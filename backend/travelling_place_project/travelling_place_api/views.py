@@ -8,6 +8,7 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from nlp_id.tokenizer import Tokenizer
 from nlp_id.lemmatizer import Lemmatizer
 from nltk.corpus import stopwords
+from .ml_models.text_rank import TextRank
 
 from .templates.google_link_fetch import GoogleLinkFetch
 from .templates.web_scrapper import WebScraper
@@ -58,7 +59,17 @@ class NewsFetchDetailsAPI(APIView):
     def get(self, request):
         data = request.data
         url_link = data["url_link"]
+        web_scraper = WebScraper()
+        web_content = web_scraper.retrieve_content_from_scraper_api(url_link)
+        relevant_paragraphs = web_scraper.get_relevant_paragraphs_only(web_content)
+
+        print(relevant_paragraphs)
+
+        summarized_text_json = json.dumps({
+            "summarized_text": "Sample Text"
+        })
         
+        return HttpResponse(summarized_text_json, content_type = "application/json", status = status.HTTP_200_OK)
 
 # Content Based Filtering
 class ContentBasedRecommendationAPI(APIView):
