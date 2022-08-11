@@ -1,5 +1,9 @@
+from ast import keyword
 import json
 from django.http import HttpResponse
+
+from .templates.pretty_print import PrettyPrint
+from .templates.keyword_extraction import KeywordExtraction
 from rest_framework import status
 from rest_framework.views import APIView
 from .models import TravellingPlaces, TravellingPlacesRating
@@ -57,7 +61,7 @@ class NewsFetchLinksAPI(APIView):
         return HttpResponse(header_news_json, content_type = "application/json", status = status.HTTP_200_OK)
 
 class NewsFetchDetailsAPI(APIView):
-    def _preprocess_text(self, sentences, word_length_threshold = 5):
+    def _preprocess_text(self, sentences, word_length_threshold = 15):
         sentence_dot_tokenized = []
         for sentence in sentences:
             sentence_dot_tokenized += sent_tokenize(sentence)
@@ -66,7 +70,15 @@ class NewsFetchDetailsAPI(APIView):
         return sentence_filtered_tokenized
     
     def _get_summarized_news(self, relevant_paragraphs):
-        pass
+        text_rank = TextRank()
+        summarized_paragraph_text = text_rank.summarize_text(relevant_paragraphs)
+        return summarized_paragraph_text
+
+    def _get_keywords(self, sentences):
+        keywords_extraction = KeywordExtraction()
+        indonesian_stopwords = set(stopwords.words("indonesian"))
+        top_words = keywords_extraction.extract_keywords(sentences, stopwords = indonesian_stopwords)
+        return top_words
 
     def _get_news_data(self, url_link):
         web_scraper = WebScraper()
@@ -81,13 +93,15 @@ class NewsFetchDetailsAPI(APIView):
         relevant_paragraphs = self._get_news_data(url_link)
         preprocessed_relevant_paragraphs = self._preprocess_text(relevant_paragraphs)
         summarized_news = self._get_summarized_news(preprocessed_relevant_paragraphs)
+        pretty_print = PrettyPrint()
         
-
-        print(preprocessed_relevant_paragraphs)
-
+        pretty_printed_relevant_paragraphs = pretty_print.pretty_print_tokenized_document(relevant_paragraphs)
+        pretty_printed_summarized_news = pretty_print.pretty_print_tokenized_document(summarized_news)
+        top_words = self._get_keywords(pretty_printed_relevant_paragraphs)
 
         summarized_text_json = json.dumps({
-            "summarized_text": "Sample Text"
+            "summarized_text": pretty_printed_summarized_news,
+            "top_words": top_words
         })
         
         return HttpResponse(summarized_text_json, content_type = "application/json", status = status.HTTP_200_OK)
