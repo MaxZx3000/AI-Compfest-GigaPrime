@@ -8,6 +8,7 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from nlp_id.tokenizer import Tokenizer
 from nlp_id.lemmatizer import Lemmatizer
 from nltk.corpus import stopwords
+from nltk.tokenize import sent_tokenize
 from .ml_models.text_rank import TextRank
 
 from .templates.google_link_fetch import GoogleLinkFetch
@@ -56,7 +57,15 @@ class NewsFetchLinksAPI(APIView):
         return HttpResponse(header_news_json, content_type = "application/json", status = status.HTTP_200_OK)
 
 class NewsFetchDetailsAPI(APIView):
-    def _get_summarized_news(self, url_link):
+    def _preprocess_text(self, sentences, word_length_threshold = 5):
+        sentence_dot_tokenized = []
+        for sentence in sentences:
+            sentence_dot_tokenized += sent_tokenize(sentence)
+
+        sentence_filtered_tokenized = [sentence for sentence in sentence_dot_tokenized if len(sentence) >= word_length_threshold]
+        return sentence_filtered_tokenized
+    
+    def _get_news_data(self, url_link):
         web_scraper = WebScraper()
         web_content = web_scraper.retrieve_content_from_scraper_api(url_link)
         relevant_paragraphs = web_scraper.get_relevant_paragraphs_only(web_content)
@@ -66,8 +75,12 @@ class NewsFetchDetailsAPI(APIView):
         data = request.data
         url_link = data["url_link"]
         
-        relevant_paragraphs = self._get_summarized_news(url_link)
-        print(relevant_paragraphs)
+        relevant_paragraphs = self._get_news_data(url_link)
+        preprocessed_relevant_paragraphs = self._preprocess_text(relevant_paragraphs)
+        
+
+        print(preprocessed_relevant_paragraphs)
+
 
         summarized_text_json = json.dumps({
             "summarized_text": "Sample Text"
