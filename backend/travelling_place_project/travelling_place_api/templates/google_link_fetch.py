@@ -5,7 +5,7 @@ class GoogleLinkFetch():
     def get_header_info(self, json_response, LIMIT_LINK_NUMBER = 2):
         header_news_infos = []
         for index, item in enumerate(json_response["items"]):
-            print(index)
+            # print(index)
             if index == LIMIT_LINK_NUMBER:
                 break
 
@@ -18,8 +18,8 @@ class GoogleLinkFetch():
             except:
                 thumbnail_image = item['pagemap']['metatags'][0]['og:image']
    
-            print(f"Thumbnail Image for title {title}:")
-            print(thumbnail_image)
+            # print(f"Thumbnail Image for title {title}:")
+            # print(thumbnail_image)
             if link.endswith("?page=all") == False and link.startswith("https://historia.id/") == False:
                 link += "?page=all"
 
@@ -31,7 +31,7 @@ class GoogleLinkFetch():
 
             header_news_infos.append(header_news_info)
             # print(link)
-        print(header_news_infos)
+        # print(header_news_infos)
         return header_news_infos
 
     def fetch_json_from_search_api(self, query):
