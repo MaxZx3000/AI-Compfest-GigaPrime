@@ -59,6 +59,7 @@ class NewsFetchDetailsAPI(APIView):
     def get(self, request):
         data = request.data
         url_link = data["url_link"]
+        print(url_link)
         web_scraper = WebScraper()
         web_content = web_scraper.retrieve_content_from_scraper_api(url_link)
         relevant_paragraphs = web_scraper.get_relevant_paragraphs_only(web_content)
