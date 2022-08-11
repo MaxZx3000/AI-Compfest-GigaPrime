@@ -56,14 +56,17 @@ class NewsFetchLinksAPI(APIView):
         return HttpResponse(header_news_json, content_type = "application/json", status = status.HTTP_200_OK)
 
 class NewsFetchDetailsAPI(APIView):
-    def get(self, request):
-        data = request.data
-        url_link = data["url_link"]
-        print(url_link)
+    def _get_summarized_news(self, url_link):
         web_scraper = WebScraper()
         web_content = web_scraper.retrieve_content_from_scraper_api(url_link)
         relevant_paragraphs = web_scraper.get_relevant_paragraphs_only(web_content)
+        return relevant_paragraphs
 
+    def get(self, request):
+        data = request.data
+        url_link = data["url_link"]
+        
+        relevant_paragraphs = self._get_summarized_news(url_link)
         print(relevant_paragraphs)
 
         summarized_text_json = json.dumps({
