@@ -1,5 +1,6 @@
-from dataclasses import field
-from django.shortcuts import render
+import json
+from django.http import HttpResponse
+from rest_framework import status
 from rest_framework.views import APIView
 from .models import TravellingPlaces, TravellingPlacesRating
 from sklearn.neighbors import NearestNeighbors
@@ -73,7 +74,9 @@ class ContentBasedRecommendationAPI(APIView):
         
         print(data_df)
 
-        pass
+        json_data = json.dumps({"sample": "Sample Data"})
+
+        return HttpResponse(json_data, status = status.HTTP_200_OK)
 
 # Colab Based Filtering
 class ColabBasedRecommedationAPI(APIView):
