@@ -38,8 +38,10 @@ class NewsFetchLinksAPI(APIView):
         data = request.data
         query = data["title"]
         news_query = f"{query} Berita"
+        NEWS_CX_KEY = "b513cee2778d74c33"
+
         google_link_fetch = GoogleLinkFetch()
-        json_response = google_link_fetch.fetch_json_from_search_api(news_query)
+        json_response = google_link_fetch.fetch_json_from_search_api(news_query, NEWS_CX_KEY)
         header_news_infos = google_link_fetch.get_header_info(json_response, LIMIT_LINK_NUMBER = 10)
         print("Header News Infos:")
         # print(header_news_infos)
