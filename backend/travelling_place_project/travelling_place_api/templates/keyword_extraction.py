@@ -20,17 +20,18 @@ class KeywordExtraction:
         return highest_relevant_topic_index
 
     def extract_keywords(self, sentences, stopwords = [], n_components = 10):
-        tf_idf_vectorizer = TfidfVectorizer(stop_words = stopwords)
+        tf_idf_vectorizer = TfidfVectorizer(stop_words = stopwords, norm = 'l1')
         x = tf_idf_vectorizer.fit_transform([sentences])
         feature_names = tf_idf_vectorizer.get_feature_names()
 
         nmf = NMF(
             n_components = n_components,
-            random_state = 100,
+            random_state = 10,
+            beta_loss = "kullback-leibler",
+            solver = 'mu'
         )
 
         nmf.fit(x)
         top_topic_indexes = self._get_most_relevant_topic_from_sentences(nmf, x)
         top_words = self._get_top_words_from_range_of_topics(nmf, feature_names)
-
         return top_words[top_topic_indexes]
