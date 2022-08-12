@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:travelling_app/globals/asset.dart';
+import 'package:travelling_app/globals/gradient.dart';
 import 'package:travelling_app/globals/route.dart';
 import 'package:travelling_app/utils/context.dart';
 
