@@ -5,7 +5,5 @@ const splashScreenRouteName = "/splash-screen";
 const homeRouteName = "/home";
 
 var routes = {
-  // initialRouteName: (context) => const HomePage(),
   splashScreenRouteName: (context) => const SplashScreenPage(),
-  // homeRouteName: (context) => const HomePage(),
 };
