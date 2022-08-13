@@ -62,6 +62,14 @@ class _SearchBarState extends State<SearchBar>{
 
   Widget getTextInput(){
     return Container(
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(30.0),
+              topLeft: Radius.circular(30.0)
+          ),
+          boxShadow: [shadow]
+      ),
       child: TextField(
         onChanged: (String text){
           setCurrentText(text);
@@ -77,14 +85,6 @@ class _SearchBarState extends State<SearchBar>{
           enabledBorder: InputBorder.none,
           focusedBorder: InputBorder.none,
         ),
-      ),
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(30.0),
-              topLeft: Radius.circular(30.0)
-          ),
-          boxShadow: [shadow]
       ),
     );
   }
