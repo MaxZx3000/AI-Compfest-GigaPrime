@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travelling_app/pages/search_bar.dart';
+import 'package:travelling_app/templates/horizontal_item_view.dart';
 
 class HomePage extends StatelessWidget{
   const HomePage({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class HomePage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(
+        body: Column(
           children: [
             SearchBar(
                 onSearchClick: onSearchBarClick,
@@ -25,6 +26,14 @@ class HomePage extends StatelessWidget{
                   blurRadius: 10.0,
                   spreadRadius: 0.0,
                 )
+            ),
+            Container(
+              padding: const EdgeInsets.all(5.0),
+              child: const HorizontalItemWidget(
+                titleText: "Sample Title",
+                subtitleText: "Sample Subtitle Text",
+                rating: 2.0,
+              ),
             )
           ],
         )
