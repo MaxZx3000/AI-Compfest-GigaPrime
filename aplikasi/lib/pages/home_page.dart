@@ -16,6 +16,8 @@ class HomePage extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SearchBar(
                 onSearchClick: onSearchBarClick,
@@ -28,7 +30,12 @@ class HomePage extends StatelessWidget{
                 )
             ),
             Container(
-              padding: const EdgeInsets.all(5.0),
+              padding: const EdgeInsets.only(
+                left: 30.0,
+                right: 30.0,
+                bottom: 0.0,
+                top: 20.0
+              ),
               child: const HorizontalItemWidget(
                 titleText: "Sample Title",
                 subtitleText: "Sample Subtitle Text",
