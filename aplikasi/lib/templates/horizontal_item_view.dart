@@ -70,7 +70,7 @@ class HorizontalItemWidget extends StatelessWidget{
         ),
         boxShadow: [
           BoxShadow(
-            offset: Offset(5, 5),
+            offset: Offset(0, 5),
             color: Colors.black12,
             spreadRadius: 0,
             blurRadius: 5
