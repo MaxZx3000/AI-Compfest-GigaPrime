@@ -5,19 +5,29 @@ class HorizontalItemWidget extends StatelessWidget{
   final String titleText;
   final String subtitleText;
   final double rating;
+  final double width;
 
   const HorizontalItemWidget({
     Key? key,
     required this.titleText,
     required this.subtitleText,
     required this.rating,
+    this.width = double.infinity,
   }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _getSummaryWidget(){
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(titleText),
+        Text(
+          titleText,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold
+          ),
+          overflow: TextOverflow.ellipsis,
+          textAlign: TextAlign.left,
+        ),
         Text(subtitleText),
         Text(
           rating.toString(),
@@ -26,4 +36,26 @@ class HorizontalItemWidget extends StatelessWidget{
     );
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: width,
+      padding: const EdgeInsets.all(8.0),
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.all(
+          Radius.circular(10.0)
+        ),
+        boxShadow: [
+          BoxShadow(
+            offset: Offset(5, 5),
+            color: Colors.black12,
+            spreadRadius: 0,
+            blurRadius: 5
+          )
+        ]
+      ),
+      child: _getSummaryWidget(),
+    );
+  }
 }
