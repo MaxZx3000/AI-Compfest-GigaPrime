@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:travelling_app/fetch-helpers/data-fetcher.dart';
 import 'package:travelling_app/pages/search_bar.dart';
 import 'package:travelling_app/templates/circular_loading_element.dart';
 import 'package:travelling_app/templates/horizontal_item_view.dart';
@@ -60,6 +61,7 @@ class HomePage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+    DataFetcher.getTravellingPlaces("Monumen Nasional");
     return Scaffold(
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
