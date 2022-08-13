@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:travelling_app/globals/colors.dart';
 
 class HorizontalItemWidget extends StatelessWidget{
   final String titleText;
@@ -48,10 +49,29 @@ class HorizontalItemWidget extends StatelessWidget{
           padding: const EdgeInsets.only(
             top: 10,
           ),
-          child: Text(
-            rating.toString(),
-            overflow: TextOverflow.ellipsis,
-            textAlign: TextAlign.left,
+          child: Row(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Color(colors["dark_orange"] as int)
+                ),
+                padding: const EdgeInsets.all(2.0),
+                child: const Icon(
+                  Icons.star,
+                  color: Colors.yellow,
+                  size: 18,
+                )
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Text(
+                rating.toString(),
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.left,
+              ),
+            ]
           ),
         )
       ],
