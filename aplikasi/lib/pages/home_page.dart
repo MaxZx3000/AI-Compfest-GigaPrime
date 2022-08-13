@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travelling_app/pages/search_bar.dart';
+import 'package:travelling_app/templates/circular_loading_element.dart';
 import 'package:travelling_app/templates/horizontal_item_view.dart';
 
 class HomePage extends StatelessWidget{
@@ -48,6 +49,12 @@ class HomePage extends StatelessWidget{
         subtitleText: "Sample Subtitle Text",
         rating: 2.0,
       ),
+    );
+  }
+
+  Widget _getCircularProgressLoading(){
+    return const CircularLoadingElement(
+      message: "Sedang memuat...",
     );
   }
 
