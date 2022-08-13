@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:travelling_app/globals/gradient.dart';
-import 'package:travelling_app/pages/gradient_button.dart';
+import 'package:travelling_app/templates/gradient_button.dart';
 import 'package:travelling_app/utils/context.dart';
 
 class SearchBar extends StatefulWidget{
