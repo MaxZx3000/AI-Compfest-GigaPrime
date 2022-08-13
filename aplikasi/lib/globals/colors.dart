@@ -8,4 +8,5 @@ const colors = {
 
 const secondaryColors = {
   'translucent_white': 0xFFf2f2f2,
+  'white': 0xFFFFFFFF,
 };
