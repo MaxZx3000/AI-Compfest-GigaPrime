@@ -20,18 +20,40 @@ class HorizontalItemWidget extends StatelessWidget{
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          titleText,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold
+        Padding(
+          padding: EdgeInsets.only(
+            top: 10,
           ),
-          overflow: TextOverflow.ellipsis,
-          textAlign: TextAlign.left,
+          child: Text(
+            titleText,
+            style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20
+            ),
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.left,
+          ),
         ),
-        Text(subtitleText),
-        Text(
-          rating.toString(),
+        Padding(
+          padding: EdgeInsets.only(
+            top: 10,
+          ),
+          child: Text(
+            subtitleText,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.left,
+          ),
         ),
+        Padding(
+          padding: const EdgeInsets.only(
+            top: 10,
+          ),
+          child: Text(
+            rating.toString(),
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.left,
+          ),
+        )
       ],
     );
   }
