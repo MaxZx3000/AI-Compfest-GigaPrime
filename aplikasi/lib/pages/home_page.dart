@@ -5,8 +5,15 @@ import 'package:travelling_app/pages/search_bar.dart';
 import 'package:travelling_app/templates/circular_loading_element.dart';
 import 'package:travelling_app/templates/horizontal_item_view.dart';
 
-class HomePage extends StatelessWidget{
+class HomePage extends StatefulWidget{
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => const _HomeState();
+
+}
+
+class _HomeState extends State<HomePage>{
 
   Function onSearchBarClick(){
     return (){
@@ -60,8 +67,13 @@ class HomePage extends StatelessWidget{
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    DataFetcher.getTravellingPlaces("Monumen Nasional");
+
     return Scaffold(
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
