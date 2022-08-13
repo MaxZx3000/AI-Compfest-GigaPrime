@@ -10,12 +10,12 @@ class SplashScreenPage extends StatelessWidget{
   const SplashScreenPage({Key? key}) : super(key: key);
 
   void moveToSearchPage(duration, context){
-    // Future.delayed(Duration(seconds: duration), (){
-    //   Navigator.pushReplacementNamed(
-    //     context,
-    //     homeRouteName,
-    //   );
-    // });
+    Future.delayed(Duration(seconds: duration), (){
+      Navigator.pushReplacementNamed(
+        context,
+        homeRouteName,
+      );
+    });
   }
 
   Widget getImageLogo(){
