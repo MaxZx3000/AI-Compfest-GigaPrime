@@ -1,5 +1,5 @@
 class ApiEndpoint{
-  static final String _baseApiURL = "http://127.0.0.1:8000/travelling_api";
+  static const String _baseApiURL = "http://127.0.0.1:8000/travelling_api";
 
   static String getTravellingPlacesListLink(){
     return "$_baseApiURL/travelling_places_list";
