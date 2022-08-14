@@ -1,13 +1,16 @@
+import 'dart:convert';
+
 class TravellingPlace{
   int placeId;
   String placeName;
   String description;
   String category;
   String city;
-  double? price;
+  int? price;
   double? rating;
-  int? timeMinutes;
-  Map<String, double>? coordinate;
+  double? timeMinutes;
+  double? latitude;
+  double? longitude;
   String? summarizedDescription;
 
   TravellingPlace({
@@ -18,22 +21,28 @@ class TravellingPlace{
     required this.city,
     this.price,
     this.rating,
-    this.coordinate,
+    this.latitude,
+    this.longitude,
     this.timeMinutes,
     this.summarizedDescription
   });
 
-  factory TravellingPlace.setFromJSON(Map<String, dynamic> json){
+  factory TravellingPlace.setFromJSON(Map<String, dynamic> jsonDatum){
+    String coordinate = jsonDatum["coordinate"];
+    coordinate = coordinate.replaceAll("'", '"');
+    Map<String, dynamic> coordinateJSON = jsonDecode(coordinate);
+
     return TravellingPlace(
-      placeId: json["place_id"],
-      placeName: json["place_name"],
-      description: json["description"],
-      category: json["category"],
-      city: json["city"],
-      price: json["price"],
-      coordinate: json["coordinate"],
-      timeMinutes: json["time_minutes"],
-      summarizedDescription: json["summarized_description"]
+      placeId: jsonDatum["place_id"],
+      placeName: jsonDatum["place_name"],
+      description: jsonDatum["description"],
+      category: jsonDatum["category"],
+      city: jsonDatum["city"],
+      price: jsonDatum["price"],
+      latitude: coordinateJSON['lat'],
+      longitude: coordinateJSON['lng'],
+      timeMinutes: jsonDatum["time_minutes"],
+      summarizedDescription: jsonDatum["summarized_description"]
     );
   }
 }
