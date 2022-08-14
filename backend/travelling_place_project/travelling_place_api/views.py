@@ -129,9 +129,12 @@ class ContentBasedRecommendationAPI(APIView):
         return top_n_df
 
     def get(self, request):
-        print("Processing...")
-        data = request.data
-        query_result = data["query"]
+        try:
+            data = request.data
+            query_result = data["query"]
+        except:
+            query_result = request.GET.get('query', '')
+        
         travelling_places_query_set = TravellingPlaces.objects.all()
 
         description_field = "description"
