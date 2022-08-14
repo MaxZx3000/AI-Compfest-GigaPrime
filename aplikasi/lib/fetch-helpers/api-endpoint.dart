@@ -1,13 +1,16 @@
 class ApiEndpoint{
-  static const String _baseApiURL = "http://127.0.0.1:8000/travelling_api";
+
+  static String getBaseAPIUrl(){
+    return "10.0.2.2:8000";
+  }
 
   static String getTravellingPlacesListLink(){
-    return "$_baseApiURL/travelling_places_list";
+    return "/travelling_api/travelling_places_list";
   }
   static String getNewsListLink(){
-    return "$_baseApiURL/news_list";
+    return "/travelling_api/news_list";
   }
   static String getNewsDetailsLink(){
-    return "$_baseApiURL/news_details";
+    return "/travelling_api/news_details";
   }
 }
