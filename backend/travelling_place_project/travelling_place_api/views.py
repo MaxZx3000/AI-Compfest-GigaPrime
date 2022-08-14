@@ -132,8 +132,10 @@ class ContentBasedRecommendationAPI(APIView):
         try:
             data = request.data
             query_result = data["query"]
+            print(f"Query Result 1: {query_result}")
         except:
             query_result = request.GET.get('query', '')
+            print(f"Query Result 2: {query_result}")
         
         travelling_places_query_set = TravellingPlaces.objects.all()
 
