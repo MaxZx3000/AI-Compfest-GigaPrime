@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:travelling_app/fetch-helpers/api-endpoint.dart';
@@ -11,15 +12,19 @@ class HttpHelpers{
       "query": query
     };
 
-    var body = json.encode(jsonRequestBody);
-    Uri uri = Uri.parse(ApiEndpoint.getTravellingPlacesListLink());
+    Uri uri = Uri.http(
+      ApiEndpoint.getBaseAPIUrl(),
+      ApiEndpoint.getTravellingPlacesListLink(),
+      jsonRequestBody
+    );
+
+    final headers = {
+      HttpHeaders.contentTypeHeader: "application/x-www-form-urlencoded",
+    };
 
     return http.get(
       uri,
-      headers: {
-        "Content-Type": "application/json",
-        body: body
-      },
+      headers: headers,
     );
   }
   static Future<http.Response> fetchNewsList(){
