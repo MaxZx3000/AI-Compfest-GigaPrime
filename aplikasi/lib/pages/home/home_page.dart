@@ -5,6 +5,7 @@ import 'package:travelling_app/classes/travelling_place.dart';
 import 'package:travelling_app/fetch-helpers/data-fetcher.dart';
 import 'package:travelling_app/globals/colors.dart';
 import 'package:travelling_app/globals/gradient.dart';
+import 'package:travelling_app/globals/route.dart';
 import 'package:travelling_app/templates/search_bar.dart';
 import 'package:travelling_app/templates/circular_loading_element.dart';
 import 'package:travelling_app/templates/horizontal_item_view.dart';
@@ -17,7 +18,7 @@ class HomePage extends StatelessWidget{
   late SearchBar searchBar;
 
   String query = "";
-
+  
   Widget _getSearchBarRegion(){
     return Column(
       children: [
@@ -106,7 +107,7 @@ class _TravellingPlaceState extends State<TravellingPlacesWidget>{
       // return Text("Loaded!");
     double childAspectRatio = 0;
     if (ContextUtils.getScreenWidth(context) > 500){
-      childAspectRatio = 2.5;
+      childAspectRatio = 1;
     }
     else{
       childAspectRatio = 3;
@@ -122,11 +123,20 @@ class _TravellingPlaceState extends State<TravellingPlacesWidget>{
             itemCount: travellingPlaces.length,
             itemBuilder: (BuildContext ctx, index){
               return Padding(
-                padding: EdgeInsets.all(10.0),
-                child: HorizontalItemWidget(
-                    titleText: travellingPlaces[index].placeName,
-                    subtitleText: travellingPlaces[index].city,
-                    rating: travellingPlaces[index].getRating(),
+                padding: EdgeInsets.all(5.0),
+                child: TextButton(
+                  onPressed: (){
+                    Navigator.pushNamed(
+                      context,
+                      detailRouteName,
+                      arguments: travellingPlaces[index]
+                    );
+                  },
+                  child: HorizontalItemWidget(
+                      titleText: travellingPlaces[index].placeName,
+                      subtitleText: travellingPlaces[index].city,
+                      rating: travellingPlaces[index].getRating(),
+                  ),
                 ),
               );
             }
