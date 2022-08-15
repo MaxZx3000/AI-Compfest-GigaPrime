@@ -36,6 +36,18 @@ class TravellingPlace{
     }
   }
 
+  String getPrice(){
+    if (price == null){
+      return "Unknown";
+    }
+    else if (price == 0){
+      return "Gratis";
+    }
+    else{
+      return price.toString();
+    }
+  }
+
   factory TravellingPlace.setFromJSON(Map<String, dynamic> jsonDatum){
     String coordinate = jsonDatum["coordinate"];
     coordinate = coordinate.replaceAll("'", '"');
