@@ -5,7 +5,7 @@ import 'package:travelling_app/globals/colors.dart';
 class HorizontalItemWidget extends StatelessWidget{
   final String titleText;
   final String subtitleText;
-  final double rating;
+  final String rating;
   final double width;
 
   const HorizontalItemWidget({
@@ -67,7 +67,7 @@ class HorizontalItemWidget extends StatelessWidget{
                 width: 10,
               ),
               Text(
-                rating.toString(),
+                rating,
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.left,
               ),

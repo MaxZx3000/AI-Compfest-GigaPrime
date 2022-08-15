@@ -97,7 +97,9 @@ class _SearchBarState extends State<SearchBar>{
             topRight: Radius.circular(30.0)
         ),
         buttonContent: const Icon(Icons.search),
-        onButtonTap: onSearchClick(),
+        onButtonTap: (){
+          onSearchClick(currentText);
+        },
         padding: const EdgeInsets.only(
             left: 22.5,
             right: 22.5,
