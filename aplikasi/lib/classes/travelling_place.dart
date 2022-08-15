@@ -27,6 +27,15 @@ class TravellingPlace{
     this.summarizedDescription
   });
 
+  String getRating(){
+    if (rating == null){
+      return "Unknown";
+    }
+    else{
+      return rating.toString();
+    }
+  }
+
   factory TravellingPlace.setFromJSON(Map<String, dynamic> jsonDatum){
     String coordinate = jsonDatum["coordinate"];
     coordinate = coordinate.replaceAll("'", '"');
@@ -38,6 +47,7 @@ class TravellingPlace{
       description: jsonDatum["description"],
       category: jsonDatum["category"],
       city: jsonDatum["city"],
+      rating: jsonDatum["rating"],
       price: jsonDatum["price"],
       latitude: coordinateJSON['lat'],
       longitude: coordinateJSON['lng'],
