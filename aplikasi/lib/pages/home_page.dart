@@ -5,7 +5,7 @@ import 'package:travelling_app/classes/travelling_place.dart';
 import 'package:travelling_app/fetch-helpers/data-fetcher.dart';
 import 'package:travelling_app/globals/colors.dart';
 import 'package:travelling_app/globals/gradient.dart';
-import 'package:travelling_app/pages/search_bar.dart';
+import 'package:travelling_app/templates/search_bar.dart';
 import 'package:travelling_app/templates/circular_loading_element.dart';
 import 'package:travelling_app/templates/horizontal_item_view.dart';
 import 'package:travelling_app/templates/information_widget.dart';
