@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travelling_app/classes/travelling_place.dart';
-import 'package:travelling_app/pages/detail/detail_app_bar.dart';
+import 'package:travelling_app/templates/backable_app_bar.dart';
 import 'package:travelling_app/utils/context.dart';
 
 class DetailPage extends StatelessWidget{
