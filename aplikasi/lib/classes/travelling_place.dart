@@ -48,6 +48,15 @@ class TravellingPlace{
     }
   }
 
+  String getSummarizedDescription(){
+    if (summarizedDescription == null){
+      return "Tidak ada deskripsi";
+    }
+    else{
+      return summarizedDescription.toString();
+    }
+  }
+
   factory TravellingPlace.setFromJSON(Map<String, dynamic> jsonDatum){
     String coordinate = jsonDatum["coordinate"];
     coordinate = coordinate.replaceAll("'", '"');
