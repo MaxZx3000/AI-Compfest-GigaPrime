@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:travelling_app/classes/travelling_place.dart';
 import 'package:travelling_app/globals/colors.dart';
 import 'package:travelling_app/templates/backable_app_bar.dart';
+import 'package:travelling_app/templates/card_template.dart';
 import 'package:travelling_app/utils/context.dart';
 
 class DetailPage extends StatelessWidget{
@@ -94,6 +95,17 @@ class DetailPage extends StatelessWidget{
     );
   }
 
+  Widget _getSummarizedDescription(){
+    return CardTemplate(
+        title: "Deskripsi Tempat",
+        contentWidget: Text(
+          travellingPlace.getSummarizedDescription(),
+        ),
+        height: 120);
+  }
+  Widget _getNewsRelatedToTravellingPlace(){
+    
+  }
   @override
   Widget build(BuildContext context) {
     var arguments = ContextUtils.getArguments(context);
@@ -110,6 +122,7 @@ class DetailPage extends StatelessWidget{
           ),
           _getJumbotronWidget(),
           _getMainPoints(),
+          _getSummarizedDescription()
         ],
       ),
     );
