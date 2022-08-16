@@ -5,6 +5,11 @@ import 'package:http/http.dart' as http;
 import 'package:travelling_app/fetch-helpers/api-endpoint.dart';
 
 class HttpHelpers{
+  static Map <String, String> getUrlHeader(){
+    return {
+      HttpHeaders.contentTypeHeader: "application/x-www-form-urlencoded",
+    };
+  }
   static Future<http.Response> fetchTravellingPlacesList(
       String query
   ){
@@ -18,18 +23,27 @@ class HttpHelpers{
       jsonRequestBody
     );
 
-    final headers = {
-      HttpHeaders.contentTypeHeader: "application/x-www-form-urlencoded",
+    return http.get(
+      uri,
+      headers: getUrlHeader(),
+    );
+  }
+  static Future<http.Response> fetchNewsList(String query){
+
+    var jsonRequestBody = {
+      "title": query
     };
+
+    Uri uri = Uri.http(
+      ApiEndpoint.getBaseAPIUrl(),
+      ApiEndpoint.getNewsListLink(),
+      jsonRequestBody,
+    );
 
     return http.get(
       uri,
-      headers: headers,
+      headers: getUrlHeader(),
     );
-  }
-  static Future<http.Response> fetchNewsList(){
-    Uri uri = Uri.parse(ApiEndpoint.getNewsListLink());
-    return http.get(uri);
   }
   static Future<http.Response> fetchNewsDetails(){
     Uri uri = Uri.parse(ApiEndpoint.getNewsDetailsLink());
