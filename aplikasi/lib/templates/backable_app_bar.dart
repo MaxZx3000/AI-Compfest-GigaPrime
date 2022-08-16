@@ -4,9 +4,11 @@ import 'package:travelling_app/templates/app_bar_stylized.dart';
 
 class DetailAppBar{
   final String appBarTitle;
+  Function onBackIconPressed;
 
   DetailAppBar({
     required this.appBarTitle,
+    required this.onBackIconPressed,
   });
 
   Widget getBackIcon(){
@@ -16,10 +18,18 @@ class DetailAppBar{
         shape: BoxShape.circle,
         color: Color(colors["dark_orange"] as int),
       ),
-      child: const Icon(
-        Icons.arrow_back,
-        size: 32,
-        color: Colors.white,
+      child: TextButton(
+        onPressed: (){
+          onBackIconPressed();
+        },
+        style: ButtonStyle(
+
+        ),
+        child: const Icon(
+          Icons.arrow_back,
+          size: 32,
+          color: Colors.white,
+        ),
       ),
     );
   }

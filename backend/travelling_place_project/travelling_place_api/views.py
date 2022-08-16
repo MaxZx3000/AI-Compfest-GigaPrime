@@ -41,8 +41,14 @@ class PreprocessingTemplate():
 
 class NewsFetchLinksAPI(APIView):
     def get(self, request):
-        data = request.data
-        query = data["title"]
+        try:
+            data = request.data
+            query = data["title"]
+            print(f"Query Result 1: {query}")
+        except:
+            query = request.GET.get('title', '')
+            print(f"Query Result News 2: {query}")
+
         news_query = f"{query} Berita"
         NEWS_CX_KEY = "b513cee2778d74c33"
 

@@ -21,27 +21,27 @@ class CircularLoadingElement extends StatelessWidget{
             borderRadius: BorderRadius.circular(100),
             border: Border.all(
               color: Color(colors["dark_green"] as int),
-              width: 3,
+              width: 2,
             ),
           ),
-          height: 90,
-          width: 90,
+          height: 80,
+          width: 80,
           child: GradientProgressIndicator(
             gradientColors: [
               Color(colors["dark_green"] as int),
               Color(colors["light_blue"] as int)
             ],
             gradientStops: const [0, 0.8],
-            strokeWidth: 10,
+            strokeWidth: 8,
             duration: 1,
-            radius: 35,
+            radius: 30,
             child: Column(),
           ),
         ),
         const SizedBox(
-          height: 10,
+          height: 20,
         ),
-        Text(this.message),
+        Text(message),
       ],
     );
   }

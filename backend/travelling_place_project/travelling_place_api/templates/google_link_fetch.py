@@ -23,6 +23,19 @@ class GoogleLinkFetch():
 
             title = item['title']
             link = item['link']
+            
+            type = None
+            try:
+                type = item["pagemap"]["metatags"][0]["og:type"]
+            except:
+                type = "article"
+
+            site_name = None
+
+            try:
+                site_name = item["pagemap"]["metatags"][0]["og:site_name"]
+            except:
+                site_name = "Unknown"
 
             print(f"Thumbnail Image for title {title}:")
             thumbnail_image = self._get_image_link(item)
@@ -34,7 +47,9 @@ class GoogleLinkFetch():
             header_news_info = {
                 "title": title,
                 "link": link,
-                "thumbnail_image": thumbnail_image
+                "thumbnail_image": thumbnail_image,
+                "type": type,
+                "site_name": site_name,
             }
 
             header_news_infos.append(header_news_info)

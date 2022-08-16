@@ -16,13 +16,13 @@ class HorizontalItemWidget extends StatelessWidget{
     this.width = double.infinity,
   }) : super(key: key);
 
-  Widget _getSummaryWidget(){
+   Widget getSummaryWidget(){
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             top: 10,
           ),
           child: Text(
@@ -36,7 +36,7 @@ class HorizontalItemWidget extends StatelessWidget{
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             top: 10,
           ),
           child: Text(
@@ -63,7 +63,7 @@ class HorizontalItemWidget extends StatelessWidget{
                   size: 18,
                 )
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Text(
@@ -78,8 +78,7 @@ class HorizontalItemWidget extends StatelessWidget{
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget getCardWidget(Widget childWidget){
     return Container(
       width: width,
       padding: const EdgeInsets.all(8.0),
@@ -97,7 +96,14 @@ class HorizontalItemWidget extends StatelessWidget{
           )
         ]
       ),
-      child: _getSummaryWidget(),
+      child: childWidget
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return getCardWidget(
+      getSummaryWidget()
     );
   }
 }

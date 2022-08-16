@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:travelling_app/classes/travelling_place.dart';
+import 'package:travelling_app/fetch-helpers/data-fetcher.dart';
 import 'package:travelling_app/globals/colors.dart';
+import 'package:travelling_app/pages/detail/news_page.dart';
 import 'package:travelling_app/templates/backable_app_bar.dart';
 import 'package:travelling_app/templates/card_template.dart';
 import 'package:travelling_app/utils/context.dart';
@@ -96,15 +99,28 @@ class DetailPage extends StatelessWidget{
   }
 
   Widget _getSummarizedDescription(){
-    return CardTemplate(
-        title: "Deskripsi Tempat",
-        contentWidget: Text(
-          travellingPlace.getSummarizedDescription(),
-        ),
-        height: 120);
+    return Padding(
+      padding: EdgeInsets.all(10.0),
+      child: CardTemplate(
+          title: "Rangkuman Deskripsi Tempat",
+          contentWidget: SingleChildScrollView(
+            primary: false,
+            padding: const EdgeInsets.all(8.0),
+            scrollDirection: Axis.vertical,
+            child: Text(
+              travellingPlace.getSummarizedDescription(),
+              style: const TextStyle(
+                height: 1.3
+              ),
+            ),
+          ),
+          height: 180),
+    );
   }
   Widget _getNewsRelatedToTravellingPlace(){
-    
+    return NewsElement(
+      query: travellingPlace.placeName,
+    );
   }
   @override
   Widget build(BuildContext context) {
@@ -113,17 +129,25 @@ class DetailPage extends StatelessWidget{
 
     return Scaffold(
       appBar: DetailAppBar(
+        onBackIconPressed: (){
+          Navigator.pop(context);
+        },
         appBarTitle: "Travelling Place Detail",
       ).getInstance(context),
-      body: Column(
-        children: [
-          const SizedBox(
-            height: 30,
-          ),
-          _getJumbotronWidget(),
-          _getMainPoints(),
-          _getSummarizedDescription()
-        ],
+      body: SingleChildScrollView(
+        primary: true,
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 30,
+            ),
+            _getJumbotronWidget(),
+            _getMainPoints(),
+            _getSummarizedDescription(),
+            _getNewsRelatedToTravellingPlace(),
+          ],
+        ),
       ),
     );
   }
