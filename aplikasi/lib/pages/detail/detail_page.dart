@@ -4,7 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:travelling_app/classes/travelling_place.dart';
 import 'package:travelling_app/fetch-helpers/data-fetcher.dart';
 import 'package:travelling_app/globals/colors.dart';
-import 'package:travelling_app/pages/detail/news_page.dart';
+import 'package:travelling_app/pages/detail/news_element.dart';
 import 'package:travelling_app/templates/backable_app_bar.dart';
 import 'package:travelling_app/templates/card_template.dart';
 import 'package:travelling_app/utils/context.dart';
