@@ -45,8 +45,21 @@ class HttpHelpers{
       headers: getUrlHeader(),
     );
   }
-  static Future<http.Response> fetchNewsDetails(){
-    Uri uri = Uri.parse(ApiEndpoint.getNewsDetailsLink());
-    return http.get(uri);
+  static Future<http.Response> fetchNewsDetails(String newsURL){
+    print("Fetch News Detaiis...");
+    var jsonRequestBody = {
+      "url_link": newsURL,
+    };
+
+    Uri uri = Uri.http(
+      ApiEndpoint.getBaseAPIUrl(),
+      ApiEndpoint.getNewsDetailsLink(),
+      jsonRequestBody,
+    );
+
+    return http.get(
+      uri,
+      headers: getUrlHeader(),
+    );
   }
 }
