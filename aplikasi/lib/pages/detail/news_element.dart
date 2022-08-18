@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:travelling_app/classes/news.dart';
 import 'package:travelling_app/fetch-helpers/data-fetcher.dart';
 import 'package:travelling_app/globals/colors.dart';
+import 'package:travelling_app/globals/route.dart';
 import 'package:travelling_app/templates/circular_loading_element.dart';
 import 'package:travelling_app/templates/image_horizontal_item_view.dart';
 import 'package:travelling_app/utils/context.dart';
@@ -67,11 +68,17 @@ class _NewsElementState extends State<NewsElement>{
       primary: false,
       scrollDirection: Axis.vertical,
       itemCount: news.length,
-      itemBuilder: (BuildContext context, index){
+      itemBuilder: (BuildContext ctx, index){
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: TextButton(
-            onPressed: (){},
+            onPressed: (){
+              Navigator.pushNamed(
+                context,
+                newsRouteName,
+                arguments: news[index]
+              );
+            },
             child: ImageHorizontalItemView(
               urlImage:  news[index].thumbnailImage,
               titleText: news[index].title,
