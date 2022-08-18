@@ -128,7 +128,7 @@ class DetailPage extends StatelessWidget{
     travellingPlace = arguments as TravellingPlace;
 
     return Scaffold(
-      appBar: DetailAppBar(
+      appBar: BackableAppBar(
         onBackIconPressed: (){
           Navigator.pop(context);
         },
