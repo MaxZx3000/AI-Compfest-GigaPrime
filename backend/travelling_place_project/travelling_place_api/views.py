@@ -93,8 +93,11 @@ class NewsFetchDetailsAPI(APIView):
         return relevant_paragraphs
 
     def get(self, request):
-        data = request.data
-        url_link = data["url_link"]
+        try:
+            data = request.data
+            url_link = data["url_link"]
+        except:
+            url_link = request.GET.get('url_link', '')       
         
         relevant_paragraphs = self._get_news_data(url_link)
         preprocessed_relevant_paragraphs = self._preprocess_text(relevant_paragraphs)
