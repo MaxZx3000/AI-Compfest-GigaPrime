@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:travelling_app/globals/colors.dart';
 import 'package:travelling_app/templates/app_bar_stylized.dart';
 
-class DetailAppBar{
+class BackableAppBar{
   final String appBarTitle;
   Function onBackIconPressed;
 
-  DetailAppBar({
+  BackableAppBar({
     required this.appBarTitle,
     required this.onBackIconPressed,
   });
@@ -22,9 +22,7 @@ class DetailAppBar{
         onPressed: (){
           onBackIconPressed();
         },
-        style: ButtonStyle(
-
-        ),
+        style: ButtonStyle(),
         child: const Icon(
           Icons.arrow_back,
           size: 32,
