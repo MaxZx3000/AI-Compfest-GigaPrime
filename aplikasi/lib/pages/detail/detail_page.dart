@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:travelling_app/classes/travelling_place.dart';
+import 'package:travelling_app/classes/user/bookmarked_travelling_place.dart';
 import 'package:travelling_app/database/travelling_place_bookmark_db.dart';
 import 'package:travelling_app/globals/colors.dart';
 import 'package:travelling_app/pages/detail/news_element.dart';
@@ -102,40 +103,8 @@ class DetailPage extends StatelessWidget{
   }
 
   Widget _getRatingElement(){
-    Widget _getLineDivider(){
-      return Container(
-        width: double.infinity,
-        height: 2,
-        decoration: BoxDecoration(
-          color: Colors.black12,
-        ),
-      );
-    }
-    Widget _getSpacing(){
-      return const SizedBox(
-        height: 10,
-      );
-    }
-    return Column(
-      children: [
-        _getSpacing(),
-        _getLineDivider(),
-        _getSpacing(),
-        const Text(
-          "Apa nilai yang Anda berikan untuk tempat ini?",
-          textAlign: TextAlign.center,
-        ),
-        BookmarkWidget(
-          score: 0,
-          onBookmarkPressed: (rating) async{
-            await travellingPlaceBookmarkDB.initBox();
-            travellingPlaceBookmarkDB.putBookmark(
-              rating, travellingPlace,
-            );
-          }
-        ),
-        _getLineDivider(),
-      ],
+    return RatingElement(
+      travellingPlace: travellingPlace
     );
   }
 
@@ -168,7 +137,6 @@ class DetailPage extends StatelessWidget{
   Widget build(BuildContext context){
     var arguments = ContextUtils.getArguments(context);
     travellingPlace = arguments as TravellingPlace;
-    travellingPlaceBookmarkDB = TravellingPlaceBookmarkDB();
     return Scaffold(
       appBar: BackableAppBar(
         onBackIconPressed: (){
@@ -194,4 +162,104 @@ class DetailPage extends StatelessWidget{
       ),
     );
   }
+}
+
+class RatingElement extends StatefulWidget{
+
+  final TravellingPlace travellingPlace;
+
+  const RatingElement({
+    Key? key,
+    required this.travellingPlace}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => _RatingState();
+}
+
+class _RatingState extends State<RatingElement>{
+
+  late TravellingPlaceBookmarkDB travellingPlaceBookmarkDB;
+
+  @override
+  void initState(){
+    super.initState();
+    travellingPlaceBookmarkDB = TravellingPlaceBookmarkDB();
+  }
+
+  Widget _getLineDivider(){
+    return Container(
+      width: double.infinity,
+      height: 2,
+      decoration: BoxDecoration(
+        color: Colors.black12,
+      ),
+    );
+  }
+  Widget _getSpacing(){
+    return const SizedBox(
+      height: 10,
+    );
+  }
+
+  Widget _getRatingWidget(int score){
+
+    return Column(
+      children: [
+        _getSpacing(),
+        _getLineDivider(),
+        _getSpacing(),
+        const Text(
+          "Apa nilai yang Anda berikan untuk tempat ini?",
+          textAlign: TextAlign.center,
+        ),
+        BookmarkWidget(
+            score: score,
+            onBookmarkPressed: (rating) async{
+              await travellingPlaceBookmarkDB.initBox();
+              travellingPlaceBookmarkDB.putBookmark(
+                rating, widget.travellingPlace,
+              );
+            }
+        ),
+        _getLineDivider(),
+      ],
+    );
+  }
+
+  Widget _getInitializingRatingWidget(){
+    return Column(
+      children: [
+        _getLineDivider(),
+        _getSpacing(),
+        const Text(
+          "Inisialisasi Rating...",
+        ),
+        _getSpacing(),
+        _getLineDivider(),
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: travellingPlaceBookmarkDB.getOneBookmarkByKey(
+        widget.travellingPlace.placeId.toString(),
+      ),
+      builder: (context, snapshot){
+        if (snapshot.hasData){
+          BookmarkedTravellingPlace bookmarkedTravellingPlace =
+          snapshot.data as BookmarkedTravellingPlace;
+          print("Initializing Bookmark Rating...");
+          return _getRatingWidget(bookmarkedTravellingPlace.rating);
+        }
+        else if (snapshot.hasError){
+          print("Something error occured: ${snapshot.error}");
+          return _getRatingWidget(0);
+        }
+        return _getInitializingRatingWidget();
+      },
+    );
+  }
+
 }
