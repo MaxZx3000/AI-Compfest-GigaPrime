@@ -1,7 +1,6 @@
 from ast import keyword
 import json
 from django.http import HttpResponse
-
 from .templates.pretty_print import PrettyPrint
 from .templates.keyword_extraction import KeywordExtraction
 from rest_framework import status
@@ -14,9 +13,10 @@ from nlp_id.lemmatizer import Lemmatizer
 from nltk.corpus import stopwords
 from nltk.tokenize import sent_tokenize
 from .ml_models.text_rank import TextRank
-
 from .templates.google_link_fetch import GoogleLinkFetch
 from .templates.web_scrapper import WebScraper
+from urllib.parse import urlparse
+from urllib.parse import parse_qs
 
 import pandas as pd
 
@@ -166,5 +166,11 @@ class ContentBasedRecommendationAPI(APIView):
 # Colab Based Filtering
 class ColabBasedRecommedationAPI(APIView):
     def get(self, request):
-        data = request.data
+        try:
+            data = request.data
+            query_result = data["query"]
+            print(f"Query Result 1: {query_result}")
+        except:
+            query_result = request.GET.get('query', '')
+            print(f"Query Result 2: {query_result}")
         pass
