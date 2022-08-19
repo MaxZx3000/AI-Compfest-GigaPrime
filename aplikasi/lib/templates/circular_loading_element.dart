@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_progress_indicator/gradient_progress_indicator.dart';
 import 'package:travelling_app/globals/colors.dart';
-import 'package:travelling_app/globals/gradient.dart';
 
 class CircularLoadingElement extends StatelessWidget{
   const CircularLoadingElement({Key? key,
