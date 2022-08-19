@@ -1,7 +1,10 @@
 import 'package:hive/hive.dart';
 import 'package:travelling_app/classes/travelling_place.dart';
 
-class BookmarkedTravellingPlace extends HiveObject{
+part "bookmarked_travelling_place.g.dart";
+
+@HiveType(typeId: 0)
+class BookmarkedTravellingPlace{
   @HiveField(0)
   int rating;
 
