@@ -2,15 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:travelling_app/classes/travelling_place.dart';
-import 'package:travelling_app/fetch-helpers/data-fetcher.dart';
+import 'package:travelling_app/database/travelling_place_bookmark_db.dart';
 import 'package:travelling_app/globals/colors.dart';
 import 'package:travelling_app/pages/detail/news_element.dart';
 import 'package:travelling_app/templates/backable_app_bar.dart';
+import 'package:travelling_app/templates/bookmark_widget.dart';
 import 'package:travelling_app/templates/card_template.dart';
 import 'package:travelling_app/utils/context.dart';
 
 class DetailPage extends StatelessWidget{
   late TravellingPlace travellingPlace;
+  late TravellingPlaceBookmarkDB travellingPlaceBookmarkDB;
 
   DetailPage({
     Key? key,
@@ -30,7 +32,7 @@ class DetailPage extends StatelessWidget{
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Text(
@@ -71,6 +73,7 @@ class DetailPage extends StatelessWidget{
         ],
       );
     }
+
     Widget _getLineDivider(){
       return Padding(
         padding: const EdgeInsets.only(
@@ -94,6 +97,44 @@ class DetailPage extends StatelessWidget{
         _getItemMainPoint(Icons.star, travellingPlace.getRating()),
         _getLineDivider(),
         _getItemMainPoint(Icons.money, travellingPlace.getPrice()),
+      ],
+    );
+  }
+
+  Widget _getRatingElement(){
+    Widget _getLineDivider(){
+      return Container(
+        width: double.infinity,
+        height: 2,
+        decoration: BoxDecoration(
+          color: Colors.black12,
+        ),
+      );
+    }
+    Widget _getSpacing(){
+      return const SizedBox(
+        height: 10,
+      );
+    }
+    return Column(
+      children: [
+        _getSpacing(),
+        _getLineDivider(),
+        _getSpacing(),
+        const Text(
+          "Apa nilai yang Anda berikan untuk tempat ini?",
+          textAlign: TextAlign.center,
+        ),
+        BookmarkWidget(
+          score: 0,
+          onBookmarkPressed: (rating) async{
+            await travellingPlaceBookmarkDB.initBox();
+            travellingPlaceBookmarkDB.putBookmark(
+              rating, travellingPlace,
+            );
+          }
+        ),
+        _getLineDivider(),
       ],
     );
   }
@@ -122,11 +163,12 @@ class DetailPage extends StatelessWidget{
       query: travellingPlace.placeName,
     );
   }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     var arguments = ContextUtils.getArguments(context);
     travellingPlace = arguments as TravellingPlace;
-
+    travellingPlaceBookmarkDB = TravellingPlaceBookmarkDB();
     return Scaffold(
       appBar: BackableAppBar(
         onBackIconPressed: (){
@@ -144,6 +186,7 @@ class DetailPage extends StatelessWidget{
             ),
             _getJumbotronWidget(),
             _getMainPoints(),
+            _getRatingElement(),
             _getSummarizedDescription(),
             _getNewsRelatedToTravellingPlace(),
           ],
