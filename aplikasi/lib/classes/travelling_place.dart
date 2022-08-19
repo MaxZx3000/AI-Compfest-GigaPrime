@@ -1,16 +1,42 @@
 import 'dart:convert';
 
+import 'package:hive/hive.dart';
+
+part "travelling_place.g.dart";
+
+@HiveType(typeId: 1)
 class TravellingPlace{
+  @HiveField(0)
   int placeId;
+
+  @HiveField(1)
   String placeName;
+
+  @HiveField(2)
   String description;
+
+  @HiveField(3)
   String category;
+
+  @HiveField(4)
   String city;
+
+  @HiveField(5)
   int? price;
+
+  @HiveField(6)
   double? rating;
+
+  @HiveField(7)
   double? timeMinutes;
+
+  @HiveField(8)
   double? latitude;
+
+  @HiveField(9)
   double? longitude;
+
+  @HiveField(10)
   String? summarizedDescription;
 
   TravellingPlace({
