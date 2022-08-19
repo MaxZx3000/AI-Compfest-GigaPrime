@@ -29,6 +29,7 @@ class TravellingPlaceBookmarkDB{
   }
 
   void putBookmark(int rating, TravellingPlace travellingPlace) async{
+    await initBox();
     BookmarkedTravellingPlace bookmarkedTravellingPlace = BookmarkedTravellingPlace(
         rating: rating,
         travellingPlace: travellingPlace
@@ -36,21 +37,25 @@ class TravellingPlaceBookmarkDB{
 
     String key = bookmarkedTravellingPlace.travellingPlace.placeId.toString();
     print("Key: ${key}");
+
     await travellingPlaceBox.put(key, bookmarkedTravellingPlace);
     print("Your data has been saved!");
   }
 
   Future<BookmarkedTravellingPlace> getOneBookmarkByKey(String placeIdKey) async{
+    await initBox();
     BookmarkedTravellingPlace bookmarkedTravellingPlace = await travellingPlaceBox.get(
       placeIdKey,
     );
     return bookmarkedTravellingPlace;
   }
 
-  List<BookmarkedTravellingPlace> getAllBookmarks(){
+  Future<List<BookmarkedTravellingPlace>> getAllBookmarks() async{
+    await initBox();
     return travellingPlaceBox.values.toList() as List<BookmarkedTravellingPlace>;
   }
   void deleteBookmark(String placeIdKey) async{
+    await initBox();
     await travellingPlaceBox.delete(placeIdKey);
   }
 }
