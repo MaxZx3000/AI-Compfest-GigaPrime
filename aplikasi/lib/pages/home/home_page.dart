@@ -22,13 +22,7 @@ class HomePage extends StatelessWidget{
   Widget _getSearchBarRegion(){
     return Column(
       children: [
-        Padding(
-            padding: const EdgeInsets.only(
-                top: 40,
-                bottom: 20
-            ),
-            child: searchBar
-        ),
+        searchBar,
       ],
     );
   }
@@ -52,12 +46,41 @@ class HomePage extends StatelessWidget{
         )
     );
     return Scaffold(
-        body: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _getSearchBarRegion(),
-            _getResultRegion(),
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          toolbarHeight: 80,
+          title: _getSearchBarRegion(),
+          actions: [
+            TextButton(
+              onPressed: (){
+
+              },
+              child: Icon(
+                Icons.info_outline,
+                color: Color(colors["dark_green"] as int),
+                size: 30,
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+
+              },
+              child: Icon(
+                Icons.star_border,
+                size: 30,
+                color: Color(colors["dark_green"] as int),
+              ),
+            ),
           ],
+        ),
+        body: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              _getResultRegion(),
+            ],
+          ),
       )
     );
   }
@@ -95,7 +118,7 @@ class _TravellingPlaceState extends State<TravellingPlacesWidget>{
   }
 
   Widget _getCircularProgressLoading(){
-    return SizedBox(
+    return const SizedBox(
       height: 100,
       child: CircularLoadingElement(
         message: "Sedang memuat...",
