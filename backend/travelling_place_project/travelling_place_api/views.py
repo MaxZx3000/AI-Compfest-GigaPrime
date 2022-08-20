@@ -168,9 +168,28 @@ class ColabBasedRecommedationAPI(APIView):
     def get(self, request):
         try:
             data = request.data
-            query_result = data["query"]
+            query_result = data["data"]
             print(f"Query Result 1: {query_result}")
         except:
-            query_result = request.GET.get('query', '')
+            query_result = request.GET.get('data', '')
             print(f"Query Result 2: {query_result}")
-        pass
+
+        request_json_rating_query = json.loads(query_result)
+        request_rating_df = pd.DataFrame(request_json_rating_query)
+        print(request_rating_df)
+
+        rating_queryset = TravellingPlacesRating.objects.all()
+        rating_df = PreprocessingTemplate.convert_queryset_data_to_df(rating_queryset)
+        rating_df = rating_df[["user_id", "place_id", "place_rating"]]
+
+        rating_with_request_rating_df = pd.concat([rating_df, request_rating_df])
+        rating_with_request_rating_df.reset_index(inplace = True)
+        rating_with_request_rating_df.drop("index", axis = 1, inplace = True)
+
+        print(rating_with_request_rating_df)
+
+        json_result = json.dumps({
+            "sample": "sample"
+        })
+
+        return HttpResponse(json_result, content_type = "application/json", status = status.HTTP_200_OK)
