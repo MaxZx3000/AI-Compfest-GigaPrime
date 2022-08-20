@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'package:travelling_app/classes/user/bookmarked_travelling_place.dart';
 import 'package:travelling_app/fetch-helpers/api-endpoint.dart';
 
 class HttpHelpers{
@@ -56,6 +57,34 @@ class HttpHelpers{
       ApiEndpoint.getNewsDetailsLink(),
       jsonRequestBody,
     );
+
+    return http.get(
+      uri,
+      headers: getUrlHeader(),
+    );
+  }
+  static Future<http.Response> fetchColabTravellingPlaces(
+    List<BookmarkedTravellingPlace> bookmarkedTravellingPlaces
+  ) async {
+
+    List<dynamic> userRatingJSON = [];
+    userRatingJSON = bookmarkedTravellingPlaces.map(
+            (bookmarkedTravellingPlace) => bookmarkedTravellingPlace.convertForColabJSON()
+    ).toList();
+
+    var jsonRequestBody = {
+      "data": jsonEncode(userRatingJSON),
+    };
+
+    print("Current: $jsonRequestBody");
+
+    Uri uri = Uri.http(
+      ApiEndpoint.getBaseAPIUrl(),
+      ApiEndpoint.getColabTravellingPlacesLink(),
+      jsonRequestBody,
+    );
+
+    print("User Rating JSON: $jsonRequestBody");
 
     return http.get(
       uri,
