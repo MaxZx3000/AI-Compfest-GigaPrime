@@ -1,3 +1,4 @@
+import 'package:travelling_app/pages/bookmark/bookmark_page.dart';
 import 'package:travelling_app/pages/detail/detail_page.dart';
 import 'package:travelling_app/pages/home/home_page.dart';
 import 'package:travelling_app/pages/news/news_page.dart';
@@ -8,10 +9,12 @@ const splashScreenRouteName = "/splash-screen";
 const homeRouteName = "/home";
 const detailRouteName = "/detail";
 const newsRouteName = "/news";
+const bookmarkRouteName = "/bookmark";
 
 var routes = {
   splashScreenRouteName: (context) => const SplashScreenPage(),
   homeRouteName: (context) => HomePage(),
   detailRouteName: (context) => DetailPage(),
   newsRouteName: (context) => const NewsPage(),
+  bookmarkRouteName: (context) => const BookmarkPage(),
 };
