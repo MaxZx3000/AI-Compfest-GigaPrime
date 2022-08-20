@@ -54,7 +54,7 @@ class TravellingPlaceBookmarkDB{
     await initBox();
     print("Travelling Place Box content: ${travellingPlaceBox.values.toList()}");
     return travellingPlaceBox.values.toList().map<BookmarkedTravellingPlace>(
-      (bookmarkedTravellingPlace) => bookmarkedTravellingPlace as BookmarkedTravellingPlace;
+      (bookmarkedTravellingPlace) => bookmarkedTravellingPlace as BookmarkedTravellingPlace
     ).toList();
   }
   void deleteBookmark(String placeIdKey) async{
