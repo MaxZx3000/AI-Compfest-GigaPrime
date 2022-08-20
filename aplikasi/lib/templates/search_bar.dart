@@ -50,9 +50,6 @@ class _SearchBarState extends State<SearchBar>{
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         getTextInput(),
         getSearchButton()
@@ -78,7 +75,7 @@ class _SearchBarState extends State<SearchBar>{
         decoration: InputDecoration(
           hintText: placeholderText,
           constraints: BoxConstraints.expand(
-            width: getSearchBarWidth() - 150,
+            width: getSearchBarWidth() - 225,
             height: 46,
           ),
           contentPadding: const EdgeInsets.only(left: 15.0),
@@ -96,7 +93,10 @@ class _SearchBarState extends State<SearchBar>{
             bottomRight: Radius.circular(30.0),
             topRight: Radius.circular(30.0)
         ),
-        buttonContent: const Icon(Icons.search),
+        buttonContent: const Icon(
+          Icons.search,
+          size: 20,
+        ),
         onButtonTap: (){
           onSearchClick(currentText);
         },
