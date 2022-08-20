@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:travelling_app/classes/news.dart';
 import 'package:travelling_app/classes/news_detail.dart';
 import 'package:travelling_app/classes/travelling_place.dart';
+import 'package:travelling_app/classes/user/bookmarked_travelling_place.dart';
 import 'package:travelling_app/fetch-helpers/http-helpers.dart';
 
 class DataFetcher{
@@ -51,5 +52,17 @@ class DataFetcher{
     print("News Detail: $newsDetail");
 
     return newsDetail;
+  }
+
+  static Future<void> getColabTravellingPlaces(
+    List<BookmarkedTravellingPlace> bookmarkedTravellingPlace,
+  ) async{
+
+    final response = await HttpHelpers.fetchColabTravellingPlaces(
+      bookmarkedTravellingPlace,
+    );
+
+    dynamic jsonDecoded = jsonDecode(response.body);
+    print(jsonDecoded);
   }
 }
