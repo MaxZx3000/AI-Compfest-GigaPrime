@@ -13,4 +13,7 @@ class ApiEndpoint{
   static String getNewsDetailsLink(){
     return "/travelling_api/news_details";
   }
+  static String getColabTravellingPlacesLink(){
+    return "/travelling_api/colab_filtering_travelling_places";
+  }
 }
