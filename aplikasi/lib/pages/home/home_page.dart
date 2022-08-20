@@ -64,7 +64,10 @@ class HomePage extends StatelessWidget{
             ),
             TextButton(
               onPressed: () {
-
+                Navigator.pushNamed(
+                  context,
+                  bookmarkRouteName,
+                );
               },
               child: Icon(
                 Icons.star_border,
