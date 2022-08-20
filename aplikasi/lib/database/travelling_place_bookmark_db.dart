@@ -52,7 +52,10 @@ class TravellingPlaceBookmarkDB{
 
   Future<List<BookmarkedTravellingPlace>> getAllBookmarks() async{
     await initBox();
-    return travellingPlaceBox.values.toList() as List<BookmarkedTravellingPlace>;
+    print("Travelling Place Box content: ${travellingPlaceBox.values.toList()}");
+    return travellingPlaceBox.values.toList().map<BookmarkedTravellingPlace>(
+      (bookmarkedTravellingPlace) => bookmarkedTravellingPlace as BookmarkedTravellingPlace;
+    ).toList();
   }
   void deleteBookmark(String placeIdKey) async{
     await initBox();
