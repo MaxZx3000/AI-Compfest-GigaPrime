@@ -175,6 +175,7 @@ class _TravellingPlaceState extends State<TravellingPlacesWidget>{
     if (query.isEmpty){
       return const InformationWidget(
           iconData: Icons.search,
+          widgetWidth: 300,
           information: "Tempat Wisata apa yang Anda cari?",
       );
     }
