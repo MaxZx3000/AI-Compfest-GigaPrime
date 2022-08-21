@@ -3,7 +3,7 @@ import 'package:travelling_app/classes/user/bookmarked_travelling_place.dart';
 import 'package:travelling_app/database/travelling_place_bookmark_db.dart';
 import 'package:travelling_app/fetch-helpers/data-fetcher.dart';
 import 'package:travelling_app/globals/route.dart';
-import 'package:travelling_app/pages/bookmark/recommendations_colab.dart';
+import 'package:travelling_app/pages/bookmark/recommendations_colab_widget.dart';
 import 'package:travelling_app/templates/backable_app_bar.dart';
 import 'package:travelling_app/templates/horizontal_item_view.dart';
 import 'package:travelling_app/templates/information_widget.dart';
@@ -41,6 +41,7 @@ class _BookmarkState extends State<BookmarkPage>{
           childAspectRatio: childAspectRatio,
         ),
         shrinkWrap: true,
+        primary: false,
         scrollDirection: Axis.vertical,
         itemCount: bookmarkedTravellingPlaces.length,
         itemBuilder: (BuildContext ctx, index){
@@ -99,24 +100,28 @@ class _BookmarkState extends State<BookmarkPage>{
           Navigator.pop(context);
         },
       ).getInstance(context),
-      body: FutureBuilder(
-        future: travellingPlaceBookmarkDB.getAllBookmarks(),
-        builder: (context, snapshot) {
-          print("Snapshot Data: ${snapshot.data}");
-          if (snapshot.hasError){
-            return Text(
-              snapshot.error.toString(),
-            );
-          }
-          if (snapshot.hasData == false){
-            return _getNoDataElement();
-          }
-          List<BookmarkedTravellingPlace> bookmarkTravellingPlaces = snapshot.data as List<BookmarkedTravellingPlace>;
-          if (bookmarkTravellingPlaces.isEmpty){
-            return _getNoDataElement();
-          }
-          return _successResult(bookmarkTravellingPlaces);
-        },
+      body: SingleChildScrollView(
+        primary: true,
+        scrollDirection: Axis.vertical,
+        child: FutureBuilder(
+          future: travellingPlaceBookmarkDB.getAllBookmarks(),
+          builder: (context, snapshot) {
+            print("Snapshot Data: ${snapshot.data}");
+            if (snapshot.hasError){
+              return Text(
+                snapshot.error.toString(),
+              );
+            }
+            if (snapshot.hasData == false){
+              return _getNoDataElement();
+            }
+            List<BookmarkedTravellingPlace> bookmarkTravellingPlaces = snapshot.data as List<BookmarkedTravellingPlace>;
+            if (bookmarkTravellingPlaces.isEmpty){
+              return _getNoDataElement();
+            }
+            return _successResult(bookmarkTravellingPlaces);
+          },
+        ),
       ),
     );
   }
