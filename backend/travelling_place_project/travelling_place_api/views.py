@@ -212,8 +212,5 @@ class ColabBasedRecommedationAPI(APIView):
         )
 
         top_n_predictions_json = top_n_predictions_df.to_json(orient = "records")
-        json_result = json.dumps({
-            "recommendations": top_n_predictions_json
-        })
-
-        return HttpResponse(json_result, content_type = "application/json", status = status.HTTP_200_OK)
+ 
+        return HttpResponse(top_n_predictions_json, content_type = "application/json", status = status.HTTP_200_OK)
