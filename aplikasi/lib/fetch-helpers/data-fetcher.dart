@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:travelling_app/classes/news.dart';
 import 'package:travelling_app/classes/news_detail.dart';
 import 'package:travelling_app/classes/travelling_place.dart';
@@ -62,13 +63,15 @@ class DataFetcher{
       bookmarkedTravellingPlace,
     );
 
-    dynamic jsonDecoded = jsonDecode(response.body)["recommendations"];
-    List<TravellingPlace> travellingPlaces = [];
+    dynamic jsonDecoded = jsonDecode(response.body);
+
+    List<TravellingPlace> recommendedTravellingPlaces = [];
+
     jsonDecoded.forEach((element){
-      TravellingPlace travellingPlace = TravellingPlace.setFromJSON(element);
-      travellingPlaces.add(travellingPlace);
+      TravellingPlace recommendedTravellingPlace = TravellingPlace.setFromJSON(element);
+      recommendedTravellingPlaces.add(recommendedTravellingPlace);
     });
 
-    return travellingPlaces;
+    return recommendedTravellingPlaces;
   }
 }
