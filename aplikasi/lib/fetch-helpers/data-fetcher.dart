@@ -54,7 +54,7 @@ class DataFetcher{
     return newsDetail;
   }
 
-  static Future<void> getColabTravellingPlaces(
+  static Future<List<TravellingPlace>> getColabTravellingPlaces(
     List<BookmarkedTravellingPlace> bookmarkedTravellingPlace,
   ) async{
 
@@ -62,7 +62,13 @@ class DataFetcher{
       bookmarkedTravellingPlace,
     );
 
-    dynamic jsonDecoded = jsonDecode(response.body);
-    print(jsonDecoded);
+    dynamic jsonDecoded = jsonDecode(response.body)["recommendations"];
+    List<TravellingPlace> travellingPlaces = [];
+    jsonDecoded.forEach((element){
+      TravellingPlace travellingPlace = TravellingPlace.setFromJSON(element);
+      travellingPlaces.add(travellingPlace);
+    });
+
+    return travellingPlaces;
   }
 }
