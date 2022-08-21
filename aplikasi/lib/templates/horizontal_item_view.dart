@@ -81,6 +81,9 @@ class HorizontalItemWidget extends StatelessWidget{
   Widget getCardWidget(Widget childWidget){
     return Container(
       width: width,
+      height: IntrinsicWidth(
+        child: childWidget,
+      ).stepHeight,
       padding: const EdgeInsets.all(8.0),
       decoration: const BoxDecoration(
         color: Colors.white,
