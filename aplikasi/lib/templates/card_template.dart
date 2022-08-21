@@ -17,7 +17,6 @@ class CardTemplate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-
         child: Column(
           children: [
             Container(
