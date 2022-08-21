@@ -1,6 +1,8 @@
 from ast import keyword
 import json
 from django.http import HttpResponse
+
+from .templates.colab_based_filtering import ColabBasedFiltering
 from .templates.pretty_print import PrettyPrint
 from .templates.keyword_extraction import KeywordExtraction
 from rest_framework import status
@@ -15,9 +17,6 @@ from nltk.tokenize import sent_tokenize
 from .ml_models.text_rank import TextRank
 from .templates.google_link_fetch import GoogleLinkFetch
 from .templates.web_scrapper import WebScraper
-from urllib.parse import urlparse
-from urllib.parse import parse_qs
-
 import pandas as pd
 
 # Create your views here.
@@ -165,6 +164,27 @@ class ContentBasedRecommendationAPI(APIView):
 
 # Colab Based Filtering
 class ColabBasedRecommedationAPI(APIView):
+
+    def _load_rating_df(self, query_result):
+        request_json_rating_query = json.loads(query_result)
+        request_rating_df = pd.DataFrame(request_json_rating_query)
+        print(request_rating_df)
+
+        rating_queryset = TravellingPlacesRating.objects.all()
+        rating_df = PreprocessingTemplate.convert_queryset_data_to_df(rating_queryset)
+        rating_df = rating_df[["user_id", "place_id", "place_rating"]]
+        rating_with_request_rating_df = pd.concat([rating_df, request_rating_df])
+        rating_with_request_rating_df.reset_index(inplace = True)
+        rating_with_request_rating_df.drop("index", axis = 1, inplace = True)
+        rating_with_request_rating_df = rating_with_request_rating_df.rename(columns = {
+            "user_id": "user", 
+            "place_id": "item",
+            "place_rating": "rating" 
+        })
+
+        print(rating_with_request_rating_df)
+        return rating_with_request_rating_df
+
     def get(self, request):
         try:
             data = request.data
@@ -174,22 +194,26 @@ class ColabBasedRecommedationAPI(APIView):
             query_result = request.GET.get('data', '')
             print(f"Query Result 2: {query_result}")
 
-        request_json_rating_query = json.loads(query_result)
-        request_rating_df = pd.DataFrame(request_json_rating_query)
-        print(request_rating_df)
+        rating_with_request_rating_df = self._load_rating_df(query_result)
 
-        rating_queryset = TravellingPlacesRating.objects.all()
-        rating_df = PreprocessingTemplate.convert_queryset_data_to_df(rating_queryset)
-        rating_df = rating_df[["user_id", "place_id", "place_rating"]]
+        colab_based_filtering = ColabBasedFiltering()
+        top_n_predictions = colab_based_filtering.perform_actual_collaborative_filtering(
+            rating_with_request_rating_df,
+        )
 
-        rating_with_request_rating_df = pd.concat([rating_df, request_rating_df])
-        rating_with_request_rating_df.reset_index(inplace = True)
-        rating_with_request_rating_df.drop("index", axis = 1, inplace = True)
+        travelling_places_queryset = TravellingPlaces.objects.all()
 
-        print(rating_with_request_rating_df)
+        travelling_places_df = PreprocessingTemplate.convert_queryset_data_to_df(travelling_places_queryset)
 
+        top_n_predictions_df = colab_based_filtering.get_top_n_results_from_df(
+            travelling_places_df, 
+            top_n_predictions[200001], 
+            "place_id",
+        )
+
+        top_n_predictions_json = top_n_predictions_df.to_json(orient = "records")
         json_result = json.dumps({
-            "sample": "sample"
+            "recommendations": top_n_predictions_json
         })
 
         return HttpResponse(json_result, content_type = "application/json", status = status.HTTP_200_OK)
