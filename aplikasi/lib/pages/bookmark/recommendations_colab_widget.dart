@@ -13,10 +13,12 @@ import 'package:travelling_app/templates/information_widget.dart';
 class RecommendationColabWidget extends StatefulWidget{
 
   final List<BookmarkedTravellingPlace> bookmarkedTravellingPlaces;
+  final Function parentFunction;
 
   const RecommendationColabWidget({
     Key? key,
     required this.bookmarkedTravellingPlaces,
+    required this.parentFunction,
   }) : super(key: key);
 
   @override
@@ -50,7 +52,9 @@ class _RecommendationState extends State<RecommendationColabWidget>{
                     context,
                     detailRouteName,
                     arguments: recommendedTravellingPlace
-                  );
+                  ).then((value) => {
+                    widget.parentFunction()
+                  });
                 },
                 child: HorizontalItemWidget(
                   titleText: recommendedTravellingPlace.placeName,
