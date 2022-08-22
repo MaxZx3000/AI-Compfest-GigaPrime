@@ -190,7 +190,7 @@ class _RatingState extends State<RatingElement>{
     return Container(
       width: double.infinity,
       height: 2,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.black12,
       ),
     );
@@ -202,7 +202,6 @@ class _RatingState extends State<RatingElement>{
   }
 
   Widget _getRatingWidget(int score){
-
     return Column(
       children: [
         _getSpacing(),
