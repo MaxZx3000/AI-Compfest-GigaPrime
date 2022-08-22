@@ -21,10 +21,15 @@ class BookmarkPage extends StatefulWidget{
 class _BookmarkState extends State<BookmarkPage>{
   late TravellingPlaceBookmarkDB travellingPlaceBookmarkDB;
 
+
   @override
   void initState() {
     super.initState();
     travellingPlaceBookmarkDB = TravellingPlaceBookmarkDB();
+  }
+
+  void updateWidget(){
+    setState(() {});
   }
 
   Widget _getBookmarkedItems(List<BookmarkedTravellingPlace> bookmarkedTravellingPlaces){
@@ -53,7 +58,7 @@ class _BookmarkState extends State<BookmarkPage>{
                     context,
                     detailRouteName,
                     arguments: bookmarkedTravellingPlaces[index].travellingPlace
-                );
+                ).then((value) => {updateWidget()});
               },
               child: HorizontalItemWidget(
                 titleText: bookmarkedTravellingPlaces[index].travellingPlace.placeName,
@@ -88,6 +93,7 @@ class _BookmarkState extends State<BookmarkPage>{
   Widget _getRecommendationTravellingPlaces(List<BookmarkedTravellingPlace> bookmarkedTravellingPlaces){
     return RecommendationColabWidget(
       bookmarkedTravellingPlaces: bookmarkedTravellingPlaces,
+      parentFunction: updateWidget,
     );
   }
 
