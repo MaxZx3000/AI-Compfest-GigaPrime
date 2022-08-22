@@ -57,6 +57,7 @@ class AboutPage extends StatelessWidget{
     return Image.asset(
       assets["splash_screen_background"] as String,
       height: 300,
+      fit: BoxFit.fill,
       width: double.infinity,
     );
   }
