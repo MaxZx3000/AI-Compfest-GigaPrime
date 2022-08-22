@@ -57,7 +57,7 @@ class TravellingPlaceBookmarkDB{
       (bookmarkedTravellingPlace) => bookmarkedTravellingPlace as BookmarkedTravellingPlace
     ).toList();
   }
-  void deleteBookmark(String placeIdKey) async{
+  Future<void> deleteBookmark(String placeIdKey) async{
     await initBox();
     await travellingPlaceBox.delete(placeIdKey);
   }
