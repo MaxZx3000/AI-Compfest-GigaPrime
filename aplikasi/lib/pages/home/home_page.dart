@@ -49,30 +49,36 @@ class HomePage extends StatelessWidget{
           toolbarHeight: 80,
           title: _getSearchBarRegion(),
           actions: [
-            TextButton(
-              onPressed: (){
-                Navigator.pushNamed(
-                  context,
-                  aboutRouteName
-                );
-              },
-              child: Icon(
-                Icons.info_outline,
-                color: Color(colors["dark_green"] as int),
-                size: 30,
+            Tooltip(
+              message: "Tentang Aplikasi Ini",
+              child: TextButton(
+                onPressed: (){
+                  Navigator.pushNamed(
+                    context,
+                    aboutRouteName
+                  );
+                },
+                child: Icon(
+                  Icons.info_outline,
+                  color: Color(colors["dark_green"] as int),
+                  size: 30,
+                ),
               ),
             ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  bookmarkRouteName,
-                );
-              },
-              child: Icon(
-                Icons.star_border,
-                size: 30,
-                color: Color(colors["dark_green"] as int),
+            Tooltip(
+              message: "Tempat wisata yang\ntelah dirating",
+              child: TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    bookmarkRouteName,
+                  );
+                },
+                child: Icon(
+                  Icons.star_border,
+                  size: 30,
+                  color: Color(colors["dark_green"] as int),
+                ),
               ),
             ),
           ],
@@ -162,7 +168,6 @@ class _TravellingPlaceState extends State<TravellingPlacesWidget>{
                     titleText: travellingPlaces[index].placeName,
                     subtitleText: travellingPlaces[index].city,
                     rating: travellingPlaces[index].getRating(),
-                    topRightWidget: Column(),
                   ),
                 ),
               );
