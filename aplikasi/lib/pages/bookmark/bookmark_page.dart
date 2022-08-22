@@ -50,6 +50,7 @@ class _BookmarkState extends State<BookmarkPage>{
         scrollDirection: Axis.vertical,
         itemCount: bookmarkedTravellingPlaces.length,
         itemBuilder: (BuildContext ctx, index){
+          BookmarkedTravellingPlace bookmarkedTravellingPlace = bookmarkedTravellingPlaces[index];
           return Padding(
             padding: const EdgeInsets.all(5.0),
             child: TextButton(
@@ -57,17 +58,22 @@ class _BookmarkState extends State<BookmarkPage>{
                 Navigator.pushNamed(
                     context,
                     detailRouteName,
-                    arguments: bookmarkedTravellingPlaces[index].travellingPlace
+                    arguments: bookmarkedTravellingPlace.travellingPlace
                 ).then((value) => {updateWidget()});
               },
               child: HorizontalItemWidget(
-                titleText: bookmarkedTravellingPlaces[index].travellingPlace.placeName,
-                subtitleText: bookmarkedTravellingPlaces[index].travellingPlace.city,
-                rating: bookmarkedTravellingPlaces[index].rating.toString(),
+                titleText: bookmarkedTravellingPlace.travellingPlace.placeName,
+                subtitleText: bookmarkedTravellingPlace.travellingPlace.city,
+                rating: bookmarkedTravellingPlace.rating.toString(),
                 topRightWidget: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
-                    onPressed: (){},
+                    onPressed: () async{
+                      await travellingPlaceBookmarkDB.deleteBookmark(
+                        bookmarkedTravellingPlace.travellingPlace.placeId.toString(),
+                      );
+                      setState((){});
+                    },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.red,
                     ),
