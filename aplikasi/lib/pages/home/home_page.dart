@@ -54,7 +54,10 @@ class HomePage extends StatelessWidget{
           actions: [
             TextButton(
               onPressed: (){
-
+                Navigator.pushNamed(
+                  context,
+                  aboutRouteName
+                );
               },
               child: Icon(
                 Icons.info_outline,
