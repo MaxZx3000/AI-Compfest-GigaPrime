@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travelling_app/globals/colors.dart';
 
@@ -7,13 +6,15 @@ class HorizontalItemWidget extends StatelessWidget{
   final String subtitleText;
   final String rating;
   final double width;
+  Widget? topRightWidget;
 
-  const HorizontalItemWidget({
+  HorizontalItemWidget({
     Key? key,
     required this.titleText,
     required this.subtitleText,
     required this.rating,
     this.width = double.infinity,
+    this.topRightWidget,
   }) : super(key: key);
 
    Widget getSummaryWidget(){
@@ -78,6 +79,24 @@ class HorizontalItemWidget extends StatelessWidget{
     );
   }
 
+  Widget _getChildCardWidget(Widget childWidget){
+     if (topRightWidget != null){
+       return Row(
+         children: [
+           Expanded(
+               flex: 2,
+               child: childWidget
+           ),
+           Expanded(
+             flex: 1,
+             child: topRightWidget!,
+           ),
+         ]
+       );
+     }
+     return childWidget;
+  }
+
   Widget getCardWidget(Widget childWidget){
     return Container(
       width: width,
@@ -99,7 +118,7 @@ class HorizontalItemWidget extends StatelessWidget{
           )
         ]
       ),
-      child: childWidget
+      child: _getChildCardWidget(childWidget),
     );
   }
 
