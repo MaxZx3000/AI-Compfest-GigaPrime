@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 class ImageHorizontalItemView extends StatelessWidget{
   final String urlImage;
   final String titleText;
@@ -44,7 +44,7 @@ class ImageHorizontalItemView extends StatelessWidget{
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.left,
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Text(
@@ -81,18 +81,18 @@ class ImageHorizontalItemView extends StatelessWidget{
   Widget getCardWidget(Widget childWidget){
     return Container(
         decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(
-                Radius.circular(10.0)
-            ),
-            boxShadow: [
-              BoxShadow(
-                  offset: Offset(0, 5),
-                  color: Colors.black12,
-                  spreadRadius: 0,
-                  blurRadius: 5
-              )
-            ]
+          color: Colors.white,
+          borderRadius: BorderRadius.all(
+              Radius.circular(10.0)
+          ),
+          boxShadow: [
+            BoxShadow(
+              offset: Offset(0, 5),
+              color: Colors.black12,
+              spreadRadius: 0,
+              blurRadius: 5
+            )
+          ]
         ),
         child: childWidget
     );
