@@ -1,10 +1,7 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:travelling_app/classes/travelling_place.dart';
 import 'package:travelling_app/fetch-helpers/data-fetcher.dart';
 import 'package:travelling_app/globals/colors.dart';
-import 'package:travelling_app/globals/gradient.dart';
 import 'package:travelling_app/globals/route.dart';
 import 'package:travelling_app/templates/search_bar.dart';
 import 'package:travelling_app/templates/circular_loading_element.dart';
@@ -162,9 +159,10 @@ class _TravellingPlaceState extends State<TravellingPlacesWidget>{
                     );
                   },
                   child: HorizontalItemWidget(
-                      titleText: travellingPlaces[index].placeName,
-                      subtitleText: travellingPlaces[index].city,
-                      rating: travellingPlaces[index].getRating(),
+                    titleText: travellingPlaces[index].placeName,
+                    subtitleText: travellingPlaces[index].city,
+                    rating: travellingPlaces[index].getRating(),
+                    topRightWidget: Column(),
                   ),
                 ),
               );
