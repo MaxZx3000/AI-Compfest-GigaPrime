@@ -64,6 +64,16 @@ class _BookmarkState extends State<BookmarkPage>{
                 titleText: bookmarkedTravellingPlaces[index].travellingPlace.placeName,
                 subtitleText: bookmarkedTravellingPlaces[index].travellingPlace.city,
                 rating: bookmarkedTravellingPlaces[index].rating.toString(),
+                topRightWidget: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: (){},
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.red,
+                    ),
+                    child: const Text("Hapus"),
+                  ),
+                ),
               ),
             ),
           );
