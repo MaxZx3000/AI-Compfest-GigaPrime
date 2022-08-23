@@ -3,10 +3,10 @@ from django.db import models
 # Create your models here.
 class TravellingPlaces(models.Model):
     place_id = models.IntegerField(primary_key = True)
-    place_name = models.CharField(max_length = 100)
-    description = models.CharField(max_length = 100)
-    category = models.CharField(max_length = 20)
-    city = models.CharField(max_length = 100)
+    place_name = models.CharField(max_length = 9000)
+    description = models.CharField(max_length = 9000)
+    category = models.CharField(max_length = 9000)
+    city = models.CharField(max_length = 9000)
     price = models.IntegerField(null = True)
     rating = models.FloatField(null = True)
     time_minutes = models.IntegerField(null = True, blank = True, default = None)

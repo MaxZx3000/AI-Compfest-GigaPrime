@@ -26,6 +26,7 @@ class KeywordExtraction:
 
         nmf = NMF(
             n_components = n_components,
+            max_iter = 600,
             random_state = 10,
             beta_loss = "kullback-leibler",
             solver = 'mu'
