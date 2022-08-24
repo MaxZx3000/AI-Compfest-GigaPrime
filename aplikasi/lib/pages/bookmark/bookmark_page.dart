@@ -121,6 +121,7 @@ class _BookmarkState extends State<BookmarkPage>{
         onBackIconPressed: (){
           Navigator.pop(context);
         },
+        rightMargin: 100
       ).getInstance(context),
       body: SingleChildScrollView(
         primary: true,

@@ -71,6 +71,7 @@ class AboutPage extends StatelessWidget{
         onBackIconPressed: (){
           Navigator.pop(context);
         },
+        rightMargin: 80,
       ).getInstance(context),
       body: SingleChildScrollView(
         child: Column(

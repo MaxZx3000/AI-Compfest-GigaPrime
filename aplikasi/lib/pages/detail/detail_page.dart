@@ -143,6 +143,7 @@ class DetailPage extends StatelessWidget{
           Navigator.pop(context);
         },
         appBarTitle: "Travelling Place Detail",
+        rightMargin: 50
       ).getInstance(context),
       body: SingleChildScrollView(
         primary: true,
