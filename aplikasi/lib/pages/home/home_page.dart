@@ -139,41 +139,41 @@ class _TravellingPlaceState extends State<TravellingPlacesWidget>{
       // return Text("Loaded!");
     double childAspectRatio = 0;
     if (ContextUtils.getScreenWidth(context) > 500){
-      childAspectRatio = 1;
+      childAspectRatio = 2.4;
     }
     else{
-      childAspectRatio = 3;
+      childAspectRatio = 2.5;
     }
     return Expanded(
-        child: GridView.builder(
-            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 600,
-              childAspectRatio: childAspectRatio,
-            ),
-            shrinkWrap: true,
-            scrollDirection: Axis.vertical,
-            itemCount: travellingPlaces.length,
-            itemBuilder: (BuildContext ctx, index){
-              return Padding(
-                padding: EdgeInsets.all(5.0),
-                child: TextButton(
-                  onPressed: (){
-                    Navigator.pushNamed(
-                      context,
-                      detailRouteName,
-                      arguments: travellingPlaces[index]
-                    );
-                  },
-                  child: HorizontalItemWidget(
-                    titleText: travellingPlaces[index].placeName,
-                    subtitleText: travellingPlaces[index].city,
-                    rating: travellingPlaces[index].getRating(),
-                  ),
-                ),
-              );
-            }
+      child: GridView.builder(
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 600,
+          childAspectRatio: childAspectRatio,
         ),
-      );
+        shrinkWrap: true,
+        scrollDirection: Axis.vertical,
+        itemCount: travellingPlaces.length,
+        itemBuilder: (BuildContext ctx, index){
+          return Padding(
+            padding: EdgeInsets.all(5.0),
+            child: TextButton(
+              onPressed: (){
+                Navigator.pushNamed(
+                  context,
+                  detailRouteName,
+                  arguments: travellingPlaces[index]
+                );
+              },
+              child: HorizontalItemWidget(
+                titleText: travellingPlaces[index].placeName,
+                subtitleText: travellingPlaces[index].city,
+                rating: travellingPlaces[index].getRating(),
+              ),
+            ),
+          );
+        }
+      ),
+    );
   }
 
   @override
@@ -195,6 +195,7 @@ class _TravellingPlaceState extends State<TravellingPlacesWidget>{
           if (snapshot.hasData){
             return _getTravellingPlacesList(snapshot.data as List<TravellingPlace>);
           }
+          print(snapshot.error.toString());
           return const Text(
             "Unknown Error Occured!"
           );
