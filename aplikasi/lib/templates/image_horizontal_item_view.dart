@@ -37,9 +37,10 @@ class ImageHorizontalItemView extends StatelessWidget{
         children: [
           Text(
             titleText,
+            maxLines: 2,
             style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20
+              fontWeight: FontWeight.bold,
+              fontSize: 16
             ),
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.left,
