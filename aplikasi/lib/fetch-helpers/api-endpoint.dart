@@ -1,7 +1,7 @@
 class ApiEndpoint{
 
   static String getBaseAPIUrl(){
-    return "10.0.2.2:8000";
+    return "travelling-app-backend.herokuapp.com";
   }
 
   static String getTravellingPlacesListLink(){
