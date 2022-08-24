@@ -40,7 +40,10 @@ class CircularLoadingElement extends StatelessWidget{
         const SizedBox(
           height: 20,
         ),
-        Text(message),
+        Text(
+          message,
+          textAlign: TextAlign.center,
+        ),
       ],
     );
   }
