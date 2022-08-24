@@ -18,7 +18,7 @@ class HttpHelpers{
       "query": query
     };
 
-    Uri uri = Uri.http(
+    Uri uri = Uri.https(
       ApiEndpoint.getBaseAPIUrl(),
       ApiEndpoint.getTravellingPlacesListLink(),
       jsonRequestBody
@@ -35,7 +35,7 @@ class HttpHelpers{
       "title": query
     };
 
-    Uri uri = Uri.http(
+    Uri uri = Uri.https(
       ApiEndpoint.getBaseAPIUrl(),
       ApiEndpoint.getNewsListLink(),
       jsonRequestBody,
@@ -52,7 +52,7 @@ class HttpHelpers{
       "url_link": newsURL,
     };
 
-    Uri uri = Uri.http(
+    Uri uri = Uri.https(
       ApiEndpoint.getBaseAPIUrl(),
       ApiEndpoint.getNewsDetailsLink(),
       jsonRequestBody,
@@ -78,7 +78,7 @@ class HttpHelpers{
 
     print("Current: $jsonRequestBody");
 
-    Uri uri = Uri.http(
+    Uri uri = Uri.https(
       ApiEndpoint.getBaseAPIUrl(),
       ApiEndpoint.getColabTravellingPlacesLink(),
       jsonRequestBody,
