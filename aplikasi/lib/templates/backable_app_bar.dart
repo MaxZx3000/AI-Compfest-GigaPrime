@@ -5,10 +5,12 @@ import 'package:travelling_app/templates/app_bar_stylized.dart';
 class BackableAppBar{
   final String appBarTitle;
   Function onBackIconPressed;
+  final double rightMargin;
 
   BackableAppBar({
     required this.appBarTitle,
     required this.onBackIconPressed,
+    required this.rightMargin,
   });
 
   Widget getBackIcon(){
@@ -56,7 +58,7 @@ class BackableAppBar{
           getVerticalDivider(),
           getTitle()
         ],
-        rightMargin: 140,
+        rightMargin: rightMargin,
     ).getInstance();
   }
 }
