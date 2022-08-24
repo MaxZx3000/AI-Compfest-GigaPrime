@@ -1,0 +1,1 @@
+web: gunicorn travelling_place_project.wsgi
