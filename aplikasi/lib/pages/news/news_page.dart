@@ -82,14 +82,17 @@ class _NewsPageState extends State<NewsPage>{
 
   Widget _getFutureBuilderNewsWidget(){
     Widget _getNewsDetailWidget(NewsDetail newsDetail){
-      return Column(
-        children: [
-          _getKeywordsWidget(newsDetail),
-          SizedBox(
-            height: 10,
-          ),
-          _getSummaryNewsWidget(newsDetail),
-        ],
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            _getKeywordsWidget(newsDetail),
+            SizedBox(
+              height: 10,
+            ),
+            _getSummaryNewsWidget(newsDetail),
+          ],
+        ),
       );
     }
     return FutureBuilder(
@@ -117,6 +120,7 @@ class _NewsPageState extends State<NewsPage>{
           Navigator.pop(context);
         },
         appBarTitle: "News Detail",
+        rightMargin: 140
       ).getInstance(context),
       body: SingleChildScrollView(
         child: Column(
