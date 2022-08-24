@@ -27,10 +27,10 @@ class _NewsElementState extends State<NewsElement>{
   Widget _getNewsHeaders(List<News> news){
     double childAspectRatio = 0;
     if (ContextUtils.getScreenWidth(context) > 500){
-      childAspectRatio = 2;
+      childAspectRatio = 2.6;
     }
     else{
-      childAspectRatio = 3;
+      childAspectRatio = 2.5;
     }
 
     Widget _getAdditionalNewsInfoWidget(News oneNews){
@@ -38,19 +38,30 @@ class _NewsElementState extends State<NewsElement>{
         decoration: BoxDecoration(
           color: Color(secondaryColors["light_gray"] as int),
         ),
-        height: 28,
+        padding: const EdgeInsets.only(
+          left: 10.0,
+          right: 10.0,
+        ),
+        height: 25,
         child: Row(
           children: [
             Expanded(
               flex: 1,
               child: Text(
-                oneNews.type
+                oneNews.type,
+                style: const TextStyle(
+                fontSize: 12
+                ),
               )
             ),
             Expanded(
               flex: 1,
               child: Text(
-                oneNews.siteName
+                oneNews.siteName,
+                style: const TextStyle(
+                  fontSize: 12,
+                  overflow: TextOverflow.ellipsis
+                ),
               )
             )
           ],
@@ -70,7 +81,10 @@ class _NewsElementState extends State<NewsElement>{
       itemCount: news.length,
       itemBuilder: (BuildContext ctx, index){
         return Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.only(
+            left: 12.0,
+            right: 12.0,
+          ),
           child: TextButton(
             onPressed: (){
               Navigator.pushNamed(
@@ -102,13 +116,6 @@ class _NewsElementState extends State<NewsElement>{
 
   @override
   Widget build(BuildContext context) {
-    double childAspectRatio = 0;
-    if (ContextUtils.getScreenWidth(context) > 500){
-      childAspectRatio = 1;
-    }
-    else{
-      childAspectRatio = 3;
-    }
     return Padding(
       padding: EdgeInsets.all(12.0),
       child: Column(
@@ -116,8 +123,8 @@ class _NewsElementState extends State<NewsElement>{
           Text(
             "Berita Terkait dengan ${widget.query}",
             style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 22
+              fontWeight: FontWeight.bold,
+              fontSize: 22
             ),
           ),
           FutureBuilder(
