@@ -1,7 +1,7 @@
-from ast import keyword
+import pickle
 import json
+import os
 from django.http import HttpResponse
-
 from .templates.colab_based_filtering import ColabBasedFiltering
 from .templates.pretty_print import PrettyPrint
 from .templates.keyword_extraction import KeywordExtraction
@@ -18,6 +18,8 @@ from .ml_models.text_rank import TextRank
 from .templates.google_link_fetch import GoogleLinkFetch
 from .templates.web_scrapper import WebScraper
 import pandas as pd
+from string import digits
+
 
 # Create your views here.
 # News API
@@ -71,7 +73,10 @@ class NewsFetchDetailsAPI(APIView):
         for sentence in sentences:
             sentence_dot_tokenized += sent_tokenize(sentence)
 
+        table_digits = str.maketrans('', '', digits)
+
         sentence_filtered_tokenized = [sentence for sentence in sentence_dot_tokenized if len(sentence) >= word_length_threshold]
+        sentence_filtered_tokenized = [word.translate(table_digits) for word in sentence_filtered_tokenized]
         return sentence_filtered_tokenized
     
     def _get_summarized_news(self, relevant_paragraphs):
@@ -81,8 +86,27 @@ class NewsFetchDetailsAPI(APIView):
 
     def _get_keywords(self, sentences):
         keywords_extraction = KeywordExtraction()
-        indonesian_stopwords = set(stopwords.words("indonesian"))
-        top_words = keywords_extraction.extract_keywords(sentences, stopwords = indonesian_stopwords)
+        lda_model_path = os.path.join(os.path.dirname(__file__), "../ml_models/lda.pkl")
+        count_vectorizer_lda_path = os.path.join(os.path.dirname(__file__), "../ml_models/count_vectorizer_lda.pkl")
+        
+        lda = pickle.load(lda_model_path)
+        count_vectorizer_lda = pickle.load(count_vectorizer_lda_path)
+        
+        preprocessed_sentence = self._preprocess_text()
+
+        top_words = keywords_extraction.perform_keyword_extraction(lda, count_vectorizer_lda, [sentences])
+
+        # indonesian_stopwords = set(stopwords.words("indonesian"))
+        # indonesian_stopwords.union({
+        #     "republika", "photo", "wib", "indonesia", "bandung", 
+        #     "peserta", "co", "peserta", "baca", "kota", 
+        #     "peristiwa", "rakyat", "jalan", "balai", 
+        #     "januari", "februari", "maret", "april", "mei",
+        #     "juni", "juli", "agustus", "september", "oktober", 
+        #     "november", "desember", "berita", "dapat", "warga",
+        #     "pulau", "kota"
+        # })
+    
         return top_words
 
     def _get_news_data(self, url_link):
