@@ -33,7 +33,7 @@ class GoogleLinkFetch():
             site_name = None
 
             try:
-                site_name = item["pagemap"]["metatags"][0]["og:site_name"]
+                site_name = item["displayLink"]
             except:
                 site_name = "Unknown"
 

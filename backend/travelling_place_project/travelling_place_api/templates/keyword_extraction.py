@@ -1,12 +1,8 @@
-from pprint import PrettyPrinter
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.decomposition import NMF
 import numpy as np
-
-from backend.travelling_place_project.travelling_place_api.templates.pretty_print import PrettyPrint
+from ..templates.pretty_print import PrettyPrint
 
 class KeywordExtraction:
-    def _get_top_words_from_range_of_topics(self, model, feature_names, n_top_words = 10):
+    def _get_top_words_from_range_of_topics(self, model, feature_names, n_top_words = 20):
         top_features_per_document = []
         for topic_idx, topic in enumerate(model.components_):
             top_features_ind = topic.argsort()[: -n_top_words - 1 : -1]
@@ -41,11 +37,10 @@ class KeywordExtraction:
     #     return top_words[top_topic_indexes]
 
     def perform_keyword_extraction(self, ml_model, vectorizer_model, sample_text):
-        pretty_print_text = PrettyPrint.pretty_print_text(sample_text)
-        x = vectorizer_model.transform([pretty_print_text])
+        x = vectorizer_model.transform(sample_text)
         feature_names = vectorizer_model.get_feature_names()
 
-        top_topic_index = self.get_most_relevant_topic_from_sentences(ml_model, x)
-        top_words = self.get_top_words_from_range_of_topics(ml_model, feature_names)
+        top_topic_index = self._get_most_relevant_topic_from_sentences(ml_model, x)
+        top_words = self._get_top_words_from_range_of_topics(ml_model, feature_names)
 
         return top_words[top_topic_index]
