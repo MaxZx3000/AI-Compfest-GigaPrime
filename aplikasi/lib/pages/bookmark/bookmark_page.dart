@@ -35,7 +35,7 @@ class _BookmarkState extends State<BookmarkPage>{
   Widget _getBookmarkedItems(List<BookmarkedTravellingPlace> bookmarkedTravellingPlaces){
     double childAspectRatio = 0;
     if (ContextUtils.getScreenWidth(context) > 500){
-      childAspectRatio = 1;
+      childAspectRatio = 2.5;
     }
     else{
       childAspectRatio = 3;
@@ -65,6 +65,7 @@ class _BookmarkState extends State<BookmarkPage>{
                 titleText: bookmarkedTravellingPlace.travellingPlace.placeName,
                 subtitleText: bookmarkedTravellingPlace.travellingPlace.city,
                 rating: bookmarkedTravellingPlace.rating.toString(),
+                height: 125,
                 topRightWidget: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(

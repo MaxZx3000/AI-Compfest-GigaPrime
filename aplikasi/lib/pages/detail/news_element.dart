@@ -25,55 +25,18 @@ class NewsElement extends StatefulWidget{
 class _NewsElementState extends State<NewsElement>{
 
   Widget _getNewsHeaders(List<News> news){
-    double childAspectRatio = 0;
-    if (ContextUtils.getScreenWidth(context) > 500){
-      childAspectRatio = 2.6;
-    }
-    else{
-      childAspectRatio = 2.5;
-    }
+    // double childAspectRatio = 0;
+    // if (ContextUtils.getScreenWidth(context) > 500){
+    //   childAspectRatio = 2.8;
+    // }
+    // else{
+    //   childAspectRatio = 2.8;
+    // }
 
-    Widget _getAdditionalNewsInfoWidget(News oneNews){
-      return Container(
-        decoration: BoxDecoration(
-          color: Color(secondaryColors["light_gray"] as int),
-        ),
-        padding: const EdgeInsets.only(
-          left: 10.0,
-          right: 10.0,
-        ),
-        height: 25,
-        child: Row(
-          children: [
-            Expanded(
-              flex: 1,
-              child: Text(
-                oneNews.type,
-                style: const TextStyle(
-                fontSize: 12
-                ),
-              )
-            ),
-            Expanded(
-              flex: 1,
-              child: Text(
-                oneNews.siteName,
-                style: const TextStyle(
-                  fontSize: 12,
-                  overflow: TextOverflow.ellipsis
-                ),
-              )
-            )
-          ],
-        ),
-      );
-    }
-
-    print("List of news: $news");
     return GridView.builder(
-      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 600,
-        childAspectRatio: childAspectRatio,
+        childAspectRatio: 2.5,
       ),
       shrinkWrap: true,
       primary: false,
@@ -96,8 +59,11 @@ class _NewsElementState extends State<NewsElement>{
             child: ImageHorizontalItemView(
               urlImage:  news[index].thumbnailImage,
               titleText: news[index].title,
-              subtitleText: news[index].link,
-              additionalWidgets: _getAdditionalNewsInfoWidget(news[index])
+              subtitleText: news[index].siteName,
+              additionalWidgets: const SizedBox(
+                height: 0,
+              ),
+              height: 115,
             ),
           ),
         );

@@ -5,6 +5,7 @@ class ImageHorizontalItemView extends StatelessWidget{
   final String titleText;
   final String subtitleText;
   final Widget additionalWidgets;
+  final double height;
   // final double width;
 
   const ImageHorizontalItemView({
@@ -12,13 +13,14 @@ class ImageHorizontalItemView extends StatelessWidget{
     required this.titleText,
     required this.subtitleText,
     required this.additionalWidgets,
+    required this.height
     // required this.width,
   }) : super();
 
   Widget _getImageWidget(){
     return Image.network(
       urlImage,
-      height: 800,
+      height: double.infinity,
       fit: BoxFit.cover,
     );
   }
@@ -32,12 +34,11 @@ class ImageHorizontalItemView extends StatelessWidget{
           bottom: 10,
         ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             titleText,
-            maxLines: 2,
+            maxLines: 3,
             style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16
@@ -60,7 +61,6 @@ class ImageHorizontalItemView extends StatelessWidget{
 
   Widget _getCombinedWidget(){
     return Row(
-      mainAxisSize: MainAxisSize.max,
       children: [
         Expanded(
           flex: 1,
@@ -81,21 +81,22 @@ class ImageHorizontalItemView extends StatelessWidget{
 
   Widget getCardWidget(Widget childWidget){
     return Container(
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(
-              Radius.circular(10.0)
-          ),
-          boxShadow: [
-            BoxShadow(
-              offset: Offset(0, 5),
-              color: Colors.black12,
-              spreadRadius: 0,
-              blurRadius: 5
-            )
-          ]
+      height: height,
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.all(
+            Radius.circular(10.0)
         ),
-        child: childWidget
+        boxShadow: [
+          BoxShadow(
+            offset: Offset(0, 5),
+            color: Colors.black12,
+            spreadRadius: 0,
+            blurRadius: 5
+          )
+        ]
+      ),
+      child: childWidget
     );
   }
 

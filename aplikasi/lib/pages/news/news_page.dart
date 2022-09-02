@@ -36,9 +36,19 @@ class _NewsPageState extends State<NewsPage>{
   }
 
   Widget _getJumbotronWidget(){
-    return SummaryWidget(
-      title: news.title,
-      subtitle: "${news.type}, ${news.siteName}",
+    return Column(
+      children: [
+        SummaryWidget(
+          title: news.title,
+          subtitle: "${news.type}, ${news.siteName}",
+        ),
+        Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Text(
+            "Full link: ${news.link}",
+          ),
+        )
+      ],
     );
   }
 
@@ -87,7 +97,7 @@ class _NewsPageState extends State<NewsPage>{
         child: Column(
           children: [
             _getKeywordsWidget(newsDetail),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             _getSummaryNewsWidget(newsDetail),

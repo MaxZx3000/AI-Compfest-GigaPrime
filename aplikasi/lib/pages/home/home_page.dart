@@ -139,10 +139,10 @@ class _TravellingPlaceState extends State<TravellingPlacesWidget>{
       // return Text("Loaded!");
     double childAspectRatio = 0;
     if (ContextUtils.getScreenWidth(context) > 500){
-      childAspectRatio = 2.4;
+      childAspectRatio = 2.5;
     }
     else{
-      childAspectRatio = 2.5;
+      childAspectRatio = 3;
     }
     return Expanded(
       child: GridView.builder(
@@ -168,6 +168,7 @@ class _TravellingPlaceState extends State<TravellingPlacesWidget>{
                 titleText: travellingPlaces[index].placeName,
                 subtitleText: travellingPlaces[index].city,
                 rating: travellingPlaces[index].getRating(),
+                height: 125,
               ),
             ),
           );

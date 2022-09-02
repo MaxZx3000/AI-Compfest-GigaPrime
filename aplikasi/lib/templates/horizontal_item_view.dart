@@ -6,6 +6,7 @@ class HorizontalItemWidget extends StatelessWidget{
   final String subtitleText;
   final String rating;
   final double width;
+  final double height;
   Widget? topRightWidget;
 
   HorizontalItemWidget({
@@ -15,6 +16,7 @@ class HorizontalItemWidget extends StatelessWidget{
     required this.rating,
     this.width = double.infinity,
     this.topRightWidget,
+    required this.height,
   }) : super(key: key);
 
    Widget getSummaryWidget(){
@@ -84,8 +86,8 @@ class HorizontalItemWidget extends StatelessWidget{
        return Row(
          children: [
            Expanded(
-               flex: 2,
-               child: childWidget
+             flex: 2,
+             child: childWidget
            ),
            Expanded(
              flex: 1,
@@ -100,9 +102,7 @@ class HorizontalItemWidget extends StatelessWidget{
   Widget getCardWidget(Widget childWidget){
     return Container(
       width: width,
-      height: IntrinsicWidth(
-        child: childWidget,
-      ).stepHeight,
+      height: height,
       padding: const EdgeInsets.all(8.0),
       decoration: const BoxDecoration(
         color: Colors.white,

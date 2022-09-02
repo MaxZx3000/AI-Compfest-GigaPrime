@@ -60,6 +60,7 @@ class _RecommendationState extends State<RecommendationColabWidget>{
                   titleText: recommendedTravellingPlace.placeName,
                   subtitleText: recommendedTravellingPlace.city,
                   width: 300.0,
+                  height: 100,
                   rating: recommendedTravellingPlace.rating.toString(),
                 ),
               ),
