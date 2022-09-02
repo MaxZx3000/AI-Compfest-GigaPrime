@@ -1,5 +1,6 @@
 import numpy as np
 from ..templates.pretty_print import PrettyPrint
+from sklearn.feature_extraction.text import CountVectorizer
 
 class KeywordExtraction:
     def _get_top_words_from_range_of_topics(self, model, feature_names, n_top_words = 20):
@@ -39,7 +40,7 @@ class KeywordExtraction:
     def perform_keyword_extraction(self, ml_model, vectorizer_model, sample_text):
         x = vectorizer_model.transform(sample_text)
         feature_names = vectorizer_model.get_feature_names()
-
+        ml_model.partial_fit(x)
         top_topic_index = self._get_most_relevant_topic_from_sentences(ml_model, x)
         top_words = self._get_top_words_from_range_of_topics(ml_model, feature_names)
 

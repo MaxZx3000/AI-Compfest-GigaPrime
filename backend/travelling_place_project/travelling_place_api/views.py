@@ -91,7 +91,7 @@ class NewsFetchDetailsAPI(APIView):
         
         lda = pickle.load(open(lda_model_path, 'rb'))
         count_vectorizer_lda = pickle.load(open(count_vectorizer_lda_path, 'rb'))
-        
+        # count_vectorizer = CountVectorizer()
         preprocessed_sentence = self._preprocess_text([sentences])
         pretty_printer = PrettyPrint()
         pretty_print_text = pretty_printer.pretty_print_tokenized_document(preprocessed_sentence)
