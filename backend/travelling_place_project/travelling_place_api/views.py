@@ -86,15 +86,20 @@ class NewsFetchDetailsAPI(APIView):
 
     def _get_keywords(self, sentences):
         keywords_extraction = KeywordExtraction()
-        lda_model_path = os.path.join(os.path.dirname(__file__), "../ml_models/lda.pkl")
-        count_vectorizer_lda_path = os.path.join(os.path.dirname(__file__), "../ml_models/count_vectorizer_lda.pkl")
+        lda_model_path = os.path.join(os.path.dirname(__file__), "ml_models/lda.pkl")
+        count_vectorizer_lda_path = os.path.join(os.path.dirname(__file__), "ml_models/count_vectorizer_lda.pkl")
         
-        lda = pickle.load(lda_model_path)
-        count_vectorizer_lda = pickle.load(count_vectorizer_lda_path)
+        lda = pickle.load(open(lda_model_path, 'rb'))
+        count_vectorizer_lda = pickle.load(open(count_vectorizer_lda_path, 'rb'))
         
-        preprocessed_sentence = self._preprocess_text()
+        preprocessed_sentence = self._preprocess_text([sentences])
+        pretty_printer = PrettyPrint()
+        pretty_print_text = pretty_printer.pretty_print_tokenized_document(preprocessed_sentence)
 
-        top_words = keywords_extraction.perform_keyword_extraction(lda, count_vectorizer_lda, [sentences])
+        print(f"Preprocessed sentence: {pretty_print_text}")
+
+        top_words = keywords_extraction.perform_keyword_extraction(lda, count_vectorizer_lda, [pretty_print_text])
+        
 
         # indonesian_stopwords = set(stopwords.words("indonesian"))
         # indonesian_stopwords.union({
