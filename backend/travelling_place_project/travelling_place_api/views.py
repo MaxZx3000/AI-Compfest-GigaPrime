@@ -77,6 +77,7 @@ class NewsFetchDetailsAPI(APIView):
 
         sentence_filtered_tokenized = [sentence for sentence in sentence_dot_tokenized if len(sentence) >= word_length_threshold]
         sentence_filtered_tokenized = [word.translate(table_digits) for word in sentence_filtered_tokenized]
+        sentence_filtered_tokenized = [word for word in sentence_filtered_tokenized if word.__contains__(":") == False]
         return sentence_filtered_tokenized
     
     def _get_summarized_news(self, relevant_paragraphs):
