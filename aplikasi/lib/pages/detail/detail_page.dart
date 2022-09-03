@@ -247,17 +247,17 @@ class _RatingState extends State<RatingElement>{
         widget.travellingPlace.placeId.toString(),
       ),
       builder: (context, snapshot){
+        if (snapshot.connectionState != ConnectionState.done){
+          return _getInitializingRatingWidget();
+        }
         if (snapshot.hasData){
           BookmarkedTravellingPlace bookmarkedTravellingPlace =
           snapshot.data as BookmarkedTravellingPlace;
           print("Initializing Bookmark Rating...");
           return _getRatingWidget(bookmarkedTravellingPlace.rating);
         }
-        else if (snapshot.hasError){
-          print("Something error occured: ${snapshot.error}");
-          return _getRatingWidget(0);
-        }
-        return _getInitializingRatingWidget();
+        print("Something error occured: ${snapshot.error}");
+        return _getRatingWidget(0);
       },
     );
   }

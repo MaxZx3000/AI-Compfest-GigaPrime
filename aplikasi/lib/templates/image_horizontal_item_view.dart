@@ -6,16 +6,19 @@ class ImageHorizontalItemView extends StatelessWidget{
   final String subtitleText;
   final Widget additionalWidgets;
   final double height;
+  final Function onCardClick;
   // final double width;
 
   const ImageHorizontalItemView({
+    Key? key,
     required this.urlImage,
     required this.titleText,
     required this.subtitleText,
     required this.additionalWidgets,
-    required this.height
+    required this.height,
+    required this.onCardClick,
     // required this.width,
-  }) : super();
+  }) : super(key: key);
 
   Widget _getImageWidget(){
     return Image.network(
@@ -81,7 +84,6 @@ class ImageHorizontalItemView extends StatelessWidget{
 
   Widget getCardWidget(Widget childWidget){
     return Container(
-      height: height,
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(
@@ -102,8 +104,19 @@ class ImageHorizontalItemView extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return getCardWidget(
-      _getCombinedWidget()
+    return SizedBox(
+      height: height,
+      child: getCardWidget(
+        TextButton(
+          onPressed: () {
+            onCardClick();
+          },
+          style: TextButton.styleFrom(
+              primary: Colors.black
+          ),
+          child: _getCombinedWidget()
+        )
+      ),
     );
   }
 }

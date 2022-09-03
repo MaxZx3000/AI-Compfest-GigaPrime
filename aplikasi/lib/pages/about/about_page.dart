@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travelling_app/globals/asset.dart';
 import 'package:travelling_app/templates/app_bar_stylized.dart';
+import 'package:travelling_app/templates/app_logo_title.dart';
 import 'package:travelling_app/templates/backable_app_bar.dart';
 
 class AboutPage extends StatelessWidget{
@@ -26,7 +27,9 @@ class AboutPage extends StatelessWidget{
           ),
           Text(
             "Aplikasi ini bertujuan untuk mendapatkan informasi detail mengenai" +
-                " tempat pariwisata di Indonesia menggunakan artificial intelligence",
+              " tempat pariwisata di Indonesia menggunakan artificial intelligence." +
+              " Tidak hanya itu, user juga bisa mendapatkan rekomendasi berdasarkan keyword pada pencarian" +
+              " dan rating tempat pariwisata yang diberikan",
             textAlign: TextAlign.center,
           ),
           SizedBox(
@@ -77,6 +80,7 @@ class AboutPage extends StatelessWidget{
         child: Column(
           children: [
             _getLogoWidget(),
+            const AppLogoTitle(),
             _getAboutWidget(),
             _getBackground(),
           ],

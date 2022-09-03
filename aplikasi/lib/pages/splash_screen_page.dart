@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:travelling_app/globals/asset.dart';
 import 'package:travelling_app/globals/colors.dart';
 import 'package:travelling_app/globals/route.dart';
+import 'package:travelling_app/templates/app_logo_title.dart';
 import 'package:travelling_app/utils/context.dart';
 
 class SplashScreenPage extends StatelessWidget{
@@ -23,7 +24,7 @@ class SplashScreenPage extends StatelessWidget{
       children: [
         Container(
           margin: const EdgeInsets.only(
-            bottom: 100
+            bottom: 5
           ),
           child: Image(
             image: Image.asset(
@@ -32,6 +33,7 @@ class SplashScreenPage extends StatelessWidget{
             height: 220,
           ),
         ),
+        const AppLogoTitle(),
       ],
     );
   }

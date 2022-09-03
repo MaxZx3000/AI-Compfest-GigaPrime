@@ -46,23 +46,21 @@ class _RecommendationState extends State<RecommendationColabWidget>{
             TravellingPlace recommendedTravellingPlace = recommendedTravellingPlaces[index];
             return Padding(
               padding: const EdgeInsets.all(8.0),
-              child: TextButton(
-                onPressed: (){
+              child: HorizontalItemWidget(
+                titleText: recommendedTravellingPlace.placeName,
+                subtitleText: recommendedTravellingPlace.city,
+                width: 300.0,
+                height: 100,
+                rating: recommendedTravellingPlace.rating.toString(),
+                onClickCard: (){
                   Navigator.pushNamed(
-                    context,
-                    detailRouteName,
-                    arguments: recommendedTravellingPlace
+                      context,
+                      detailRouteName,
+                      arguments: recommendedTravellingPlace
                   ).then((value) => {
                     widget.parentFunction()
                   });
                 },
-                child: HorizontalItemWidget(
-                  titleText: recommendedTravellingPlace.placeName,
-                  subtitleText: recommendedTravellingPlace.city,
-                  width: 300.0,
-                  height: 100,
-                  rating: recommendedTravellingPlace.rating.toString(),
-                ),
               ),
             );
           },
@@ -74,7 +72,7 @@ class _RecommendationState extends State<RecommendationColabWidget>{
     return const Padding(
       padding: EdgeInsets.all(8.0),
       child: InformationWidget(
-        iconData: Icons.place,
+        iconData: Icons.star,
         information: "Anda memerlukan minimal 6 rating untuk mendapatkan rekomendasi.",
         widgetWidth: 300,
       ),

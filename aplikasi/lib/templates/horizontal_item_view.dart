@@ -7,6 +7,7 @@ class HorizontalItemWidget extends StatelessWidget{
   final String rating;
   final double width;
   final double height;
+  final Function onClickCard;
   Widget? topRightWidget;
 
   HorizontalItemWidget({
@@ -17,6 +18,7 @@ class HorizontalItemWidget extends StatelessWidget{
     this.width = double.infinity,
     this.topRightWidget,
     required this.height,
+    required this.onClickCard,
   }) : super(key: key);
 
    Widget getSummaryWidget(){
@@ -125,7 +127,15 @@ class HorizontalItemWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return getCardWidget(
-      getSummaryWidget()
+      TextButton(
+        onPressed: (){
+          onClickCard();
+        },
+        style: TextButton.styleFrom(
+            primary: Colors.black
+        ),
+        child: getSummaryWidget()
+      )
     );
   }
 }

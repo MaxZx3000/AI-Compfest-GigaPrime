@@ -156,20 +156,18 @@ class _TravellingPlaceState extends State<TravellingPlacesWidget>{
         itemBuilder: (BuildContext ctx, index){
           return Padding(
             padding: EdgeInsets.all(5.0),
-            child: TextButton(
-              onPressed: (){
+            child: HorizontalItemWidget(
+              titleText: travellingPlaces[index].placeName,
+              subtitleText: travellingPlaces[index].city,
+              rating: travellingPlaces[index].getRating(),
+              height: 125,
+              onClickCard: (){
                 Navigator.pushNamed(
-                  context,
-                  detailRouteName,
-                  arguments: travellingPlaces[index]
+                    context,
+                    detailRouteName,
+                    arguments: travellingPlaces[index]
                 );
               },
-              child: HorizontalItemWidget(
-                titleText: travellingPlaces[index].placeName,
-                subtitleText: travellingPlaces[index].city,
-                rating: travellingPlaces[index].getRating(),
-                height: 125,
-              ),
             ),
           );
         }

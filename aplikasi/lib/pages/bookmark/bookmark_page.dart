@@ -53,33 +53,31 @@ class _BookmarkState extends State<BookmarkPage>{
           BookmarkedTravellingPlace bookmarkedTravellingPlace = bookmarkedTravellingPlaces[index];
           return Padding(
             padding: const EdgeInsets.all(5.0),
-            child: TextButton(
-              onPressed: (){
+            child: HorizontalItemWidget(
+              titleText: bookmarkedTravellingPlace.travellingPlace.placeName,
+              subtitleText: bookmarkedTravellingPlace.travellingPlace.city,
+              rating: bookmarkedTravellingPlace.rating.toString(),
+              height: 125,
+              onClickCard: (){
                 Navigator.pushNamed(
                     context,
                     detailRouteName,
                     arguments: bookmarkedTravellingPlace.travellingPlace
                 ).then((value) => {updateWidget()});
               },
-              child: HorizontalItemWidget(
-                titleText: bookmarkedTravellingPlace.travellingPlace.placeName,
-                subtitleText: bookmarkedTravellingPlace.travellingPlace.city,
-                rating: bookmarkedTravellingPlace.rating.toString(),
-                height: 125,
-                topRightWidget: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    onPressed: () async{
-                      await travellingPlaceBookmarkDB.deleteBookmark(
-                        bookmarkedTravellingPlace.travellingPlace.placeId.toString(),
-                      );
-                      setState((){});
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.red,
-                    ),
-                    child: const Text("Hapus"),
+              topRightWidget: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  onPressed: () async{
+                    await travellingPlaceBookmarkDB.deleteBookmark(
+                      bookmarkedTravellingPlace.travellingPlace.placeId.toString(),
+                    );
+                    setState((){});
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.red,
                   ),
+                  child: const Text("Hapus"),
                 ),
               ),
             ),
@@ -102,7 +100,7 @@ class _BookmarkState extends State<BookmarkPage>{
       child: InformationWidget(
         iconData: Icons.star,
         widgetWidth: 250,
-        information: "Anda belum melakukan bookmark tempat wisata sama sekali!"
+        information: "Anda belum melakukan rating tempat wisata sama sekali!"
       ),
     );
   }
@@ -118,7 +116,7 @@ class _BookmarkState extends State<BookmarkPage>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BackableAppBar(
-        appBarTitle: "Bookmark Page",
+        appBarTitle: "Rating Page",
         onBackIconPressed: (){
           Navigator.pop(context);
         },
@@ -130,7 +128,6 @@ class _BookmarkState extends State<BookmarkPage>{
         child: FutureBuilder(
           future: travellingPlaceBookmarkDB.getAllBookmarks(),
           builder: (context, snapshot) {
-            print("Snapshot Data: ${snapshot.data}");
             if (snapshot.hasError){
               return Text(
                 snapshot.error.toString(),

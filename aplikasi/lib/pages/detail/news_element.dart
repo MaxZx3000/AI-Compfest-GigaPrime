@@ -47,24 +47,24 @@ class _NewsElementState extends State<NewsElement>{
           padding: const EdgeInsets.only(
             left: 12.0,
             right: 12.0,
+            top: 5,
+            bottom: 5,
           ),
-          child: TextButton(
-            onPressed: (){
+          child: ImageHorizontalItemView(
+            urlImage:  news[index].thumbnailImage,
+            titleText: news[index].title,
+            subtitleText: news[index].siteName,
+            onCardClick: (){
               Navigator.pushNamed(
                 context,
                 newsRouteName,
                 arguments: news[index]
               );
             },
-            child: ImageHorizontalItemView(
-              urlImage:  news[index].thumbnailImage,
-              titleText: news[index].title,
-              subtitleText: news[index].siteName,
-              additionalWidgets: const SizedBox(
-                height: 0,
-              ),
-              height: 115,
+            additionalWidgets: const SizedBox(
+              height: 0,
             ),
+            height: 150,
           ),
         );
       },
