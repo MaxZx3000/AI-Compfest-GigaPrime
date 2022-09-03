@@ -68,7 +68,7 @@ class NewsFetchLinksAPI(APIView):
         return HttpResponse(header_news_json, content_type = "application/json", status = status.HTTP_200_OK)
 
 class NewsFetchDetailsAPI(APIView):
-    def _preprocess_text(self, sentences, word_length_threshold = 15):
+    def _preprocess_keywords_text(self, sentences, word_length_threshold = 15):
         sentence_dot_tokenized = []
         for sentence in sentences:
             sentence_dot_tokenized += sent_tokenize(sentence)
@@ -76,9 +76,19 @@ class NewsFetchDetailsAPI(APIView):
         table_digits = str.maketrans('', '', digits)
 
         sentence_filtered_tokenized = [sentence for sentence in sentence_dot_tokenized if len(sentence) >= word_length_threshold]
-        sentence_filtered_tokenized = [word.translate(table_digits) for word in sentence_filtered_tokenized]
-        sentence_filtered_tokenized = [word for word in sentence_filtered_tokenized if word.__contains__(":") == False]
+        sentence_filtered_tokenized = [sentence.translate(table_digits) for sentence in sentence_filtered_tokenized]
+        sentence_filtered_tokenized = [sentence for sentence in sentence_filtered_tokenized if sentence.__contains__(":") == False]
         return sentence_filtered_tokenized
+
+    def _preprocess_summary_text(self, sentences, word_length_threshold = 15):
+        sentence_dot_tokenized = []
+        for sentence in sentences:
+            sentence_dot_tokenized += sent_tokenize(sentence)
+
+        sentence_filtered_tokenized = [sentence for sentence in sentence_dot_tokenized if len(sentence) >= word_length_threshold]
+        sentence_filtered_tokenized = [sentence for sentence in sentence_filtered_tokenized if sentence.__contains__(":") == False]
+        return sentence_filtered_tokenized
+
     
     def _get_summarized_news(self, relevant_paragraphs):
         text_rank = TextRank()
@@ -93,7 +103,7 @@ class NewsFetchDetailsAPI(APIView):
         lda = pickle.load(open(lda_model_path, 'rb'))
         count_vectorizer_lda = pickle.load(open(count_vectorizer_lda_path, 'rb'))
         # count_vectorizer = CountVectorizer()
-        preprocessed_sentence = self._preprocess_text([sentences])
+        preprocessed_sentence = self._preprocess_keywords_text([sentences])
         pretty_printer = PrettyPrint()
         pretty_print_text = pretty_printer.pretty_print_tokenized_document(preprocessed_sentence)
 
@@ -129,7 +139,7 @@ class NewsFetchDetailsAPI(APIView):
             url_link = request.GET.get('url_link', '')       
         
         relevant_paragraphs = self._get_news_data(url_link)
-        preprocessed_relevant_paragraphs = self._preprocess_text(relevant_paragraphs)
+        preprocessed_relevant_paragraphs = self._preprocess_summary_text(relevant_paragraphs)
         summarized_news = self._get_summarized_news(preprocessed_relevant_paragraphs)
         pretty_print = PrettyPrint()
         
