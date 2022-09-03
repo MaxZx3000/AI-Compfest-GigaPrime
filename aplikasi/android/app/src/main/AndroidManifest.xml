@@ -4,9 +4,9 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:label="travelling_app"
+        android:label="TrAIvel"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/traivel_app_logo">
         <activity
             android:name=".MainActivity"
             android:exported="true"
