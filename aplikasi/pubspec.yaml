@@ -37,6 +37,7 @@ dependencies:
   hive_flutter: ^1.1.0
   path_provider: ^2.0.2
   hive: ^2.2.3
+  google_fonts: ^3.0.1
   cupertino_icons: ^1.0.5
   gradient_progress_indicator: ^1.0.0+5
 
