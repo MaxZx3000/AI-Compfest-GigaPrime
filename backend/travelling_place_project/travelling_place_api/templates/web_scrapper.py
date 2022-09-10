@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 
 class WebScraper():
     def retrieve_content_from_scraper_api(self, url):
-        API_KEY = "aa2c2fb68fc1cf60e13db8ebaf260112"
+        API_KEY = "012663f1577c99d16387b5aba5f54712"
         web_url = f"http://api.scraperapi.com?api_key={API_KEY}&url={url}"
         request = requests.get(web_url)
         return request.text
