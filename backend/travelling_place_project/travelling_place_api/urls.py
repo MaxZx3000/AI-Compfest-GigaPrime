@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .views import ColabBasedRecommedationAPI, ContentBasedRecommendationUserQueryAPI, ContentBasedRecommendationUserLocationAPI, NewsFetchDetailsAPI, NewsFetchLinksAPI
+from .views import ColabBasedRecommedationAPI, ContentBasedRecommendationUserQueryAPI, ContentBasedRecommendationUserLocationAPI, NewsFetchDetailsAPI, NewsFetchLinksAPI, TimeSeriesWisatawanMancanegaraJakartaAPI
 from rest_framework import routers
 from django.urls import path, include
 
@@ -9,4 +9,5 @@ urlpatterns = [
     path(r'news_list', NewsFetchLinksAPI.as_view(), name = "news_list"),
     path(r'news_details', NewsFetchDetailsAPI.as_view(), name = "news_details"),
     path(r'colab_filtering_travelling_places', ColabBasedRecommedationAPI.as_view(), name = "colab_filtering_travelling_places"),
+    path('time_series_jumlah_kunjungan_wisatawan_mancanegara', TimeSeriesWisatawanMancanegaraJakartaAPI.as_view(), name = "time_series_jumlah_kunjungan_wisatawan_mancanegara")
 ]

@@ -1,6 +1,9 @@
 import pickle
 import json
 import os
+from unittest import result
+import numpy as np
+import statsmodels.api as sm
 from django.http import HttpResponse
 from .templates.content_based_filtering import ContentBasedFiltering
 from .templates.colab_based_filtering import ColabBasedFiltering
@@ -23,6 +26,7 @@ from .templates.pandas_data_loader import PandasDataLoader
 import pandas as pd
 from string import digits
 from scipy.sparse import hstack, vstack
+from datetime import date
 
 # Create your views here.
 # News API
@@ -204,8 +208,36 @@ class ContentBasedRecommendationUserQueryAPI(APIView):
         )
 
 class TimeSeriesWisatawanMancanegaraJakartaAPI(APIView):
-    def get(self):
+    def get(self, request):
+        model_path = os.path.join(os.path.dirname(__file__), "ml_models/arima_kunjungan_wisatawan_mancanegara_jakarta.pickle")
+        arima_model_result = sm.load(model_path)
+        new_datetime_range = pd.date_range(
+            start = date(2018, 1, 1), 
+            end = date(2022, 10, 1), 
+            freq = 'MS'
+        )
+
+        columns = ["date", "jumlah"]
+
+        n_samples = 58
+        prediction_result_df = arima_model_result.get_forecast(n_samples)
+        prediction_result_df = np.exp(prediction_result_df.predicted_mean)
+        prediction_result_df = prediction_result_df.reset_index()
         
+        prediction_result_df.columns = columns
+        
+        prediction_result_df["date"] = prediction_result_df["date"].astype(str)
+
+        # print(prediction_result_df)
+
+        json_result = prediction_result_df.to_json(orient = "records")
+        
+        return HttpResponse(
+            json_result,
+            content_type = "application/json",
+            status = status.HTTP_200_OK
+        )
+    
 
 # Content Based Filtering
 class ContentBasedRecommendationUserLocationAPI(APIView):
