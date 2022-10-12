@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:travelling_app/classes/user/bookmarked_travelling_place.dart';
 import 'package:travelling_app/fetch-helpers/api-endpoint.dart';
@@ -11,16 +12,43 @@ class HttpHelpers{
       HttpHeaders.contentTypeHeader: "application/x-www-form-urlencoded",
     };
   }
-  static Future<http.Response> fetchTravellingPlacesList(
-      String query
-  ){
+  static Future<http.Response> fetchTravellingPlacesUserQueryList(
+      String query,
+    ){
+    print("Query on Future: ${query}");
     var jsonRequestBody = {
-      "query": query
+      "query": query,
     };
 
-    Uri uri = Uri.https(
+    Uri uri = Uri.http(
+        ApiEndpoint.getBaseAPIUrl(),
+        ApiEndpoint.getTravellingPlacesUserQueryLink(),
+        jsonRequestBody
+    );
+
+    return http.get(
+      uri,
+      headers: getUrlHeader(),
+    );
+  }
+
+
+  static Future<http.Response> fetchTravellingPlacesUserLocationList(
+      String categories,
+      String cities,
+      double latitude,
+      double longitude,
+  ){
+    var jsonRequestBody = {
+      "latitude": latitude.toString(),
+      "longitude": longitude.toString(),
+      "categories": categories,
+      "cities": cities,
+    };
+
+    Uri uri = Uri.http(
       ApiEndpoint.getBaseAPIUrl(),
-      ApiEndpoint.getTravellingPlacesListLink(),
+      ApiEndpoint.getTravellingPlacesUserLocationLink(),
       jsonRequestBody
     );
 
@@ -35,7 +63,7 @@ class HttpHelpers{
       "title": query
     };
 
-    Uri uri = Uri.https(
+    Uri uri = Uri.http(
       ApiEndpoint.getBaseAPIUrl(),
       ApiEndpoint.getNewsListLink(),
       jsonRequestBody,
@@ -47,12 +75,11 @@ class HttpHelpers{
     );
   }
   static Future<http.Response> fetchNewsDetails(String newsURL){
-    print("Fetch News Detaiis...");
     var jsonRequestBody = {
       "url_link": newsURL,
     };
 
-    Uri uri = Uri.https(
+    Uri uri = Uri.http(
       ApiEndpoint.getBaseAPIUrl(),
       ApiEndpoint.getNewsDetailsLink(),
       jsonRequestBody,
@@ -78,7 +105,7 @@ class HttpHelpers{
 
     print("Current: $jsonRequestBody");
 
-    Uri uri = Uri.https(
+    Uri uri = Uri.http(
       ApiEndpoint.getBaseAPIUrl(),
       ApiEndpoint.getColabTravellingPlacesLink(),
       jsonRequestBody,

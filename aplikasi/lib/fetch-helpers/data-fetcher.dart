@@ -8,8 +8,32 @@ import 'package:travelling_app/classes/user/bookmarked_travelling_place.dart';
 import 'package:travelling_app/fetch-helpers/http-helpers.dart';
 
 class DataFetcher{
-  static Future<List<TravellingPlace>> getTravellingPlaces(String query) async {
-    final response = await HttpHelpers.fetchTravellingPlacesList(query);
+  static Future<List<TravellingPlace>> getTravellingPlacesByQuery(
+      String query,) async {
+    final response = await HttpHelpers.fetchTravellingPlacesUserQueryList(
+      query,
+    );
+    dynamic jsonDecoded = jsonDecode(response.body);
+    List<TravellingPlace> travellingPlaces = [];
+    jsonDecoded.forEach((element) {
+      print(element);
+      TravellingPlace travellingPlace = TravellingPlace.setFromJSON(element);
+      travellingPlaces.add(travellingPlace);
+    });
+    return travellingPlaces;
+  }
+
+  static Future<List<TravellingPlace>> getTravellingPlacesByLocation(
+    String categories,
+    String cities,
+    double latitude,
+    double longitude,) async {
+    final response = await HttpHelpers.fetchTravellingPlacesUserLocationList(
+      categories,
+      cities,
+      latitude,
+      longitude
+    );
     dynamic jsonDecoded = jsonDecode(response.body);
     List<TravellingPlace> travellingPlaces = [];
     jsonDecoded.forEach((element) {
@@ -18,6 +42,7 @@ class DataFetcher{
     });
     return travellingPlaces;
   }
+
   static Future<List<News>> getNewsList(String query) async {
     String newsQuery = "Berita $query";
     final response = await HttpHelpers.fetchNewsList(newsQuery);
@@ -39,11 +64,7 @@ class DataFetcher{
       news.link
     );
 
-    print("Fetch News Detaiis Done...");
-
     dynamic jsonDecoded = jsonDecode(response.body);
-
-    print(jsonDecoded);
 
     NewsDetail newsDetail = NewsDetail.setFromJSON(
       news,

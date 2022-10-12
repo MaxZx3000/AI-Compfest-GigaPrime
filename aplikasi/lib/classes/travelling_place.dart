@@ -28,7 +28,7 @@ class TravellingPlace{
   double? rating;
 
   @HiveField(7)
-  double? timeMinutes;
+  int? timeMinutes;
 
   @HiveField(8)
   double? latitude;
@@ -84,22 +84,18 @@ class TravellingPlace{
   }
 
   factory TravellingPlace.setFromJSON(Map<String, dynamic> jsonDatum){
-    String coordinate = jsonDatum["coordinate"];
-    coordinate = coordinate.replaceAll("'", '"');
-    Map<String, dynamic> coordinateJSON = jsonDecode(coordinate);
-
     return TravellingPlace(
-      placeId: jsonDatum["place_id"],
-      placeName: jsonDatum["place_name"],
-      description: jsonDatum["description"],
-      category: jsonDatum["category"],
-      city: jsonDatum["city"],
-      rating: jsonDatum["rating"],
-      price: jsonDatum["price"],
-      latitude: coordinateJSON['lat'],
-      longitude: coordinateJSON['lng'],
-      timeMinutes: jsonDatum["time_minutes"],
-      summarizedDescription: jsonDatum["summarized_description"]
+      placeId: jsonDatum["Place_Id"],
+      placeName: jsonDatum["Place_Name"],
+      description: jsonDatum["Description"],
+      category: jsonDatum["Category"],
+      city: jsonDatum["City"],
+      rating: double.parse(jsonDatum["Rating"]),
+      price: jsonDatum["Price"],
+      latitude: jsonDatum['Lat'],
+      longitude: jsonDatum['Long'],
+      // timeMinutes: int.parse(jsonDatum["Time_Minutes"]),
+      summarizedDescription: jsonDatum["Summarized_Description"]
     );
   }
 }

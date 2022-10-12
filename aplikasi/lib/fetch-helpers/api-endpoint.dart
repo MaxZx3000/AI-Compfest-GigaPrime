@@ -1,11 +1,15 @@
 class ApiEndpoint{
 
   static String getBaseAPIUrl(){
-    return "travelling-app-backend.herokuapp.com";
+    // return "travelling-app-backend.herokuapp.com"; // For Public API
+    return "10.0.2.2:8000"; // For Testing
   }
 
-  static String getTravellingPlacesListLink(){
-    return "/travelling_api/travelling_places_list";
+  static String getTravellingPlacesUserQueryLink(){
+    return "/travelling_api/travelling_places_user_query_list";
+  }
+  static String getTravellingPlacesUserLocationLink(){
+    return "/travelling_api/travelling_places_user_location_list";
   }
   static String getNewsListLink(){
     return "/travelling_api/news_list";

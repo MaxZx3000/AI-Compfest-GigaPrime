@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:travelling_app/globals/gradient.dart';
 import 'package:travelling_app/templates/gradient_button.dart';
 import 'package:travelling_app/utils/context.dart';
@@ -10,36 +8,24 @@ class SearchBar extends StatefulWidget{
   final Function onSearchClick;
   final double maxWidth;
   final BoxShadow searchBarShadow;
+  final Alignment alignment;
+  final double offsetValue;
 
   const SearchBar({Key? key,
     this.placeholderText = "",
     required this.onSearchClick,
     required this.maxWidth,
-    required this.searchBarShadow
+    required this.searchBarShadow,
+    required this.alignment,
+    required this.offsetValue
   }) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _SearchBarState(
-      placeholderText: placeholderText,
-      onSearchClick: onSearchClick,
-      maxWidth: maxWidth,
-      shadow: this.searchBarShadow
-  );
+  State<StatefulWidget> createState() => _SearchBarState();
 }
 
 class _SearchBarState extends State<SearchBar>{
-  final String placeholderText;
-  final Function onSearchClick;
-  final double maxWidth;
-  final BoxShadow shadow;
   String currentText = "";
-
-  _SearchBarState({
-    this.placeholderText = "",
-    required this.onSearchClick,
-    required this.maxWidth,
-    required this.shadow
-  });
 
   void setCurrentText(String newText){
     setState(() {
@@ -50,6 +36,7 @@ class _SearchBarState extends State<SearchBar>{
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         getTextInput(),
         getSearchButton()
@@ -65,7 +52,7 @@ class _SearchBarState extends State<SearchBar>{
               bottomLeft: Radius.circular(30.0),
               topLeft: Radius.circular(30.0)
           ),
-          boxShadow: [shadow]
+          boxShadow: [widget.searchBarShadow]
       ),
       child: TextField(
         onChanged: (String text){
@@ -73,10 +60,10 @@ class _SearchBarState extends State<SearchBar>{
         },
         maxLines: 1,
         decoration: InputDecoration(
-          hintText: placeholderText,
+          hintText: widget.placeholderText,
           constraints: BoxConstraints.expand(
-            width: getSearchBarWidth() - 225,
-            height: 46,
+            width: widget.maxWidth,
+            height: 50,
           ),
           contentPadding: const EdgeInsets.only(left: 15.0),
           enabledBorder: InputBorder.none,
@@ -98,7 +85,7 @@ class _SearchBarState extends State<SearchBar>{
           size: 20,
         ),
         onButtonTap: (){
-          onSearchClick(currentText);
+          widget.onSearchClick(currentText);
         },
         padding: const EdgeInsets.only(
             left: 22.5,
@@ -106,15 +93,8 @@ class _SearchBarState extends State<SearchBar>{
             top: 11,
             bottom: 11
         ),
-        shadow: shadow
+        shadow: widget.searchBarShadow,
     );
   }
 
-  double getSearchBarWidth(){
-    double screenWidth = ContextUtils.getScreenWidth(context);
-    if (screenWidth > maxWidth){
-      return maxWidth;
-    }
-    return screenWidth;
-  }
 }

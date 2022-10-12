@@ -40,6 +40,10 @@ dependencies:
   google_fonts: ^3.0.1
   cupertino_icons: ^1.0.5
   gradient_progress_indicator: ^1.0.0+5
+  sliding_up_panel: ^2.0.0+1
+  geolocator: ^8.0.0
+  google_maps_flutter: ^2.2.1
+  fluttertoast: ^8.0.9
 
 dev_dependencies:
   flutter_test:
