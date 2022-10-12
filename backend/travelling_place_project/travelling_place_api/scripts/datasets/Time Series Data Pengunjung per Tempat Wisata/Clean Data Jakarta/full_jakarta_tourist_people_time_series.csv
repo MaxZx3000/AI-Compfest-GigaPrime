@@ -1,0 +1,545 @@
+tahun,bulan,tempat_wisata,jumlah
+2018,12,Taman Impian Jaya Ancol,1801476
+2018,12,Taman Mini Indonesia Indah,567401
+2018,12,Taman Margasatwa Ragunan,402761
+2018,12,Monumen Nasional,257071
+2018,12,Museum Nasional,26445
+2018,12,Museum Satria Mandala,461
+2018,12,Museum Sejarah Jakarta,140768
+2018,12,Museum Tekstil,4301
+2018,12,Museum Bahari,3475
+2018,12,Museum Seni Rupa dan Keramik,27526
+2018,12,Museum Wayang,50245
+2018,12,Museum Joang 45 dan Thamrin,4110
+2018,12,Taman Arkeologi Onrust,3876
+2018,12,Pelabuhan Sunda Kelapa,4254
+2018,12,Kepulauan Seribu,43280
+2018,12,PBB Setu babakan,35830
+2018,12,Museum Prasasti,3195
+2018,12,Planetarium,23190
+2018,12,Rumah si Pitung,3435
+2020,10,Taman Impian Jaya Ancol,1978996
+2020,10,Taman Mini Indonesia Indah,962277
+2020,10,Taman Margasatwa Ragunan,600470
+2020,10,Monumen Nasional,443034
+2020,10,Museum Nasional,65308
+2020,10,Museum Satria Mandala,0
+2020,10,Museum Sejarah Jakarta,2864
+2020,10,Museum Tekstil,96
+2020,10,Museum Bahari,383
+2020,10,Museum Seni Rupa dan Keramik,422
+2020,10,Museum Wayang,1390
+2020,10,Museum Joang 45,249
+2020,10,Taman Arkeologi Onrust,2783
+2020,10,Pelabuhan Sunda Kelapa,2232
+2020,10,Kepulauan Seribu,14944
+2020,10,PBB Setu babakan,10372
+2020,10,Museum Prasasti,203
+2020,10,Planetarium,0
+2020,10,Rumah si Pitung,1342
+2020,10,Kawasan Kota Tua,8618
+2020,1,Taman Impian Jaya Ancol,620327.0
+2020,1,Taman Mini Indonesia Indah,272960.0
+2020,1,Taman Margasatwa Ragunan,289748.0
+2020,1,Monumen Nasional,24.325
+2020,1,Museum Nasional,18145.0
+2020,1,Museum Satria Mandala,2046.0
+2020,1,Museum Sejarah Jakarta,66251.0
+2020,1,Museum Tekstil,2658.0
+2020,1,Museum Bahari,2087.0
+2020,1,Museum Seni Rupa dan Keramik,12190.0
+2020,1,Museum Wayang,21231.0
+2020,1,Museum Joang 45,581.0
+2020,1,Taman Arkeologi Onrust,2200.0
+2020,1,Pelabuhan Sunda Kelapa,931.0
+2020,1,Kepulauan Seribu,31041.0
+2020,1,PBB Setu babakan,35369.0
+2020,1,Museum Prasasti,1030.0
+2020,1,Planetarium,9654.0
+2020,1,Rumah si Pitung,2048.0
+2020,1,Kawasan Kota Tua,456902.0
+2018,5,Taman Impian Jaya Ancol,1500023
+2018,5,Taman Mini Indonesia Indah,500013
+2018,5,Taman Margasatwa Ragunan,350254
+2018,5,Monumen Nasional,103522
+2018,5,Museum Nasional,28047
+2018,5,Museum Satria Mandala,1451
+2018,5,Museum Sejarah Jakarta,30978
+2018,5,Museum Tekstil,2137
+2018,5,Museum Bahari,3305
+2018,5,Museum Seni Rupa dan Keramik,7539
+2018,5,Museum Wayang,1955
+2018,5,Museum Joang 45 dan Thamrin,881
+2018,5,Taman Arkeologi Onrust,4034
+2018,5,Pelabuhan Sunda Kelapa,5521
+2018,5,Kepulauan Seribu,34304
+2018,5,PBB Setu babakan,23062
+2018,5,Museum Prasasti,494
+2018,5,Planetarium,12555
+2018,5,Rumah si Pitung,3845
+2019,9,Taman Impian Jaya Ancol,585215
+2019,9,Taman Mini Indonesia Indah,301451
+2019,9,Taman Margasatwa Ragunan,317049
+2019,9,Monumen Nasional (kawasan),666990
+2019,9,Museum Nasional,11241
+2019,9,Museum Satria Mandala,687
+2019,9,Museum Sejarah Jakarta,33526
+2019,9,Museum Tekstil,2627
+2019,9,Museum Bahari,1455
+2019,9,Museum Seni Rupa dan Keramik,9430
+2019,9,Museum Wayang,14883
+2019,9,Museum Joang 45 dan Thamrin,1133
+2019,9,Taman Arkeologi Onrust,3361
+2019,9,Pelabuhan Sunda Kelapa,2274
+2019,9,Kepulauan Seribu,37788
+2019,9,PBB Setu babakan,38771
+2019,9,Museum Prasasti,618
+2019,9,Planetarium,12206
+2019,9,Rumah si Pitung,2140
+2019,9,Kawasan Kota Tua,387941
+2019,10,Taman Impian Jaya Ancol,579221
+2019,10,Taman Mini Indonesia Indah,298031
+2019,10,Taman Margasatwa Ragunan,302576
+2019,10,Monumen Nasional (kawasan),1290753
+2019,10,Museum Nasional,10441
+2019,10,Museum Satria Mandala,605
+2019,10,Museum Sejarah Jakarta,35747
+2019,10,Museum Tekstil,2621
+2019,10,Museum Bahari,1336
+2019,10,Museum Seni Rupa dan Keramik,8464
+2019,10,Museum Wayang,16541
+2019,10,Museum Joang 45 dan Thamrin,1979
+2019,10,Taman Arkeologi Onrust,3197
+2019,10,Pelabuhan Sunda Kelapa,2095
+2019,10,Kepulauan Seribu,52545
+2019,10,PBB Setu babakan,32727
+2019,10,Museum Prasasti,767
+2019,10,Planetarium,6189
+2019,10,Rumah si Pitung,948
+2019,10,Kawasan Kota Tua,450409
+2018,2,Taman Impian Jaya Ancol,944173
+2018,2,Taman Mini Indonesia Indah,375001
+2018,2,Taman Margasatwa Ragunan,239365
+2018,2,Monumen Nasional,120166
+2018,2,Museum Nasional,18330
+2018,2,Museum Satria Mandala,1254
+2018,2,Museum Sejarah Jakarta,49170
+2018,2,Museum Tekstil,3942
+2018,2,Museum Bahari,1813
+2018,2,Museum Seni Rupa dan Keramik,14628
+2018,2,Museum Wayang,27896
+2018,2,Museum Joang 45 dan Thamrin,1512
+2018,2,Taman Arkeologi Onrust,3594
+2018,2,Pelabuhan Sunda Kelapa,4650
+2018,2,Kepulauan Seribu,33780
+2018,2,PBB Setu babakan,24278
+2018,2,Museum Prasasti,2104
+2018,2,Planetarium,21118
+2018,2,Rumah si Pitung,2420
+2018,3,Taman Impian Jaya Ancol,1445553
+2018,3,Taman Mini Indonesia Indah,502883
+2018,3,Taman Margasatwa Ragunan,318348
+2018,3,Monumen Nasional,152565
+2018,3,Museum Nasional,25332
+2018,3,Museum Satria Mandala,1301
+2018,3,Museum Sejarah Jakarta,60626
+2018,3,Museum Tekstil,3923
+2018,3,Museum Bahari,1676
+2018,3,Museum Seni Rupa dan Keramik,16306
+2018,3,Museum Wayang,33803
+2018,3,Museum Joang 45 dan Thamrin,1624
+2018,3,Taman Arkeologi Onrust,7238
+2018,3,Pelabuhan Sunda Kelapa,3215
+2018,3,Kepulauan Seribu,60881
+2018,3,PBB Setu babakan,29657
+2018,3,Museum Prasasti,841
+2018,3,Planetarium,22908
+2018,3,Rumah si Pitung,2807
+2019,3,Taman Impian Jaya Ancol,991778
+2019,3,Taman Mini Indonesia Indah,405124
+2019,3,Taman Margasatwa Ragunan,345016
+2019,3,Monumen Nasional,159760
+2019,3,Museum Nasional,29178
+2019,3,Museum Satria Mandala,1679
+2019,3,Museum Sejarah Jakarta,61791
+2019,3,Museum Tekstil,3685
+2019,3,Museum Bahari,2305
+2019,3,Museum Seni Rupa dan Keramik,14486
+2019,3,Museum Wayang,28035
+2019,3,Museum Joang 45 dan Thamrin,1916
+2019,3,Taman Arkeologi Onrust,2960
+2019,3,Pelabuhan Sunda Kelapa,1025
+2019,3,Kepulauan Seribu,36783
+2019,3,PBB Setu babakan,38596
+2019,3,Museum Prasasti,1082
+2019,3,Planetarium,16350
+2019,3,Rumah si Pitung,2887
+2018,8,Taman Impian Jaya Ancol,1597859
+2018,8,Taman Mini Indonesia Indah,498765
+2018,8,Taman Margasatwa Ragunan,300345
+2018,8,Monumen Nasional,137873
+2018,8,Museum Nasional,9078
+2018,8,Museum Satria Mandala,988
+2018,8,Museum Sejarah Jakarta,46678
+2018,8,Museum Tekstil,2808
+2018,8,Museum Bahari,7911
+2018,8,Museum Seni Rupa dan Keramik,10510
+2018,8,Museum Wayang,23691
+2018,8,Museum Joang 45 dan Thamrin,857
+2018,8,Taman Arkeologi Onrust,5498
+2018,8,Pelabuhan Sunda Kelapa,2671
+2018,8,Kepulauan Seribu,40038
+2018,8,PBB Setu babakan,20816
+2018,8,Museum Prasasti,620
+2018,8,Planetarium,11446
+2018,8,Rumah si Pitung,4786
+2019,6,Taman Impian Jaya Ancol,1351619
+2019,6,Taman Mini Indonesia Indah,481788
+2019,6,Taman Margasatwa Ragunan,1127494
+2019,6,Monumen Nasional,1436125
+2019,6,Museum Nasional,25321
+2019,6,Museum Satria Mandala,1109
+2019,6,Museum Sejarah Jakarta,125807
+2019,6,Museum Tekstil,2209
+2019,6,Museum Bahari,2292
+2019,6,Museum Seni Rupa dan Keramik,42840
+2019,6,Museum Wayang,61121
+2019,6,Museum Joang 45 dan Thamrin,1750
+2019,6,Taman Arkeologi Onrust,7986
+2019,6,Pelabuhan Sunda Kelapa,1232
+2019,6,Kepulauan Seribu,115541
+2019,6,PBB Setu babakan,84999
+2019,6,Museum Prasasti,842
+2019,6,Planetarium,17288
+2019,6,Rumah si Pitung,6738
+2019,6,Kawasan Kotatua,1304879
+2019,8,Taman Impian Jaya Ancol,610863
+2019,8,Taman Mini Indonesia Indah,350143
+2019,8,Taman Margasatwa Ragunan,215935
+2019,8,Monumen Nasional (kawasan),1228515
+2019,8,Museum Nasional,12546
+2019,8,Museum Satria Mandala,801
+2019,8,Museum Sejarah Jakarta,36090
+2019,8,Museum Tekstil,2697
+2019,8,Museum Bahari,1605
+2019,8,Museum Seni Rupa dan Keramik,10986
+2019,8,Museum Wayang,19107
+2019,8,Museum Joang 45 dan Thamrin,1675
+2019,8,Taman Arkeologi Onrust,4049
+2019,8,Pelabuhan Sunda Kelapa,2354
+2019,8,Kepulauan Seribu,31805
+2019,8,PBB Setu babakan,37335
+2019,8,Museum Prasasti,781
+2019,8,Planetarium,9412
+2019,8,Rumah si Pitung,1363
+2019,8,Kawasan Kota Tua,398094
+2019,2,Taman Impian Jaya Ancol,965432
+2019,2,Taman Mini Indonesia Indah,350965
+2019,2,Taman Margasatwa Ragunan,243216
+2019,2,Monumen Nasional,142591
+2019,2,Museum Nasional,17654
+2019,2,Museum Satria Mandala,1187
+2019,2,Museum Sejarah Jakarta,58012
+2019,2,Museum Tekstil,2821
+2019,2,Museum Bahari,3887
+2019,2,Museum Seni Rupa dan Keramik,16545
+2019,2,Museum Wayang,28858
+2019,2,Museum Joang 45 dan Thamrin,1408
+2019,2,Taman Arkeologi Onrust,973
+2019,2,Pelabuhan Sunda Kelapa,2316
+2019,2,Kepulauan Seribu,18237
+2019,2,PBB Setu babakan,34883
+2019,2,Museum Prasasti,631
+2019,2,Planetarium,16104
+2019,2,Rumah si Pitung,2335
+2020,11,Taman Impian Jaya Ancol,126744
+2020,11,Taman Mini Indonesia Indah,107810
+2020,11,Taman Margasatwa Ragunan,21741
+2020,11,Monumen Nasional,0
+2020,11,Museum Nasional,1451
+2020,11,Museum Satria Mandala,0
+2020,11,Museum Sejarah Jakarta,5610
+2020,11,Museum Tekstil,161
+2020,11,Museum Bahari,729
+2020,11,Museum Seni Rupa dan Keramik,1003
+2020,11,Museum Wayang,2728
+2020,11,Museum Joang,267
+2020,11,Taman Arkeologi Onrust,4186
+2020,11,Pelabuhan Sunda Kelapa,2752
+2020,11,Kepulauan Seribu,18301
+2020,11,PBB Setu babakan,17181
+2020,11,Museum Prasasti,417
+2020,11,Planetarium,0
+2020,11,Rumah si Pitung,2316
+2020,11,Kawasan Kota Tua,3354
+2018,7,Taman Impian Jaya Ancol,1659321
+2018,7,Taman Mini Indonesia Indah,554021
+2018,7,Taman Margasatwa Ragunan,370124
+2018,7,Monumen Nasional,186720
+2018,7,Museum Nasional,14031
+2018,7,Museum Satria Mandala,1437
+2018,7,Museum Sejarah Jakarta,81946
+2018,7,Museum Tekstil,2290
+2018,7,Museum Bahari,11921
+2018,7,Museum Seni Rupa dan Keramik,17794
+2018,7,Museum Wayang,35458
+2018,7,Museum Joang 45 dan Thamrin,869
+2018,7,Taman Arkeologi Onrust,6431
+2018,7,Pelabuhan Sunda Kelapa,3021
+2018,7,Kepulauan Seribu,69530
+2018,7,PBB Setu babakan,69090
+2018,7,Museum Prasasti,725
+2018,7,Planetarium,19723
+2018,7,Rumah si Pitung,5503
+2019,5,Taman Impian Jaya Ancol,978936
+2019,5,Taman Mini Indonesia Indah,320134
+2019,5,Taman Margasatwa Ragunan,204698
+2019,5,Monumen Nasional,48679
+2019,5,Museum Nasional,17546
+2019,5,Museum Satria Mandala,746
+2019,5,Museum Sejarah Jakarta,17734
+2019,5,Museum Tekstil,1948
+2019,5,Museum Bahari,1047
+2019,5,Museum Seni Rupa dan Keramik,3046
+2019,5,Museum Wayang,8358
+2019,5,Museum Joang 45 dan Thamrin,953
+2019,5,Taman Arkeologi Onrust,1928
+2019,5,Pelabuhan Sunda Kelapa,954
+2019,5,Kepulauan Seribu,15402
+2019,5,PBB Setu babakan,10021
+2019,5,Museum Prasasti,506
+2019,5,Planetarium,2263
+2019,5,Rumah si Pitung,1551
+2020,9,Taman Impian Jaya Ancol,71688
+2020,9,Taman Mini Indonesia Indah,36977
+2020,9,Taman Margasatwa Ragunan,6109
+2020,9,Monumen Nasional,0
+2020,9,Museum Nasional,105
+2020,9,Museum Satria Mandala,0
+2020,9,Museum Sejarah Jakarta,769
+2020,9,Museum Tekstil,80
+2020,9,Museum Bahari,269
+2020,9,Museum Seni Rupa dan Keramik,237
+2020,9,Museum Wayang,422
+2020,9,Museum Joang 45,113
+2020,9,Taman Arkeologi Onrust,2969
+2020,9,Pelabuhan Sunda Kelapa,2155
+2020,9,Kepulauan Seribu,15270
+2020,9,PBB Setu babakan,4704
+2020,9,Museum Prasasti,125
+2020,9,Planetarium,0
+2020,9,Rumah si Pitung,1018
+2020,9,Kawasan Kota Tua,1837
+2019,7,Taman Impian Jaya Ancol,1066473
+2019,7,Taman Mini Indonesia Indah,465162
+2019,7,Taman Margasatwa Ragunan,656146
+2019,7,Monumen Nasional (kawasan),1616154
+2019,7,Museum Nasional,1345
+2019,7,Museum Satria Mandala,789
+2019,7,Museum Sejarah Jakarta,79461
+2019,7,Museum Tekstil,1632
+2019,7,Museum Bahari,2333
+2019,7,Museum Seni Rupa dan Keramik,20483
+2019,7,Museum Wayang,38063
+2019,7,Museum Joang 45 dan Thamrin,759
+2019,7,Taman Arkeologi Onrust,655
+2019,7,Pelabuhan Sunda Kelapa,2456
+2019,7,Kepulauan Seribu,63279
+2019,7,PBB Setu babakan,61046
+2019,7,Museum Prasasti,823
+2019,7,Planetarium,12104
+2019,7,Rumah si Pitung,426
+2019,7,Kawasan Kota Tua,971279
+2020,7,Taman Impian Jaya Ancol,85142
+2020,7,Taman Mini Indonesia Indah,82696
+2020,7,Taman Margasatwa Ragunan,9365
+2020,7,Monumen Nasional,0
+2020,7,Museum Nasional,583
+2020,7,Museum Satria Mandala,0
+2020,7,Museum Sejarah Jakarta,2066
+2020,7,Museum Tekstil,132
+2020,7,Museum Bahari,632
+2020,7,Museum Seni Rupa dan Keramik,327
+2020,7,Museum Wayang,819
+2020,7,Museum Joang 45,115
+2020,7,Taman Arkeologi Onrust,3711
+2020,7,Pelabuhan Sunda Kelapa,927
+2020,7,Kepulauan Seribu,20360
+2020,7,PBB Setu babakan,1548
+2020,7,Museum Prasasti,194
+2020,7,Planetarium,0
+2020,7,Rumah si Pitung,1722
+2020,7,Kawasan Kota Tua,3925
+2018,9,Taman Impian Jaya Ancol,1600051
+2018,9,Taman Mini Indonesia Indah,476301
+2018,9,Taman Margasatwa Ragunan,250321
+2018,9,Monumen Nasional,143508
+2018,9,Museum Nasional,8841
+2018,9,Museum Satria Mandala,857
+2018,9,Museum Sejarah Jakarta,49502
+2018,9,Museum Tekstil,3493
+2018,9,Museum Bahari,9761
+2018,9,Museum Seni Rupa dan Keramik,10714
+2018,9,Museum Wayang,23299
+2018,9,Museum Joang 45 dan Thamrin,1442
+2018,9,Taman Arkeologi Onrust,4951
+2018,9,Pelabuhan Sunda Kelapa,2594
+2018,9,Kepulauan Seribu,48033
+2018,9,PBB Setu babakan,33749
+2018,9,Museum Prasasti,695
+2018,9,Planetarium,11200
+2018,9,Rumah si Pitung,3976
+2018,1,Taman Impian Jaya Ancol,1506955
+2018,1,Taman Mini Indonesia Indah,434508
+2018,1,Taman Margasatwa Ragunan,482233
+2018,1,Monumen Nasional,216941
+2018,1,Museum Nasional,21604
+2018,1,Museum Satria Mandala,1966
+2018,1,Museum Sejarah Jakarta,82078
+2018,1,Museum Tekstil,3700
+2018,1,Museum Bahari,2468
+2018,1,Museum Seni Rupa dan Keramik,21995
+2018,1,Museum Wayang,38129
+2018,1,Museum Joang 45 dan Thamrin,1473
+2018,1,Taman Arkeologi Onrust,5174
+2018,1,Pelabuhan Sunda Kelapa,3587
+2018,1,Kepulauan Seribu,58788
+2018,1,PBB Setu babakan,38167
+2018,1,Museum Prasasti,734
+2018,1,Planetarium,29230
+2018,1,Rumah si Pitung,5156
+2018,4,Taman Impian Jaya Ancol,1031219
+2018,4,Taman Mini Indonesia Indah,49912
+2018,4,Taman Margasatwa Ragunan,316583
+2018,4,Monumen Nasional,144018
+2018,4,Museum Nasional,27004
+2018,4,Museum Satria Mandala,154
+2018,4,Museum Sejarah Jakarta,6021
+2018,4,Museum Tekstil,2942
+2018,4,Museum Bahari,2707
+2018,4,Museum Seni Rupa dan Keramik,14822
+2018,4,Museum Wayang,30552
+2018,4,Museum Joang 45 dan Thamrin,1891
+2018,4,Taman Arkeologi Onrust,8418
+2018,4,Pelabuhan Sunda Kelapa,4277
+2018,4,Kepulauan Seribu,62434
+2018,4,PBB Setu babakan,37249
+2018,4,Museum Prasasti,690
+2018,4,Planetarium,21285
+2018,4,Rumah si Pitung,3998
+2018,6,Taman Impian Jaya Ancol,1721013
+2018,6,Taman Mini Indonesia Indah,604542
+2018,6,Taman Margasatwa Ragunan,405761
+2018,6,Monumen Nasional,205141
+2018,6,Museum Nasional,32768
+2018,6,Museum Satria Mandala,1654
+2018,6,Museum Sejarah Jakarta,105126
+2018,6,Museum Tekstil,2045
+2018,6,Museum Bahari,1514
+2018,6,Museum Seni Rupa dan Keramik,28612
+2018,6,Museum Wayang,42911
+2018,6,Museum Joang 45 dan Thamrin,854
+2018,6,Taman Arkeologi Onrust,6352
+2018,6,Pelabuhan Sunda Kelapa,6632
+2018,6,Kepulauan Seribu,133595
+2018,6,PBB Setu babakan,55723
+2018,6,Museum Prasasti,858
+2018,6,Planetarium,8811
+2018,6,Rumah si Pitung,5095
+2019,4,Taman Impian Jaya Ancol,845145
+2019,4,Taman Mini Indonesia Indah,480513
+2019,4,Taman Margasatwa Ragunan,450511
+2019,4,Monumen Nasional,514216
+2019,4,Museum Nasional,23112
+2019,4,Museum Satria Mandala,1701
+2019,4,Museum Sejarah Jakarta,57092
+2019,4,Museum Tekstil,3639
+2019,4,Museum Bahari,2540
+2019,4,Museum Seni Rupa dan Keramik,13685
+2019,4,Museum Wayang,28110
+2019,4,Museum Joang 45 dan Thamrin,2812
+2019,4,Taman Arkeologi Onrust,3672
+2019,4,Pelabuhan Sunda Kelapa,1320
+2019,4,Kepulauan Seribu,44637
+2019,4,PBB Setu babakan,40674
+2019,4,Museum Prasasti,1580
+2019,4,Planetarium,59693
+2019,4,Rumah si Pitung,4356
+2020,12,Taman Impian Jaya Ancol,479272
+2020,12,Taman Mini Indonesia Indah,105008
+2020,12,Taman Margasatwa Ragunan,19012
+2020,12,Monumen Nasional,0
+2020,12,Museum Nasional,1418
+2020,12,Museum Satria Mandala,0
+2020,12,Museum Sejarah Jakarta,4083
+2020,12,Museum Tekstil,203
+2020,12,Museum Bahari,654
+2020,12,Museum Seni Rupa dan Keramik,627
+2020,12,Museum Wayang,1788
+2020,12,Museum Joang 45,228
+2020,12,Taman Arkeologi Onrust,1621
+2020,12,Pelabuhan Sunda Kelapa,2296
+2020,12,Kepulauan Seribu,22289
+2020,12,PBB Setu babakan,9883
+2020,12,Museum Prasasti,364
+2020,12,Planetarium,0
+2020,12,Rumah si Pitung,1238
+2020,12,Kawasan Kota Tua,0
+2018,10,Taman Impian Jaya Ancol,1643864
+2018,10,Taman Mini Indonesia Indah,401598
+2018,10,Taman Margasatwa Ragunan,334685
+2018,10,Monumen Nasional,156648
+2018,10,Museum Nasional,24103
+2018,10,Museum Satria Mandala,305
+2018,10,Museum Sejarah Jakarta,52503
+2018,10,Museum Tekstil,4939
+2018,10,Museum Bahari,2891
+2018,10,Museum Seni Rupa dan Keramik,11628
+2018,10,Museum Wayang,25865
+2018,10,Museum Joang 45 dan Thamrin,1557
+2018,10,Taman Arkeologi Onrust,4292
+2018,10,Pelabuhan Sunda Kelapa,3946
+2018,10,Kepulauan Seribu,39547
+2018,10,PBB Setu babakan,28213
+2018,10,Museum Prasasti,644
+2018,10,Planetarium,17707
+2018,10,Rumah si Pitung,2010
+2020,8,Taman Impian Jaya Ancol,174988
+2020,8,Taman Mini Indonesia Indah,134546
+2020,8,Taman Margasatwa Ragunan,16570
+2020,8,Monumen Nasional,0
+2020,8,Museum Nasional,233
+2020,8,Museum Satria Mandala,0
+2020,8,Museum Sejarah Jakarta,1857
+2020,8,Museum Tekstil,162
+2020,8,Museum Bahari,887
+2020,8,Museum Seni Rupa dan Keramik,321
+2020,8,Museum Wayang,506
+2020,8,Museum Joang 45,359
+2020,8,Taman Arkeologi Onrust,4257
+2020,8,Pelabuhan Sunda Kelapa,2535
+2020,8,Kepulauan Seribu,37986
+2020,8,PBB Setu babakan,21997
+2020,8,Museum Prasasti,280
+2020,8,Planetarium,0
+2020,8,Rumah si Pitung,2597
+2020,8,Kawasan Kota Tua,3386
+2018,11,Taman Impian Jaya Ancol,1650221
+2018,11,Taman Mini Indonesia Indah,403551
+2018,11,Taman Margasatwa Ragunan,339574
+2018,11,Monumen Nasional,117225
+2018,11,Museum Nasional,23951
+2018,11,Museum Satria Mandala,325
+2018,11,Museum Sejarah Jakarta,51801
+2018,11,Museum Tekstil,5001
+2018,11,Museum Bahari,1942
+2018,11,Museum Seni Rupa dan Keramik,8256
+2018,11,Museum Wayang,20916
+2018,11,Museum Joang 45 dan Thamrin,1597
+2018,11,Taman Arkeologi Onrust,2496
+2018,11,Pelabuhan Sunda Kelapa,4021
+2018,11,Kepulauan Seribu,38389
+2018,11,PBB Setu babakan,31870
+2018,11,Museum Prasasti,715
+2018,11,Planetarium,13390
+2018,11,Rumah si Pitung,2090

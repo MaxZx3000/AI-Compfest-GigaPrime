@@ -2,9 +2,11 @@ import pickle
 import json
 import os
 from django.http import HttpResponse
+from .templates.content_based_filtering import ContentBasedFiltering
 from .templates.colab_based_filtering import ColabBasedFiltering
 from .templates.pretty_print import PrettyPrint
 from .templates.keyword_extraction import KeywordExtraction
+from .templates.pandas_data_loader import PandasDataLoader
 from rest_framework import status
 from rest_framework.views import APIView
 from .models import TravellingPlaces, TravellingPlacesRating
@@ -17,9 +19,10 @@ from nltk.tokenize import sent_tokenize
 from .ml_models.text_rank import TextRank
 from .templates.google_link_fetch import GoogleLinkFetch
 from .templates.web_scrapper import WebScraper
+from .templates.pandas_data_loader import PandasDataLoader
 import pandas as pd
 from string import digits
-
+from scipy.sparse import hstack, vstack
 
 # Create your views here.
 # News API
@@ -154,53 +157,134 @@ class NewsFetchDetailsAPI(APIView):
         
         return HttpResponse(summarized_text_json, content_type = "application/json", status = status.HTTP_200_OK)
 
-# Content Based Filtering
-class ContentBasedRecommendationAPI(APIView):
-    def _get_descriptions(self, data_df, sample_description):        
-        indonesian_stopwords = stopwords.words("indonesian")
-        tf_idf_vectorizer = TfidfVectorizer(stop_words = indonesian_stopwords)
-        vector_components = tf_idf_vectorizer.fit_transform(data_df)
-        sample_description_vector_component = tf_idf_vectorizer.transform([sample_description])
-        index_to_word_mapping = tf_idf_vectorizer.get_feature_names()
-        
-        return vector_components, sample_description_vector_component, index_to_word_mapping
-    
-    def _recommend_travelling_places_using_knn(self, vector_components, sample_description_vector_component):
-        nearest_neighbors = NearestNeighbors(n_neighbors = 10)
-        nearest_neighbors.fit(vector_components)
-        k_nearest_neighbors_scores = nearest_neighbors.kneighbors(sample_description_vector_component)
-
-        return k_nearest_neighbors_scores
-
-    def _get_top_n_recommendations_based_on_similarity_scores(self, df, top_n_indexes):
-        top_n_df = df.iloc[top_n_indexes]
-        return top_n_df
+class ContentBasedRecommendationUserQueryAPI(APIView):
+    def _transform_description(self, content_based_filtering_class, sample_description):
+        description_tf_idf_vectorizer_path = os.path.join(os.path.dirname(__file__), "ml_models/tf_idf_vectorizer_descriptions.pkl")
+        return content_based_filtering_class.transform_to_vector(description_tf_idf_vectorizer_path, [sample_description])
 
     def get(self, request):
         try:
             data = request.data
-            query_result = data["query"]
-            print(f"Query Result 1: {query_result}")
+            query = data["query"]
+            print(f"Query: {query}")
         except:
-            query_result = request.GET.get('query', '')
-            print(f"Query Result 2: {query_result}")
-        
-        travelling_places_query_set = TravellingPlaces.objects.all()
+            query = request.GET.get('query', '')
+            print(f"Query Result 2: {query}")
 
-        description_field = "description"
+        pandas_data_loader = PandasDataLoader()
+        travelling_place_df = pandas_data_loader.load_travelling_places_dataset()
 
-        data_df = PreprocessingTemplate.convert_queryset_data_to_df(travelling_places_query_set)
-        lemmatized_texts = PreprocessingTemplate.lemmatize_texts(data_df, description_field)
-        data_df[description_field] = lemmatized_texts
-        
-        vector_components, sample_description_vector_components, index_to_word_mapping = self._get_descriptions(data_df[description_field], query_result)
+        content_based_filtering = ContentBasedFiltering()
 
-        top_n_distances, top_n_indexes_ranking = self._recommend_travelling_places_using_knn(vector_components, sample_description_vector_components)
+        all_vector_components = self._transform_description(
+            content_based_filtering,
+            query
+        )
+
+        print(all_vector_components.shape)
+
+        k_nearest_neighbors_path = os.path.join(os.path.dirname(__file__), "ml_models/tourism_place_user_query_nearest_neighbors.pkl")
+
+        top_n_distances, top_n_indexes_ranking = content_based_filtering.recommend_travelling_places_using_knn(
+            all_vector_components,
+            k_nearest_neighbors_path
+        )
         
-        top_n_df = self._get_top_n_recommendations_based_on_similarity_scores(data_df, top_n_indexes_ranking.flatten())
+        top_n_df = content_based_filtering.get_top_n_recommendations_based_on_similarity_scores(
+            travelling_place_df, 
+            top_n_indexes_ranking.flatten()
+        )
 
         json_result = top_n_df.to_json(orient = "records")
-        return HttpResponse(json_result, content_type = "application/json", status = status.HTTP_200_OK)
+
+        return HttpResponse(
+            json_result, 
+            content_type = "application/json", 
+            status = status.HTTP_200_OK
+        )
+
+# Content Based Filtering
+class ContentBasedRecommendationUserLocationAPI(APIView):
+    def transform_city(self, content_based_filtering_class, sample_cities):
+        city_count_vectorizer_path = os.path.join(os.path.dirname(__file__), "ml_models/city_count_vectorizer.pkl")
+        return content_based_filtering_class.transform_to_vector(city_count_vectorizer_path, sample_cities) * 1000
+
+    def transform_categories(self, content_based_filtering_class, sample_categories):
+        categories_count_vectorizer_path = os.path.join(os.path.dirname(__file__), "ml_models/categories_count_vectorizer.pkl")
+        return content_based_filtering_class.transform_to_vector(categories_count_vectorizer_path, sample_categories) * 1000
+
+    def _transform(self,
+                content_based_filtering_class,
+                sample_cities,
+                sample_categories,
+                sample_latitude, 
+                sample_longitude,):
+        # categories_vector_component = transform_categories([sample_categories])
+
+        city_vector_component = self.transform_city(
+            content_based_filtering_class,
+            [sample_cities]
+        )
+
+        categories_vector_component = self.transform_categories(
+            content_based_filtering_class,
+            [sample_categories]
+        )
+
+        all_vector_components = hstack([city_vector_component,
+                                        categories_vector_component,
+                                        sample_longitude,
+                                        sample_latitude], format = 'csr')
+        
+        return all_vector_components
+
+    def get(self, request):
+        try:
+            data = request.data
+            latitude = float(data["latitude"])
+            longitude = float(data["longitude"])
+            categories = data["categories"]
+            cities = data["cities"]
+            print(f"Latitude: {latitude}")
+            print(f"Longitude: {longitude}")
+        except:
+            latitude = float(request.GET.get('latitude', ''))
+            longitude = float(request.GET.get('longitude', ''))
+            categories = request.GET.get('categories', '')
+            cities = request.GET.get('cities', '')
+
+        pandas_data_loader = PandasDataLoader()
+        travelling_places_df = pandas_data_loader.load_travelling_places_dataset()
+
+        content_based_filtering = ContentBasedFiltering()
+        
+        all_vector_components = self._transform(
+            content_based_filtering,
+            cities,
+            categories,
+            longitude,
+            latitude,
+        )
+
+        k_nearest_neighbors_path = os.path.join(os.path.dirname(__file__), "ml_models/tourism_place_user_location_nearest_neighbors.pkl")
+
+        top_n_distances, top_n_indexes_ranking = content_based_filtering.recommend_travelling_places_using_knn(
+            all_vector_components,
+            k_nearest_neighbors_path
+        )
+        
+        top_n_df = content_based_filtering.get_top_n_recommendations_based_on_similarity_scores(
+            travelling_places_df, 
+            top_n_indexes_ranking.flatten()
+        )
+
+        json_result = top_n_df.to_json(orient = "records")
+
+        return HttpResponse(
+            json_result,
+            content_type = "application/json", 
+            status = status.HTTP_200_OK
+        )
 
 # Colab Based Filtering
 class ColabBasedRecommedationAPI(APIView):
@@ -208,7 +292,6 @@ class ColabBasedRecommedationAPI(APIView):
     def _load_rating_df(self, query_result):
         request_json_rating_query = json.loads(query_result)
         request_rating_df = pd.DataFrame(request_json_rating_query)
-        print(request_rating_df)
 
         rating_queryset = TravellingPlacesRating.objects.all()
         rating_df = PreprocessingTemplate.convert_queryset_data_to_df(rating_queryset)

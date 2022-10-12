@@ -52,7 +52,7 @@ def seed_travelling_places():
 def seed_travelling_places_rating():
     travelling_places_rating_df = pd.read_csv(travelling_places_rating_csv, delimiter = ',')
     
-    TravellingPlacesRating.objects.all()
+    TravellingPlacesRating.objects.all().delete()
 
     print("Seeding Travelling Places Rating...")
     index = 0
