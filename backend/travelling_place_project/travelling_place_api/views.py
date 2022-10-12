@@ -203,6 +203,10 @@ class ContentBasedRecommendationUserQueryAPI(APIView):
             status = status.HTTP_200_OK
         )
 
+class TimeSeriesWisatawanMancanegaraJakartaAPI(APIView):
+    def get(self):
+        
+
 # Content Based Filtering
 class ContentBasedRecommendationUserLocationAPI(APIView):
     def transform_city(self, content_based_filtering_class, sample_cities):
