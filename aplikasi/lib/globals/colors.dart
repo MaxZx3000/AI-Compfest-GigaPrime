@@ -10,4 +10,5 @@ const secondaryColors = {
   'translucent_white': 0xFFf2f2f2,
   'white': 0xFFFFFFFF,
   'light_gray': 0xFFFBFBFB,
+  "dark_translucent_gray": 0xFF989898,
 };

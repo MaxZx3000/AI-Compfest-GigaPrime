@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:travelling_app/globals/colors.dart';
 
 class HorizontalItemWidget extends StatelessWidget{
   final String titleText;
   final String subtitleText;
-  final String rating;
   final double width;
   final double height;
   final Function onClickCard;
-  Widget? topRightWidget;
+  final Widget additionalWidget;
+  final Widget? topRightWidget;
 
-  HorizontalItemWidget({
+  const HorizontalItemWidget({
     Key? key,
     required this.titleText,
     required this.subtitleText,
-    required this.rating,
     this.width = double.infinity,
     this.topRightWidget,
     required this.height,
     required this.onClickCard,
+    required this.additionalWidget,
   }) : super(key: key);
 
    Widget getSummaryWidget(){
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.max,
       children: [
         Padding(
           padding: const EdgeInsets.only(
@@ -54,30 +54,7 @@ class HorizontalItemWidget extends StatelessWidget{
           padding: const EdgeInsets.only(
             top: 10,
           ),
-          child: Row(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Color(colors["dark_orange"] as int)
-                ),
-                padding: const EdgeInsets.all(2.0),
-                child: const Icon(
-                  Icons.star,
-                  color: Colors.yellow,
-                  size: 18,
-                )
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              Text(
-                rating,
-                overflow: TextOverflow.ellipsis,
-                textAlign: TextAlign.left,
-              ),
-            ]
-          ),
+          child: additionalWidget
         )
       ],
     );
