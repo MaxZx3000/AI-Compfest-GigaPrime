@@ -26,7 +26,7 @@ class TravellingPlaceAdapter extends TypeAdapter<TravellingPlace> {
       rating: fields[6] as double?,
       latitude: fields[8] as double?,
       longitude: fields[9] as double?,
-      timeMinutes: fields[7] as int?,
+      timeMinutes: fields[7] as double?,
       summarizedDescription: fields[10] as String?,
     );
   }

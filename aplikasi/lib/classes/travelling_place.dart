@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:hive/hive.dart';
 
 part "travelling_place.g.dart";
@@ -28,7 +26,7 @@ class TravellingPlace{
   double? rating;
 
   @HiveField(7)
-  int? timeMinutes;
+  double? timeMinutes;
 
   @HiveField(8)
   double? latitude;
@@ -90,11 +88,11 @@ class TravellingPlace{
       description: jsonDatum["Description"],
       category: jsonDatum["Category"],
       city: jsonDatum["City"],
-      rating: double.parse(jsonDatum["Rating"]),
+      rating: jsonDatum["Rating"],
       price: jsonDatum["Price"],
       latitude: jsonDatum['Lat'],
       longitude: jsonDatum['Long'],
-      // timeMinutes: int.parse(jsonDatum["Time_Minutes"]),
+      timeMinutes: jsonDatum["Time_Minutes"],
       summarizedDescription: jsonDatum["Summarized_Description"]
     );
   }

@@ -199,7 +199,11 @@ class ContentBasedRecommendationUserQueryAPI(APIView):
             top_n_indexes_ranking.flatten()
         )
 
+        top_n_df["Time_Minutes"] = top_n_df["Time_Minutes"].astype(float)
+        top_n_df["Rating"] = top_n_df["Rating"].astype(float)
+
         json_result = top_n_df.to_json(orient = "records")
+        
 
         return HttpResponse(
             json_result, 
@@ -311,6 +315,9 @@ class ContentBasedRecommendationUserLocationAPI(APIView):
             travelling_places_df, 
             top_n_indexes_ranking.flatten()
         )
+
+        top_n_df["Time_Minutes"] = top_n_df["Time_Minutes"].astype(float)
+        top_n_df["Rating"] = top_n_df["Rating"].astype(float)
 
         json_result = top_n_df.to_json(orient = "records")
 
