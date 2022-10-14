@@ -17,7 +17,7 @@ class DataFetcher{
     dynamic jsonDecoded = jsonDecode(response.body);
     List<TravellingPlace> travellingPlaces = [];
     jsonDecoded.forEach((element) {
-      print(element);
+      // print(element);
       TravellingPlace travellingPlace = TravellingPlace.setFromJSON(element);
       travellingPlaces.add(travellingPlace);
     });

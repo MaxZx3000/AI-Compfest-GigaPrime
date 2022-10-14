@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:travelling_app/pages/home/query/travelling_place_result_widget_query.dart';
+import 'package:travelling_app/pages/home/query/travelling_place_search_bar_widget.dart';
 import 'package:travelling_app/templates/search_bar.dart';
 
 class HomeQueryPage extends StatefulWidget{
@@ -15,7 +17,7 @@ class HomeQueryPage extends StatefulWidget{
 class _HomeQueryPageState extends State<HomeQueryPage>{
   late TravellingPlacesWidgetQuery travellingPlacesQueryWidget;
 
-  late SearchBar searchBar;
+  late TravellingPlaceSearchBarWidget travellingPlaceSearchBarWidget;
 
   String query = "";
 
@@ -28,61 +30,31 @@ class _HomeQueryPageState extends State<HomeQueryPage>{
   void initState() {
     super.initState();
     travellingPlacesQueryWidget = TravellingPlacesWidgetQuery();
+    travellingPlaceSearchBarWidget = TravellingPlaceSearchBarWidget(
+        onSearchClick: (query){
+          travellingPlacesQueryWidget.performSearch(
+            query,
+          );
+        }
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    searchBar = SearchBar(
-      onSearchClick: (query){
-        String queryString = query.toString();
-
-        if (queryString.trim() == ""){
-          Fluttertoast.showToast(
-            msg: "Silahkan masukkan query pada search bar terlebih dahulu.",
-          );
-          return;
-        }
-
-        print("Query in String: $queryString.");
-        travellingPlacesQueryWidget.performSearch(
-          query,
-        );
-      },
-      maxWidth: 250,
-      searchBarShadow: const BoxShadow(
-        color: Colors.black12,
-        offset: Offset(0, 0),
-        blurRadius: 10.0,
-        spreadRadius: 0.0,
-      ),
-      alignment: Alignment.center,
-      offsetValue: 150,
-    );
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(
-            top: 1.0,
-            bottom: 1.0,
-            left: 10.0,
-            right: 10.0
+    return Center(
+      child: Stack(
+        // mainAxisSize: MainAxisSize.min,
+        // crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(
+              padding: const EdgeInsets.only(
+                top: 50.0,
+              ),
+              child: Center(child: travellingPlacesQueryWidget)
           ),
-          child: searchBar
-        ),
-        Padding(
-            padding: const EdgeInsets.only(
-              top: 10.0,
-            ),
-            child: Column(
-              children: [
-                Center(
-                  child: travellingPlacesQueryWidget
-                ),
-              ],
-            )
-        ),
-      ],
+          travellingPlaceSearchBarWidget,
+        ],
+      ),
     );
   }
 }

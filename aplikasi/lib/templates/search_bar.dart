@@ -63,7 +63,7 @@ class _SearchBarState extends State<SearchBar>{
           hintText: widget.placeholderText,
           constraints: BoxConstraints.expand(
             width: widget.maxWidth,
-            height: 50,
+            height: 45,
           ),
           contentPadding: const EdgeInsets.only(left: 15.0),
           enabledBorder: InputBorder.none,

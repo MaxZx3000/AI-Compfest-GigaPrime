@@ -10,7 +10,7 @@ import 'package:travelling_app/utils/context.dart';
 
 class TravellingPlacesWidgetQuery extends StatefulWidget{
 
-  late _TravellingPlaceState state;
+  late _TravellingPlaceQueryState state;
 
   String query = "";
 
@@ -24,13 +24,13 @@ class TravellingPlacesWidgetQuery extends StatefulWidget{
 
   @override
   State<StatefulWidget> createState() {
-    state = _TravellingPlaceState();
+    state = _TravellingPlaceQueryState();
     return state;
   }
 
 }
 
-class _TravellingPlaceState extends State<TravellingPlacesWidgetQuery>{
+class _TravellingPlaceQueryState extends State<TravellingPlacesWidgetQuery>{
 
   late Future<List<TravellingPlace>> futureTravellingPlaces;
 
@@ -51,43 +51,41 @@ class _TravellingPlaceState extends State<TravellingPlacesWidgetQuery>{
   }
 
   Widget _getTravellingPlacesList(List<TravellingPlace> travellingPlaces){
-    double childAspectRatio = 0;
-    if (ContextUtils.getScreenWidth(context) > 500){
-      childAspectRatio = 2.5;
-    }
-    else{
-      childAspectRatio = 3;
-    }
-    return Expanded(
-      child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 600,
-            childAspectRatio: childAspectRatio,
-          ),
-          shrinkWrap: true,
-          scrollDirection: Axis.vertical,
-          itemCount: travellingPlaces.length,
-          itemBuilder: (BuildContext ctx, index){
-            return Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: HorizontalItemWidget(
-                titleText: travellingPlaces[index].placeName,
-                subtitleText: travellingPlaces[index].city,
-                additionalWidget: RatingWidget(
-                    rating: travellingPlaces[index].getRating()
-                ),
-                height: 125,
-                onClickCard: (){
-                  Navigator.pushNamed(
-                    context,
-                    detailRouteName,
-                    arguments: travellingPlaces[index]
-                  );
-                },
+    // double childAspectRatio = 0;
+    // if (ContextUtils.getScreenWidth(context) > 500){
+    //   childAspectRatio = 2.5;
+    // }
+    // else{
+    //   childAspectRatio = 3;
+    // }
+    return GridView.builder(
+        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 600,
+          mainAxisExtent: 140,
+        ),
+        shrinkWrap: true,
+        scrollDirection: Axis.vertical,
+        itemCount: travellingPlaces.length,
+        itemBuilder: (BuildContext ctx, index){
+          return Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: HorizontalItemWidget(
+              titleText: travellingPlaces[index].placeName,
+              subtitleText: travellingPlaces[index].city,
+              additionalWidget: RatingWidget(
+                  rating: travellingPlaces[index].getRating()
               ),
-            );
-          }
-      ),
+              height: 125,
+              onClickCard: (){
+                Navigator.pushNamed(
+                  context,
+                  detailRouteName,
+                  arguments: travellingPlaces[index]
+                );
+              },
+            ),
+          );
+        }
     );
   }
 
