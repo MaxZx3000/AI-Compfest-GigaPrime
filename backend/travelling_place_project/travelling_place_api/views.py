@@ -217,7 +217,7 @@ class TimeSeriesWisatawanMancanegaraJakartaAPI(APIView):
             freq = 'MS'
         )
 
-        columns = ["date", "jumlah"]
+        columns = ["date", "value"]
 
         n_samples = 58
         prediction_result_df = arima_model_result.get_forecast(n_samples)
@@ -227,8 +227,6 @@ class TimeSeriesWisatawanMancanegaraJakartaAPI(APIView):
         prediction_result_df.columns = columns
         
         prediction_result_df["date"] = prediction_result_df["date"].astype(str)
-
-        # print(prediction_result_df)
 
         json_result = prediction_result_df.to_json(orient = "records")
         
