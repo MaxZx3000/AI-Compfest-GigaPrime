@@ -1,139 +1,157 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travelling_app/globals/asset.dart';
 import 'package:travelling_app/globals/colors.dart';
 import 'package:travelling_app/globals/route.dart';
-import 'package:travelling_app/pages/home/location/home_page_location.dart';
-import 'package:travelling_app/pages/home/location/travelling_place_result_widget_location.dart';
-import 'package:travelling_app/pages/home/query/home_page_query.dart';
-import 'package:travelling_app/pages/home/query/travelling_place_result_widget_query.dart';
+import 'package:travelling_app/pages/home/timeseries_countries_list_page.dart';
+import 'package:travelling_app/pages/home/travelling_place_home_page.dart';
 
 class HomePage extends StatefulWidget{
-
-  int selectedPageIndex = 0;
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() {
-    return _HomePageState();
-  }
+  State<StatefulWidget> createState() => _HomePage();
+
 }
 
-class _HomePageState extends State<HomePage>{
+class _HomePage extends State<HomePage>{
 
   late Widget currentPage;
 
-  List<Widget> widgetTabPage = [
-    const HomeQueryPage(),
-    const HomeLocationPage(),
-  ];
+  Widget _getListTileDrawer(
+      Function onTap,
+      String title,
+      IconData iconData,
+    ){
+    return ListTile(
+      onTap: (){
+        onTap();
+      },
+      title: Text(title),
+      leading: Icon(
+        iconData,
+        color: Color(colors["dark_green"] as int),
+        size: 30,
+      ),
+    );
+  }
 
-  List<Tooltip> _getTooltipWidget(BuildContext context){
-    return [
-      Tooltip(
-        message: "Tentang Aplikasi Ini",
-        child: TextButton(
-          onPressed: (){
-            Navigator.pushNamed(
-                context,
-                aboutRouteName
-            );
-          },
-          child: Icon(
-            Icons.info_outline,
-            color: Color(colors["dark_green"] as int),
-            size: 30,
-          ),
+  Widget _getHeaderTextDrawer(
+    String headerText,
+  ){
+    return Padding(
+      padding: const EdgeInsets.only(
+        top: 8.0,
+        bottom: 8.0,
+        left: 18.0,
+        right: 18.0,
+      ),
+      child: Text(
+        headerText,
+        style: const TextStyle(
+          fontWeight: FontWeight.bold,
         ),
       ),
-      Tooltip(
-        message: "Tempat wisata yang\ntelah dirating",
-        child: TextButton(
-          onPressed: () {
-            Navigator.pushNamed(
-              context,
-              bookmarkRouteName,
-            );
-          },
-          child: Icon(
-            Icons.star_border,
-            size: 30,
-            color: Color(colors["dark_green"] as int),
+    );
+  }
+
+  Drawer _getDrawerWidget(BuildContext context){
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          const DrawerHeader(
+            decoration: BoxDecoration(
+              color: Colors.blue,
+            ),
+            child: Text(
+              'TrAIvel',
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            ),
           ),
-        ),
-      )
-    ];
+          _getHeaderTextDrawer(
+            "Fitur Utama"
+          ),
+          _getListTileDrawer(
+            (){
+              setState(() {
+                currentPage = TravellingPlaceHomePage();
+              });
+            },
+            "Tempat Wisata",
+            Icons.travel_explore
+          ),
+          _getListTileDrawer(
+            (){
+              setState(() {
+                currentPage = const TimeSeriesCountriesPage();
+              });
+            },
+            "Time Series",
+            Icons.timeline
+          ),
+          const Divider(),
+          _getHeaderTextDrawer(
+            "Lainnya"
+          ),
+          _getListTileDrawer(
+            (){
+              Navigator.pushNamed(
+                context,
+                bookmarkRouteName
+              );
+            },
+            "Tempat Wisata yang dirating",
+            Icons.star
+          ),
+          _getListTileDrawer(
+            (){
+              Navigator.pushNamed(
+                context,
+                aboutRouteName
+              );
+            },
+            "Tentang Aplikasi Ini",
+            Icons.info_outline
+          ),
+        ],
+      ),
+    );
   }
 
   @override
   void initState() {
     super.initState();
-    currentPage = widgetTabPage[widget.selectedPageIndex];
-  }
-
-  void onItemTapped(int index){
-    setState(() {
-      widget.selectedPageIndex = index;
-      currentPage = widgetTabPage[widget.selectedPageIndex];
-    });
+    currentPage = TravellingPlaceHomePage();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: _getDrawerWidget(context),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        iconTheme: const IconThemeData(
+          color: Colors.black
+        ),
         toolbarHeight: 70,
-        actions: _getTooltipWidget(context),
         title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
               assets["app_logo"] as String,
               height: 40,
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
-            ),
-            Text(
-              "Tempat Wisata",
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.black
-              ),
             ),
           ],
         ),
       ),
       body: currentPage,
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-            border: Border(
-                top: BorderSide(width: 4, color: Color(colors["orange"] as int))),
-          gradient: LinearGradient(
-            colors: [
-              Color(colors['light_blue'] as int),
-              Color(colors['dark_green'] as int)
-            ]
-          )
-        ),
-        child: BottomNavigationBar(
-          type: BottomNavigationBarType.shifting,
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.search),
-              label: 'Query',
-              backgroundColor: Color(colors['dark_orange'] as int),
-            ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.location_on),
-              label: 'Location',
-              backgroundColor: Color(colors['dark_orange'] as int),
-            ),
-          ],
-          currentIndex: widget.selectedPageIndex,
-          selectedItemColor: Colors.white,
-          onTap: onItemTapped,
-        ),
-      ),
     );
   }
 }

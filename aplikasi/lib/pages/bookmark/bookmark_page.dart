@@ -7,6 +7,7 @@ import 'package:travelling_app/pages/bookmark/recommendations_colab_widget.dart'
 import 'package:travelling_app/templates/backable_app_bar.dart';
 import 'package:travelling_app/templates/horizontal_item_view.dart';
 import 'package:travelling_app/templates/information_widget.dart';
+import 'package:travelling_app/templates/rating_widget.dart';
 
 import '../../utils/context.dart';
 
@@ -56,7 +57,9 @@ class _BookmarkState extends State<BookmarkPage>{
             child: HorizontalItemWidget(
               titleText: bookmarkedTravellingPlace.travellingPlace.placeName,
               subtitleText: bookmarkedTravellingPlace.travellingPlace.city,
-              rating: bookmarkedTravellingPlace.rating.toString(),
+              additionalWidget: RatingWidget(
+                rating: bookmarkedTravellingPlace.rating.toString(),
+              ),
               height: 125,
               onClickCard: (){
                 Navigator.pushNamed(

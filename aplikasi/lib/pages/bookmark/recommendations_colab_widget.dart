@@ -9,6 +9,7 @@ import 'package:travelling_app/templates/card_template.dart';
 import 'package:travelling_app/templates/circular_loading_element.dart';
 import 'package:travelling_app/templates/horizontal_item_view.dart';
 import 'package:travelling_app/templates/information_widget.dart';
+import 'package:travelling_app/templates/rating_widget.dart';
 
 class RecommendationColabWidget extends StatefulWidget{
 
@@ -49,9 +50,11 @@ class _RecommendationState extends State<RecommendationColabWidget>{
               child: HorizontalItemWidget(
                 titleText: recommendedTravellingPlace.placeName,
                 subtitleText: recommendedTravellingPlace.city,
-                width: 300.0,
+                width: double.infinity,
                 height: 100,
-                rating: recommendedTravellingPlace.rating.toString(),
+                additionalWidget: RatingWidget(
+                  rating: recommendedTravellingPlace.rating.toString(),
+                ),
                 onClickCard: (){
                   Navigator.pushNamed(
                       context,

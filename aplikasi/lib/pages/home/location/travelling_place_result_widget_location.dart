@@ -5,6 +5,7 @@ import 'package:travelling_app/globals/route.dart';
 import 'package:travelling_app/templates/circular_loading_element.dart';
 import 'package:travelling_app/templates/horizontal_item_view.dart';
 import 'package:travelling_app/templates/information_widget.dart';
+import 'package:travelling_app/templates/rating_widget.dart';
 import 'package:travelling_app/utils/context.dart';
 
 class TravellingPlacesWidgetLocation extends StatefulWidget{
@@ -88,7 +89,9 @@ class _TravellingPlaceState extends State<TravellingPlacesWidgetLocation>{
               child: HorizontalItemWidget(
                 titleText: travellingPlaces[index].placeName,
                 subtitleText: travellingPlaces[index].city,
-                rating: travellingPlaces[index].getRating(),
+                additionalWidget: RatingWidget(
+                  rating: travellingPlaces[index].getRating(),
+                ),
                 height: 125,
                 onClickCard: (){
                   Navigator.pushNamed(

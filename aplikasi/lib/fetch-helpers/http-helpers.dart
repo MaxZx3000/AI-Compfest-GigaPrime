@@ -90,6 +90,19 @@ class HttpHelpers{
       headers: getUrlHeader(),
     );
   }
+
+  static Future<http.Response> fetchTimeSeriesData(String timeSeriesURL){
+    Uri uri = Uri.http(
+        ApiEndpoint.getBaseAPIUrl(),
+        timeSeriesURL,
+    );
+
+    return http.get(
+      uri,
+      headers: getUrlHeader(),
+    );
+  }
+
   static Future<http.Response> fetchColabTravellingPlaces(
     List<BookmarkedTravellingPlace> bookmarkedTravellingPlaces
   ) async {
