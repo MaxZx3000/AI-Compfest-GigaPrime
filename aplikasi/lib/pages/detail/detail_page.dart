@@ -124,7 +124,8 @@ class DetailPage extends StatelessWidget{
               ),
             ),
           ),
-          height: 180),
+          height: 180
+      ),
     );
   }
   Widget _getNewsRelatedToTravellingPlace(){
@@ -145,13 +146,14 @@ class DetailPage extends StatelessWidget{
         appBarTitle: "Travelling Place Detail",
         rightMargin: 50
       ).getInstance(context),
+      extendBody: true,
       body: SingleChildScrollView(
         primary: true,
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
             const SizedBox(
-              height: 30,
+              height: 50,
             ),
             _getJumbotronWidget(),
             _getMainPoints(),

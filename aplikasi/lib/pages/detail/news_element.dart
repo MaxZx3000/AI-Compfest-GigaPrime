@@ -36,7 +36,7 @@ class _NewsElementState extends State<NewsElement>{
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 600,
-        childAspectRatio: 2.5,
+        mainAxisExtent: 140,
       ),
       shrinkWrap: true,
       primary: false,
@@ -64,7 +64,7 @@ class _NewsElementState extends State<NewsElement>{
             additionalWidgets: const SizedBox(
               height: 0,
             ),
-            height: 150,
+            height: 130,
           ),
         );
       },
@@ -72,19 +72,17 @@ class _NewsElementState extends State<NewsElement>{
   }
 
   Widget _getCircularProgressLoading(){
-    return const SizedBox(
-      height: 100,
-      child: CircularLoadingElement(
-        message: "Sedang memuat...",
-      ),
+    return const CircularLoadingElement(
+      message: "Sedang memuat...",
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(12.0),
+      padding: const EdgeInsets.all(12.0),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             "Berita Terkait dengan ${widget.query}",

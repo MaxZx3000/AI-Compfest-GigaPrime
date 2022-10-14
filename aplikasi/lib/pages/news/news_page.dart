@@ -132,6 +132,7 @@ class _NewsPageState extends State<NewsPage>{
         appBarTitle: "News Detail",
         rightMargin: 140
       ).getInstance(context),
+      extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
         child: Column(
           children: [
