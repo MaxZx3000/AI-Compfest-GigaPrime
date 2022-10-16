@@ -29,6 +29,8 @@ class HorizontalItemWidget extends StatelessWidget{
         Padding(
           padding: const EdgeInsets.only(
             top: 10,
+            left: 10,
+            right: 10,
           ),
           child: Text(
             titleText,
@@ -43,6 +45,8 @@ class HorizontalItemWidget extends StatelessWidget{
         Padding(
           padding: const EdgeInsets.only(
             top: 10,
+            left: 10,
+            right: 10,
           ),
           child: Text(
             subtitleText,
@@ -50,12 +54,7 @@ class HorizontalItemWidget extends StatelessWidget{
             textAlign: TextAlign.left,
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(
-            top: 10,
-          ),
-          child: additionalWidget
-        )
+        additionalWidget
       ],
     );
   }
@@ -82,7 +81,8 @@ class HorizontalItemWidget extends StatelessWidget{
     return Container(
       width: width,
       height: height,
-      padding: const EdgeInsets.all(8.0),
+      margin: EdgeInsets.all(0),
+      padding: EdgeInsets.all(0),
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(

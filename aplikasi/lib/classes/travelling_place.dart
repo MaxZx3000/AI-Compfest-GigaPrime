@@ -82,6 +82,13 @@ class TravellingPlace{
   }
 
   factory TravellingPlace.setFromJSON(Map<String, dynamic> jsonDatum){
+    int price = 0;
+    if (jsonDatum["Price"] == null){
+      price = 0;
+    }
+    else{
+      price = jsonDatum["Price"];
+    }
     return TravellingPlace(
       placeId: jsonDatum["Place_Id"],
       placeName: jsonDatum["Place_Name"],
@@ -89,7 +96,7 @@ class TravellingPlace{
       category: jsonDatum["Category"],
       city: jsonDatum["City"],
       rating: jsonDatum["Rating"],
-      price: jsonDatum["Price"],
+      price: price,
       latitude: jsonDatum['Lat'],
       longitude: jsonDatum['Long'],
       timeMinutes: jsonDatum["Time_Minutes"],

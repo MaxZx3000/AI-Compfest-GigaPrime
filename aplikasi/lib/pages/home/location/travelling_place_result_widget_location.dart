@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travelling_app/classes/travelling_place.dart';
 import 'package:travelling_app/fetch-helpers/data-fetcher.dart';
+import 'package:travelling_app/globals/colors.dart';
 import 'package:travelling_app/globals/route.dart';
 import 'package:travelling_app/templates/circular_loading_element.dart';
 import 'package:travelling_app/templates/horizontal_item_view.dart';
@@ -76,7 +77,7 @@ class _TravellingPlaceLocationState extends State<TravellingPlacesWidgetLocation
     return GridView.builder(
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 600,
-          mainAxisExtent: 140,
+          mainAxisExtent: 220,
         ),
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
@@ -87,8 +88,56 @@ class _TravellingPlaceLocationState extends State<TravellingPlacesWidgetLocation
             child: HorizontalItemWidget(
               titleText: travellingPlaces[index].placeName,
               subtitleText: travellingPlaces[index].city,
-              additionalWidget: RatingWidget(
-                rating: travellingPlaces[index].getRating(),
+              additionalWidget: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: RatingWidget(
+                      rating: travellingPlaces[index].getRating(),
+                    ),
+                  ),
+                  Container(
+                    padding: null,
+                    margin: null,
+                    color: Color(secondaryColors["light_gray"] as int),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Row(
+                            children: [
+                              const Icon(
+                                  Icons.category
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                  travellingPlaces[index].category
+                              )
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Row(
+                            children: [
+                              const Icon(
+                                  Icons.place
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                  "${travellingPlaces[index].latitude.toString()}, ${travellingPlaces[index].longitude.toString()}"
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
               ),
               height: 125,
               onClickCard: (){

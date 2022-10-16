@@ -72,8 +72,15 @@ class _TravellingPlaceQueryState extends State<TravellingPlacesWidgetQuery>{
             child: HorizontalItemWidget(
               titleText: travellingPlaces[index].placeName,
               subtitleText: travellingPlaces[index].city,
-              additionalWidget: RatingWidget(
-                  rating: travellingPlaces[index].getRating()
+              additionalWidget: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: RatingWidget(
+                        rating: travellingPlaces[index].getRating()
+                    ),
+                  ),
+                ],
               ),
               height: 125,
               onClickCard: (){

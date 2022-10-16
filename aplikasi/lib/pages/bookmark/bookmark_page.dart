@@ -57,8 +57,11 @@ class _BookmarkState extends State<BookmarkPage>{
             child: HorizontalItemWidget(
               titleText: bookmarkedTravellingPlace.travellingPlace.placeName,
               subtitleText: bookmarkedTravellingPlace.travellingPlace.city,
-              additionalWidget: RatingWidget(
-                rating: bookmarkedTravellingPlace.rating.toString(),
+              additionalWidget: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: RatingWidget(
+                  rating: bookmarkedTravellingPlace.rating.toString(),
+                ),
               ),
               height: 125,
               onClickCard: (){
