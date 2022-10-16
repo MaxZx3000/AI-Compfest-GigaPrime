@@ -10,6 +10,7 @@ from .templates.colab_based_filtering import ColabBasedFiltering
 from .templates.pretty_print import PrettyPrint
 from .templates.keyword_extraction import KeywordExtraction
 from .templates.pandas_data_loader import PandasDataLoader
+from .templates.time_series import TimeSeries
 from rest_framework import status
 from rest_framework.views import APIView
 from .models import TravellingPlaces, TravellingPlacesRating
@@ -213,24 +214,14 @@ class ContentBasedRecommendationUserQueryAPI(APIView):
 
 class TimeSeriesWisatawanMancanegaraJakartaAPI(APIView):
     def get(self, request):
-        model_path = os.path.join(os.path.dirname(__file__), "ml_models/arima_kunjungan_wisatawan_mancanegara_jakarta.pickle")
-        arima_model_result = sm.load(model_path)
-        new_datetime_range = pd.date_range(
-            start = date(2018, 1, 1), 
-            end = date(2022, 10, 1), 
-            freq = 'MS'
+        time_series = TimeSeries()
+        arima_model_result = time_series.load_model("arima_kunjungan_wisatawan_mancanegara_jakarta")
+        prediction_result_df = time_series.get_forecast(
+            arima_model_result = arima_model_result,
+            n_samples = 58
         )
 
-        columns = ["date", "value"]
-
-        n_samples = 58
-        prediction_result_df = arima_model_result.get_forecast(n_samples)
-        prediction_result_df = np.exp(prediction_result_df.predicted_mean)
-        prediction_result_df = prediction_result_df.reset_index()
-        
-        prediction_result_df.columns = columns
-        
-        prediction_result_df["date"] = prediction_result_df["date"].astype(str)
+        prediction_result_df["value"] = np.exp(prediction_result_df["value"])
 
         json_result = prediction_result_df.to_json(orient = "records")
         
@@ -240,6 +231,41 @@ class TimeSeriesWisatawanMancanegaraJakartaAPI(APIView):
             status = status.HTTP_200_OK
         )
     
+class TimeSeriesWisatawanMancanegaraAcehAPI(APIView):
+    def get(self, request):
+        time_series = TimeSeries()
+        arima_model_result = time_series.load_model("arima_kunjungan_wisatawan_mancanegara_aceh")
+        
+        prediction_result_df = time_series.get_forecast(
+            arima_model_result = arima_model_result,
+            n_samples = 23
+        )
+
+        json_result = prediction_result_df.to_json(orient = "records")
+
+        return HttpResponse(
+            json_result,
+            content_type = "application/json",
+            status = status.HTTP_200_OK
+        )
+
+class TimeSeriesWisatawanNusantaraAcehAPI(APIView):
+    def get(self, request):
+        time_series = TimeSeries()
+        arima_model_result = time_series.load_model("arima_kunjungan_wisatawan_nusantara_aceh")
+        
+        prediction_result_df = time_series.get_forecast(
+            arima_model_result = arima_model_result,
+            n_samples = 19
+        )
+
+        json_result = prediction_result_df.to_json(orient = "records")
+
+        return HttpResponse(
+            json_result,
+            content_type = "application/json",
+            status = status.HTTP_200_OK
+        )
 
 # Content Based Filtering
 class ContentBasedRecommendationUserLocationAPI(APIView):
