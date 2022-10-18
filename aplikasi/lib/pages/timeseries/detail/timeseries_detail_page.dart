@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:travelling_app/classes/city_time_series.dart';
 import 'package:travelling_app/classes/time_series.dart';
+import 'package:travelling_app/classes/time_series_header.dart';
 import 'package:travelling_app/fetch-helpers/data-fetcher.dart';
 import 'package:travelling_app/globals/colors.dart';
 import 'package:travelling_app/templates/backable_app_bar.dart';
+import 'package:travelling_app/templates/bullet_point_widget.dart';
+import 'package:travelling_app/templates/card_template.dart';
 import 'package:travelling_app/templates/circular_loading_element.dart';
 import 'package:travelling_app/utils/context.dart';
 
@@ -46,7 +49,7 @@ class _TimeSeriesDetailPageState extends State<TimeSeriesDetailPage>{
                   return _getLoadingWidget();
                 }
                 if (snapshot.hasData){
-                  return _getTimeSeriesWidget(snapshot.data as List<TimeSeries>);
+                  return _getTimeSeriesWidget(snapshot.data as TimeSeriesHeader);
                 }
                 print("Error: ${snapshot.error}");
                 return const Text(
@@ -60,29 +63,49 @@ class _TimeSeriesDetailPageState extends State<TimeSeriesDetailPage>{
     );
   }
 
+  Widget _getInsightWidget(TimeSeriesHeader timeSeriesHeader){
+    return CardTemplate(
+        title: "Insight",
+        contentWidget: Column(
+          children: [
+            BulletPointWidget(
+              text: timeSeriesHeader.trend,
+              spaceWidth: 10
+            )
+          ],
+        ),
+        height: 80
+    );
+  }
+
   Widget _getLoadingWidget(){
     return const CircularLoadingElement(
       message: "Sedang mengambil data..."
     );
   }
 
-  Widget _getTimeSeriesWidget(List<TimeSeries> timeSeriesData){
+  Widget _getTimeSeriesWidget(TimeSeriesHeader timeSeriesHeader){
     final charts.Series<TimeSeries, DateTime> seriesList = charts.Series<TimeSeries, DateTime>(
       id: "TimeSeries",
-      data: timeSeriesData,
+      data: timeSeriesHeader.timeSeries,
       colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
       domainFn: (TimeSeries timeSeries, _) => timeSeries.date,
       measureFn: (TimeSeries timeSeries, _) => timeSeries.value,
     );
 
-    return Container(
-      height: 300,
-      margin: const EdgeInsets.all(8.0),
-      child: charts.TimeSeriesChart(
-        [seriesList],
-        animate: true,
-        dateTimeFactory: const charts.LocalDateTimeFactory(),
-      ),
+    return Column(
+      children: [
+        Container(
+          height: 300,
+          margin: const EdgeInsets.all(8.0),
+          child: charts.TimeSeriesChart(
+            [seriesList],
+            animate: true,
+            dateTimeFactory: const charts.LocalDateTimeFactory(),
+          ),
+        ),
+        _getInsightWidget(timeSeriesHeader)
+      ],
     );
   }
 

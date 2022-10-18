@@ -68,7 +68,7 @@ class _TravellingPlaceQueryState extends State<TravellingPlacesWidgetQuery>{
         itemCount: travellingPlaces.length,
         itemBuilder: (BuildContext ctx, index){
           return Padding(
-            padding: const EdgeInsets.all(5.0),
+            padding: const EdgeInsets.all(8.0),
             child: HorizontalItemWidget(
               titleText: travellingPlaces[index].placeName,
               subtitleText: travellingPlaces[index].city,

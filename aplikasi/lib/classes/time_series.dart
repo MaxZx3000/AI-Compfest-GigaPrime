@@ -14,7 +14,7 @@ class TimeSeries{
   factory TimeSeries.setFromJSON(dynamic jsonDatum){
     return TimeSeries(
       date: DateTime.parse(jsonDatum["date"]),
-      value: jsonDatum["value"]
+      value: jsonDatum["value"],
     );
   }
 }

@@ -23,17 +23,20 @@ class TimeSeriesCountriesPage extends StatelessWidget{
             itemCount: cities.length,
             shrinkWrap: true,
             itemBuilder: (BuildContext context, int index){
-              return ImageSimpleItemView(
-                title: cities[index].name,
-                imageURL: cities[index].logoURL,
-                onCardClick: (){
-                  Navigator.pushNamed(
-                    context,
-                    timeSeriesPerCountryRouteName,
-                    arguments: cities[index]
-                  );
-                },
-                height: 80,
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ImageSimpleItemView(
+                  title: cities[index].name,
+                  imageURL: cities[index].logoURL,
+                  onCardClick: (){
+                    Navigator.pushNamed(
+                      context,
+                      timeSeriesPerCountryRouteName,
+                      arguments: cities[index]
+                    );
+                  },
+                  height: 80,
+                ),
               );
             },
           ),

@@ -1,5 +1,6 @@
 enum CityKey {
  JAKARTA,
+ ACEH,
 }
 
 class City{

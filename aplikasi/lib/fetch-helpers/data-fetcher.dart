@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:travelling_app/classes/news.dart';
 import 'package:travelling_app/classes/news_detail.dart';
 import 'package:travelling_app/classes/time_series.dart';
+import 'package:travelling_app/classes/time_series_header.dart';
 import 'package:travelling_app/classes/travelling_place.dart';
 import 'package:travelling_app/classes/user/bookmarked_travelling_place.dart';
 import 'package:travelling_app/fetch-helpers/http-helpers.dart';
@@ -96,17 +97,16 @@ class DataFetcher{
 
     return recommendedTravellingPlaces;
   }
-  static Future<List<TimeSeries>> fetchTimeSeriesData(
+  static Future<TimeSeriesHeader> fetchTimeSeriesData(
       String timeSeriesURL
   ) async{
     final response = await HttpHelpers.fetchTimeSeriesData(timeSeriesURL);
 
     dynamic jsonDecoded = jsonDecode(response.body);
-    List<TimeSeries> timeSeriesData = [];
 
-    jsonDecoded.forEach((element){
-      timeSeriesData.add(TimeSeries.setFromJSON(element));
-    });
-    return timeSeriesData;
+    TimeSeriesHeader timeSeriesHeader = TimeSeriesHeader.setFromJSON(
+      jsonDecoded
+    );
+    return timeSeriesHeader;
   }
 }

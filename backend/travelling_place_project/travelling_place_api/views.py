@@ -223,10 +223,20 @@ class TimeSeriesWisatawanMancanegaraJakartaAPI(APIView):
 
         prediction_result_df["value"] = np.exp(prediction_result_df["value"])
 
-        json_result = prediction_result_df.to_json(orient = "records")
-        
+        json_result = prediction_result_df.to_dict(orient = "records")
+
+        trend = time_series.get_trend(
+            prediction_result_df,
+        )
+
+        json_data = time_series.get_time_series_json_data(
+            trend,
+            "wisatawan mancanegara Jakarta",
+            json_result
+        )
+
         return HttpResponse(
-            json_result,
+            json_data,
             content_type = "application/json",
             status = status.HTTP_200_OK
         )
@@ -241,10 +251,20 @@ class TimeSeriesWisatawanMancanegaraAcehAPI(APIView):
             n_samples = 23
         )
 
-        json_result = prediction_result_df.to_json(orient = "records")
+        json_result = prediction_result_df.to_dict(orient = "records")
+
+        trend = time_series.get_trend(
+            prediction_result_df,
+        )
+
+        json_data = time_series.get_time_series_json_data(
+            trend,
+             "wisatawan mancanegara Aceh",
+            json_result
+        )
 
         return HttpResponse(
-            json_result,
+            json_data,
             content_type = "application/json",
             status = status.HTTP_200_OK
         )
@@ -259,10 +279,20 @@ class TimeSeriesWisatawanNusantaraAcehAPI(APIView):
             n_samples = 19
         )
 
-        json_result = prediction_result_df.to_json(orient = "records")
+        json_result = prediction_result_df.to_dict(orient = "records")
+
+        trend = time_series.get_trend(
+            prediction_result_df,
+        )
+
+        json_data = time_series.get_time_series_json_data(
+            trend,
+            "wisatawan nusantara Aceh",
+            json_result,
+        )
 
         return HttpResponse(
-            json_result,
+            json_data,
             content_type = "application/json",
             status = status.HTTP_200_OK
         )

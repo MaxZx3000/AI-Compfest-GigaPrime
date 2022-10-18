@@ -58,21 +58,24 @@ class TimeSeriesPerCountryPage extends StatelessWidget{
       itemCount: countryTimeSeries.length,
       shrinkWrap: true,
       itemBuilder: (context, index) {
-        return HorizontalItemWidget(
-          titleText: countryTimeSeries[index].timeSeriesTitle,
-          subtitleText: countryTimeSeries[index].timeSeriesDescription,
-          height: 120,
-          width: double.infinity,
-          topRightWidget: null,
-          onClickCard: (){
-            Navigator.pushNamed(
-              context,
-              timeSeriesDetailRouteName,
-              arguments: countryTimeSeries[index],
-            );
-          },
-          additionalWidget: const SizedBox(
-            height: 0,
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: HorizontalItemWidget(
+            titleText: countryTimeSeries[index].timeSeriesTitle,
+            subtitleText: countryTimeSeries[index].timeSeriesDescription,
+            height: 120,
+            width: double.infinity,
+            topRightWidget: null,
+            onClickCard: (){
+              Navigator.pushNamed(
+                context,
+                timeSeriesDetailRouteName,
+                arguments: countryTimeSeries[index],
+              );
+            },
+            additionalWidget: const SizedBox(
+              height: 0,
+            ),
           ),
         );
       },
