@@ -8,6 +8,7 @@ import 'package:travelling_app/globals/colors.dart';
 import 'package:travelling_app/pages/detail/news_element.dart';
 import 'package:travelling_app/templates/backable_app_bar.dart';
 import 'package:travelling_app/templates/bookmark_widget.dart';
+import 'package:travelling_app/templates/bullet_point_widget.dart';
 import 'package:travelling_app/templates/card_template.dart';
 import 'package:travelling_app/utils/context.dart';
 
@@ -109,23 +110,31 @@ class DetailPage extends StatelessWidget{
   }
 
   Widget _getSummarizedDescription(){
+    List<String> travellingPlaceDescs = travellingPlace.getSplittedSummarizedDescription();
     return Padding(
-      padding: EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(10.0),
       child: CardTemplate(
-          title: "Rangkuman Deskripsi Tempat",
-          contentWidget: SingleChildScrollView(
-            primary: false,
-            padding: const EdgeInsets.all(8.0),
-            scrollDirection: Axis.vertical,
-            child: Text(
-              travellingPlace.getSummarizedDescription(),
-              style: const TextStyle(
-                height: 1.3
-              ),
-            ),
+        title: "Rangkuman Deskripsi Tempat",
+        height: 180,
+        contentWidget: SingleChildScrollView(
+          primary: false,
+          padding: const EdgeInsets.all(8.0),
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children:  List.generate(travellingPlaceDescs.length, (index) {
+              return Padding(
+                padding: const EdgeInsets.only(
+                  bottom: 8.5
+                ),
+                child: BulletPointWidget(
+                  text: travellingPlaceDescs[index],
+                  spaceWidth: 10,
+                ),
+              );
+            })
           ),
-          height: 180
-      ),
+        ),
+      )
     );
   }
   Widget _getNewsRelatedToTravellingPlace(){

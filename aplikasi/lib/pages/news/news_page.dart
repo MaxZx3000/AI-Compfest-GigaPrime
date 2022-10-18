@@ -76,7 +76,11 @@ class _NewsPageState extends State<NewsPage>{
       contentWidget: SingleChildScrollView(
         primary: false,
         child: Text(
-          newsDetail.summarizedText
+          newsDetail.summarizedText,
+          textAlign: TextAlign.justify,
+          style: const TextStyle(
+            height: 1.4,
+          ),
         ),
       ),
       height: 300,
