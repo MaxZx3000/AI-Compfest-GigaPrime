@@ -60,15 +60,29 @@ class _HomePage extends State<HomePage>{
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          const DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.blue,
-            ),
-            child: Text(
-              'TrAIvel',
-              style: TextStyle(
-                fontSize: 20,
-              ),
+          DrawerHeader(
+            padding: EdgeInsets.zero,
+            child: Stack(
+              alignment: Alignment.bottomLeft,
+              children: [
+                Image.asset(
+                  assets["drawer_header_background"] as String,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8.0),
+                  color: Colors.black12.withOpacity(0.35),
+                  width: double.infinity,
+                  child: const Text(
+                    'TrAIvel',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           _getHeaderTextDrawer(
