@@ -70,7 +70,7 @@ class _TimeSeriesDetailPageState extends State<TimeSeriesDetailPage>{
           children: [
             BulletPointWidget(
               text: timeSeriesHeader.trend,
-              spaceWidth: 10
+              spaceWidth: 10,
             )
           ],
         ),
