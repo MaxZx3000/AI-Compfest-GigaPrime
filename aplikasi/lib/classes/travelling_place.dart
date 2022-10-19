@@ -81,6 +81,13 @@ class TravellingPlace{
     }
   }
 
+  List<String> getSplittedSummarizedDescription(){
+    if (summarizedDescription == null){
+      return [];
+    }
+    return summarizedDescription.toString().split(". ");
+  }
+
   factory TravellingPlace.setFromJSON(Map<String, dynamic> jsonDatum){
     int price = 0;
     if (jsonDatum["Price"] == null){

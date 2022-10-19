@@ -167,6 +167,30 @@ class ContentBasedRecommendationUserQueryAPI(APIView):
         description_tf_idf_vectorizer_path = os.path.join(os.path.dirname(__file__), "ml_models/tf_idf_vectorizer_descriptions.pkl")
         return content_based_filtering_class.transform_to_vector(description_tf_idf_vectorizer_path, [sample_description])
 
+    def get_related_sentence_based_on_keyword(
+        self, 
+        description,
+        keyword,
+    ):
+        tokenized_sentences = sent_tokenize(description)
+        tf_idf_vectorizer = TfidfVectorizer()
+        vectorized_sentences = tf_idf_vectorizer.fit_transform(tokenized_sentences)
+        k_nearest_neighbors = NearestNeighbors(n_neighbors = 3)
+        k_nearest_neighbors.fit(vectorized_sentences)
+
+        vectorized_keyword = tf_idf_vectorizer.transform([keyword])
+        top_n_distances, top_n_indexes_ranking = k_nearest_neighbors.kneighbors(
+            vectorized_keyword
+        )
+
+        top_n_indexes_ranking.sort()
+        top_ranking_index_sentences = top_n_indexes_ranking.flatten().astype(int)
+        print(f"Rankings: {top_ranking_index_sentences}")
+
+        print(f"Tokenized Sentences: {type(tokenized_sentences)}")
+
+        return np.array(tokenized_sentences)[top_ranking_index_sentences]
+
     def get(self, request):
         try:
             data = request.data
@@ -202,9 +226,20 @@ class ContentBasedRecommendationUserQueryAPI(APIView):
 
         top_n_df["Time_Minutes"] = top_n_df["Time_Minutes"].astype(float)
         top_n_df["Rating"] = top_n_df["Rating"].astype(float)
+        top_n_df["Related_Sentences"] = ""
 
-        json_result = top_n_df.to_json(orient = "records")
-        
+        pretty_print = PrettyPrint()
+        for index, row in top_n_df.iterrows():
+            print(f"Index: {index}")
+            related_sentences = self.get_related_sentence_based_on_keyword(
+                row["Summarized_Description"],
+                query
+            )
+            
+            pretty_print_related_sentences = pretty_print.pretty_print_tokenized_document(related_sentences)
+            top_n_df.loc[index, "Related_Sentences"] = pretty_print_related_sentences
+
+        json_result = top_n_df.to_json(orient = "records")        
 
         return HttpResponse(
             json_result, 

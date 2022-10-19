@@ -6,23 +6,23 @@ import 'package:travelling_app/classes/news_detail.dart';
 import 'package:travelling_app/classes/time_series.dart';
 import 'package:travelling_app/classes/time_series_header.dart';
 import 'package:travelling_app/classes/travelling_place.dart';
+import 'package:travelling_app/classes/travelling_place_query.dart';
 import 'package:travelling_app/classes/user/bookmarked_travelling_place.dart';
 import 'package:travelling_app/fetch-helpers/http-helpers.dart';
 
 class DataFetcher{
-  static Future<List<TravellingPlace>> getTravellingPlacesByQuery(
+  static Future<List<TravellingPlaceQuery>> getTravellingPlacesByQuery(
       String query,) async {
     final response = await HttpHelpers.fetchTravellingPlacesUserQueryList(
       query,
     );
     dynamic jsonDecoded = jsonDecode(response.body);
-    List<TravellingPlace> travellingPlaces = [];
+    List<TravellingPlaceQuery> travellingPlacesQuery = [];
     jsonDecoded.forEach((element) {
-      // print(element);
-      TravellingPlace travellingPlace = TravellingPlace.setFromJSON(element);
-      travellingPlaces.add(travellingPlace);
+      TravellingPlaceQuery travellingPlaceQuery = TravellingPlaceQuery.setFromJSON(element);
+      travellingPlacesQuery.add(travellingPlaceQuery);
     });
-    return travellingPlaces;
+    return travellingPlacesQuery;
   }
 
   static Future<List<TravellingPlace>> getTravellingPlacesByLocation(
