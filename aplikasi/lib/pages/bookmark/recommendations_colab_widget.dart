@@ -50,10 +50,13 @@ class _RecommendationState extends State<RecommendationColabWidget>{
               child: HorizontalItemWidget(
                 titleText: recommendedTravellingPlace.placeName,
                 subtitleText: recommendedTravellingPlace.city,
-                width: double.infinity,
+                width: 300,
                 height: 100,
-                additionalWidget: RatingWidget(
-                  rating: recommendedTravellingPlace.rating.toString(),
+                additionalWidget: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: RatingWidget(
+                    rating: recommendedTravellingPlace.rating.toString(),
+                  ),
                 ),
                 onClickCard: (){
                   Navigator.pushNamed(
