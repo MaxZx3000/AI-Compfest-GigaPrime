@@ -37,18 +37,22 @@ class TravellingPlace{
   @HiveField(10)
   String? summarizedDescription;
 
+  @HiveField(11)
+  String imageURL;
+
   TravellingPlace({
     required this.placeId,
     required this.placeName,
     required this.description,
     required this.category,
     required this.city,
+    required this.imageURL,
     this.price,
     this.rating,
     this.latitude,
     this.longitude,
     this.timeMinutes,
-    this.summarizedDescription
+    this.summarizedDescription,
   });
 
   String getRating(){
@@ -102,6 +106,7 @@ class TravellingPlace{
       description: jsonDatum["Description"],
       category: jsonDatum["Category"],
       city: jsonDatum["City"],
+      imageURL: jsonDatum["Image_URL"],
       rating: jsonDatum["Rating"],
       price: price,
       latitude: jsonDatum['Lat'],

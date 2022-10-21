@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 
-class TopImageHorizontalItemWidget extends StatelessWidget{
+class HorizontalItemWidget extends StatelessWidget{
   final String titleText;
   final String subtitleText;
   final double width;
   final double height;
   final Function onClickCard;
-  final String imageURL;
   final Widget additionalWidget;
   final Widget? topRightWidget;
 
-  const TopImageHorizontalItemWidget({
+  const HorizontalItemWidget({
     Key? key,
     required this.titleText,
     required this.subtitleText,
@@ -18,7 +17,6 @@ class TopImageHorizontalItemWidget extends StatelessWidget{
     this.topRightWidget,
     required this.height,
     required this.onClickCard,
-    required this.imageURL,
     required this.additionalWidget,
   }) : super(key: key);
 
@@ -101,12 +99,6 @@ class TopImageHorizontalItemWidget extends StatelessWidget{
       ),
       child: Column(
         children: [
-          Image.network(
-            imageURL,
-            width: double.infinity,
-            fit: BoxFit.cover,
-            height: 175,
-          ),
           _getChildCardWidget(childWidget),
         ],
       ),

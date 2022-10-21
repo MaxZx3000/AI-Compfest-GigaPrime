@@ -5,7 +5,7 @@ import 'package:travelling_app/fetch-helpers/data-fetcher.dart';
 import 'package:travelling_app/globals/route.dart';
 import 'package:travelling_app/pages/bookmark/recommendations_colab_widget.dart';
 import 'package:travelling_app/templates/backable_app_bar.dart';
-import 'package:travelling_app/templates/horizontal_item_view.dart';
+import 'package:travelling_app/templates/top_image_horizontal_item_view.dart';
 import 'package:travelling_app/templates/information_widget.dart';
 import 'package:travelling_app/templates/rating_widget.dart';
 
@@ -34,17 +34,11 @@ class _BookmarkState extends State<BookmarkPage>{
   }
 
   Widget _getBookmarkedItems(List<BookmarkedTravellingPlace> bookmarkedTravellingPlaces){
-    double childAspectRatio = 0;
-    if (ContextUtils.getScreenWidth(context) > 500){
-      childAspectRatio = 2.5;
-    }
-    else{
-      childAspectRatio = 3;
-    }
+
     return GridView.builder(
-        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 600,
-          childAspectRatio: childAspectRatio,
+          mainAxisExtent: 310,
         ),
         shrinkWrap: true,
         primary: false,
@@ -54,9 +48,10 @@ class _BookmarkState extends State<BookmarkPage>{
           BookmarkedTravellingPlace bookmarkedTravellingPlace = bookmarkedTravellingPlaces[index];
           return Padding(
             padding: const EdgeInsets.all(5.0),
-            child: HorizontalItemWidget(
+            child: TopImageHorizontalItemWidget(
               titleText: bookmarkedTravellingPlace.travellingPlace.placeName,
               subtitleText: bookmarkedTravellingPlace.travellingPlace.city,
+              imageURL: bookmarkedTravellingPlace.travellingPlace.imageURL,
               additionalWidget: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: RatingWidget(
@@ -96,6 +91,9 @@ class _BookmarkState extends State<BookmarkPage>{
     return Column(
       children: [
         _getBookmarkedItems(bookmarkedTravellingPlaces),
+        const SizedBox(
+          height: 30,
+        ),
         _getRecommendationTravellingPlaces(bookmarkedTravellingPlaces),
       ],
     );
@@ -128,6 +126,7 @@ class _BookmarkState extends State<BookmarkPage>{
         },
         rightMargin: 100
       ).getInstance(context),
+      extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
         primary: true,
         scrollDirection: Axis.vertical,

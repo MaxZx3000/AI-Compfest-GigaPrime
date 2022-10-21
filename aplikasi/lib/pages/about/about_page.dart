@@ -11,9 +11,9 @@ class AboutPage extends StatelessWidget{
 
   Widget _getLogoWidget(){
     return Image.asset(
+      assets["app_logo"] as String,
       height: 200,
       width: 200,
-      assets["app_logo"] as String,
     );
   }
 

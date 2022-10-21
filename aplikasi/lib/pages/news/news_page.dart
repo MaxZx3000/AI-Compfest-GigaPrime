@@ -26,12 +26,18 @@ class _NewsPageState extends State<NewsPage>{
   late News news;
 
   Widget _getLargeImageWidget(){
-    return Image.network(
-      news.thumbnailImage,
-      height: 250,
-      cacheHeight: 250,
-      fit: BoxFit.cover,
-      width: double.infinity,
+    return ClipRRect(
+      borderRadius: const BorderRadius.only(
+        bottomRight: Radius.circular(20.0),
+        bottomLeft: Radius.circular(20.0)
+      ),
+      child: Image.network(
+        news.thumbnailImage,
+        height: 250,
+        cacheHeight: 250,
+        fit: BoxFit.cover,
+        width: double.infinity,
+      ),
     );
   }
 

@@ -4,7 +4,7 @@ import 'package:travelling_app/fetch-helpers/data-fetcher.dart';
 import 'package:travelling_app/globals/colors.dart';
 import 'package:travelling_app/globals/route.dart';
 import 'package:travelling_app/templates/circular_loading_element.dart';
-import 'package:travelling_app/templates/horizontal_item_view.dart';
+import 'package:travelling_app/templates/top_image_horizontal_item_view.dart';
 import 'package:travelling_app/templates/information_widget.dart';
 import 'package:travelling_app/templates/rating_widget.dart';
 
@@ -77,7 +77,7 @@ class _TravellingPlaceLocationState extends State<TravellingPlacesWidgetLocation
     return GridView.builder(
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 600,
-          mainAxisExtent: 220,
+          mainAxisExtent: 400,
         ),
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
@@ -85,7 +85,8 @@ class _TravellingPlaceLocationState extends State<TravellingPlacesWidgetLocation
         itemBuilder: (BuildContext ctx, index){
           return Padding(
             padding: const EdgeInsets.all(5.0),
-            child: HorizontalItemWidget(
+            child: TopImageHorizontalItemWidget(
+              imageURL: travellingPlaces[index].imageURL,
               titleText: travellingPlaces[index].placeName,
               subtitleText: travellingPlaces[index].city,
               additionalWidget: Column(
@@ -96,46 +97,52 @@ class _TravellingPlaceLocationState extends State<TravellingPlacesWidgetLocation
                       rating: travellingPlaces[index].getRating(),
                     ),
                   ),
-                  Container(
-                    padding: null,
-                    margin: null,
-                    color: Color(secondaryColors["light_gray"] as int),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Row(
-                            children: [
-                              const Icon(
-                                  Icons.category
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                  travellingPlaces[index].category
-                              )
-                            ],
-                          ),
+                  const Divider(
+                    color: Colors.grey,
+                    thickness: 1.0,
+                  ),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 10.0,
+                          right: 10.0,
+                          bottom: 5.0,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Row(
-                            children: [
-                              const Icon(
-                                  Icons.place
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                  "${travellingPlaces[index].latitude.toString()}, ${travellingPlaces[index].longitude.toString()}"
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
+                        child: Row(
+                          children: [
+                            const Icon(
+                                Icons.category
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                                travellingPlaces[index].category
+                            )
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 10.0,
+                          right: 10.0
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(
+                                Icons.place
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                                "${travellingPlaces[index].latitude.toString()}, ${travellingPlaces[index].longitude.toString()}"
+                            )
+                          ],
+                        ),
+                      )
+                    ],
                   ),
                 ],
               ),

@@ -7,7 +7,7 @@ import 'package:travelling_app/globals/colors.dart';
 import 'package:travelling_app/globals/route.dart';
 import 'package:travelling_app/templates/card_template.dart';
 import 'package:travelling_app/templates/circular_loading_element.dart';
-import 'package:travelling_app/templates/horizontal_item_view.dart';
+import 'package:travelling_app/templates/top_image_horizontal_item_view.dart';
 import 'package:travelling_app/templates/information_widget.dart';
 import 'package:travelling_app/templates/rating_widget.dart';
 
@@ -47,11 +47,12 @@ class _RecommendationState extends State<RecommendationColabWidget>{
             TravellingPlace recommendedTravellingPlace = recommendedTravellingPlaces[index];
             return Padding(
               padding: const EdgeInsets.all(8.0),
-              child: HorizontalItemWidget(
+              child: TopImageHorizontalItemWidget(
+                imageURL: recommendedTravellingPlace.imageURL,
                 titleText: recommendedTravellingPlace.placeName,
                 subtitleText: recommendedTravellingPlace.city,
                 width: 300,
-                height: 100,
+                height: 200,
                 additionalWidget: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: RatingWidget(
@@ -114,7 +115,7 @@ class _RecommendationState extends State<RecommendationColabWidget>{
   @override
   Widget build(BuildContext context) {
     return CardTemplate(
-      height: 175,
+      height: 310,
       title: "Rekomendasi berdasarkan rating Anda",
       contentWidget: _getRecommendationsContent(),
     );

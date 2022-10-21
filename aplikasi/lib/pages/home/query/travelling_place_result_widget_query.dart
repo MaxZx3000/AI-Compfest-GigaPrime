@@ -5,7 +5,7 @@ import 'package:travelling_app/classes/travelling_place_query.dart';
 import 'package:travelling_app/fetch-helpers/data-fetcher.dart';
 import 'package:travelling_app/globals/route.dart';
 import 'package:travelling_app/templates/circular_loading_element.dart';
-import 'package:travelling_app/templates/horizontal_item_view.dart';
+import 'package:travelling_app/templates/top_image_horizontal_item_view.dart';
 import 'package:travelling_app/templates/information_widget.dart';
 import 'package:travelling_app/templates/rating_widget.dart';
 import 'package:travelling_app/utils/context.dart';
@@ -63,7 +63,7 @@ class _TravellingPlaceQueryState extends State<TravellingPlacesWidgetQuery>{
     return GridView.builder(
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 600,
-          mainAxisExtent: 275,
+          mainAxisExtent: 480,
         ),
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
@@ -71,7 +71,8 @@ class _TravellingPlaceQueryState extends State<TravellingPlacesWidgetQuery>{
         itemBuilder: (BuildContext ctx, index){
           return Padding(
             padding: const EdgeInsets.all(8.0),
-            child: HorizontalItemWidget(
+            child: TopImageHorizontalItemWidget(
+              imageURL: travellingPlacesQuery[index].travellingPlace.imageURL,
               titleText: travellingPlacesQuery[index].travellingPlace.placeName,
               subtitleText: travellingPlacesQuery[index].travellingPlace.city,
               additionalWidget: Column(
@@ -106,7 +107,7 @@ class _TravellingPlaceQueryState extends State<TravellingPlacesWidgetQuery>{
                   ),
                 ],
               ),
-              height: 125,
+              height: 220,
               onClickCard: (){
                 Navigator.pushNamed(
                   context,

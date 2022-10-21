@@ -7,6 +7,7 @@ import 'package:travelling_app/globals/route.dart';
 import 'package:travelling_app/local_data_provider/timeseries_data_provider.dart';
 import 'package:travelling_app/templates/backable_app_bar.dart';
 import 'package:travelling_app/templates/horizontal_item_view.dart';
+import 'package:travelling_app/templates/top_image_horizontal_item_view.dart';
 import 'package:travelling_app/utils/context.dart';
 
 class TimeSeriesPerCountryPage extends StatelessWidget{
@@ -18,9 +19,9 @@ class TimeSeriesPerCountryPage extends StatelessWidget{
       fit: StackFit.loose,
       children: [
         Image.network(
+          city.logoURL,
           width: double.infinity,
           height: 300,
-          city.logoURL,
           fit: BoxFit.fitHeight,
         ),
         Container(

@@ -21,30 +21,36 @@ class DetailPage extends StatelessWidget{
   }) : super(key: key);
 
   Widget _getJumbotronWidget(){
-    return Padding(
-      padding: const EdgeInsets.all(12.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Text(
-            travellingPlace.placeName,
-            style: const TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        getJumbotronImageWidget(),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                travellingPlace.placeName,
+                style: const TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Text(
+                travellingPlace.city,
+                style: const TextStyle(
+                  color: Colors.black45,
+                ),
+              )
+            ],
           ),
-          const SizedBox(
-            height: 15,
-          ),
-          Text(
-            travellingPlace.city,
-            style: const TextStyle(
-              color: Colors.black45,
-            ),
-          )
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -103,6 +109,21 @@ class DetailPage extends StatelessWidget{
     );
   }
 
+  Widget getJumbotronImageWidget() {
+    return ClipRRect(
+      borderRadius: const BorderRadius.only(
+        bottomLeft: Radius.circular(20.0),
+        bottomRight: Radius.circular(20.0),
+      ),
+      child: Image.network(
+        travellingPlace.imageURL,
+        height: 300,
+        width: double.infinity,
+        fit: BoxFit.cover,
+      ),
+    );
+  }
+
   Widget _getRatingElement(){
     return RatingElement(
       travellingPlace: travellingPlace
@@ -155,15 +176,12 @@ class DetailPage extends StatelessWidget{
         appBarTitle: "Travelling Place Detail",
         rightMargin: 50
       ).getInstance(context),
-      extendBody: true,
+      extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
         primary: true,
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
-            const SizedBox(
-              height: 50,
-            ),
             _getJumbotronWidget(),
             _getMainPoints(),
             _getRatingElement(),

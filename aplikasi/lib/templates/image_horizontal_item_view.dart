@@ -21,10 +21,16 @@ class ImageHorizontalItemView extends StatelessWidget{
   }) : super(key: key);
 
   Widget _getImageWidget(){
-    return Image.network(
-      urlImage,
-      height: double.infinity,
-      fit: BoxFit.cover,
+    return ClipRRect(
+      borderRadius: const BorderRadius.only(
+        topLeft: Radius.circular(10.0),
+        bottomLeft: Radius.circular(10.0)
+      ),
+      child: Image.network(
+        urlImage,
+        height: double.infinity,
+        fit: BoxFit.cover,
+      ),
     );
   }
 
@@ -64,6 +70,7 @@ class ImageHorizontalItemView extends StatelessWidget{
 
   Widget _getCombinedWidget(){
     return Row(
+      mainAxisSize: MainAxisSize.max,
       children: [
         Expanded(
           flex: 1,
@@ -98,6 +105,7 @@ class ImageHorizontalItemView extends StatelessWidget{
           )
         ]
       ),
+      padding: EdgeInsets.zero,
       child: childWidget
     );
   }
@@ -112,7 +120,8 @@ class ImageHorizontalItemView extends StatelessWidget{
             onCardClick();
           },
           style: TextButton.styleFrom(
-              primary: Colors.black
+            primary: Colors.black,
+            padding: EdgeInsets.zero
           ),
           child: _getCombinedWidget()
         )
