@@ -23,6 +23,8 @@ class TravellingPlaceSearchBarWidget extends StatefulWidget{
 
 class _TravellingPlaceSearchBarWidgetState extends State<TravellingPlaceSearchBarWidget>{
 
+  final PanelController _pc = PanelController();
+
   Widget _getCollapsedWidget(){
     return Container(
       alignment: Alignment.topCenter,
@@ -69,9 +71,9 @@ class _TravellingPlaceSearchBarWidgetState extends State<TravellingPlaceSearchBa
               );
               return;
             }
-
             print("Query in String: $queryString.");
             widget.onSearchClick(query);
+            _pc.close();
           },
           maxWidth: 250,
           searchBarShadow: const BoxShadow(
@@ -94,6 +96,7 @@ class _TravellingPlaceSearchBarWidgetState extends State<TravellingPlaceSearchBa
       minHeight: 40,
       maxHeight: 140,
       header: _getCollapsedWidget(),
+      controller: _pc,
       // collapsed: _getCollapsedWidget(),
       boxShadow: const [
         BoxShadow(

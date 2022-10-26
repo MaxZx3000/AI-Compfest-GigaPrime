@@ -45,6 +45,25 @@ class DataFetcher{
     return travellingPlaces;
   }
 
+  static Future<List<TravellingPlace>> getTravellingPlaceByBudget(
+      String categories,
+      String cities,
+      int ticketPrice,
+  ) async{
+    final response = await HttpHelpers.fetchTravellingPlacesUserBudgetList(
+        categories,
+        cities,
+        ticketPrice,
+    );
+    dynamic jsonDecoded = jsonDecode(response.body);
+    List<TravellingPlace> travellingPlaces = [];
+    jsonDecoded.forEach((element) {
+      TravellingPlace travellingPlace = TravellingPlace.setFromJSON(element);
+      travellingPlaces.add(travellingPlace);
+    });
+    return travellingPlaces;
+  }
+
   static Future<List<News>> getNewsList(String query) async {
     String newsQuery = "Berita $query";
     final response = await HttpHelpers.fetchNewsList(newsQuery);

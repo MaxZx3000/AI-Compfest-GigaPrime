@@ -35,6 +35,7 @@ class _HomeQueryPageState extends State<HomeQueryPage>{
           travellingPlacesQueryWidget.performSearch(
             query,
           );
+          FocusManager.instance.primaryFocus?.unfocus();
         }
     );
   }

@@ -106,19 +106,19 @@ class _HomePage extends State<HomePage>{
             "Time Series",
             Icons.timeline
           ),
-          const Divider(),
-          _getHeaderTextDrawer(
-            "Lainnya"
-          ),
           _getListTileDrawer(
             (){
               Navigator.pushNamed(
-                context,
-                bookmarkRouteName
+                  context,
+                  bookmarkRouteName
               );
             },
             "Tempat Wisata yang dirating",
             Icons.star
+          ),
+          const Divider(),
+          _getHeaderTextDrawer(
+            "Lainnya"
           ),
           _getListTileDrawer(
             (){
@@ -160,7 +160,7 @@ class _HomePage extends State<HomePage>{
               height: 40,
             ),
             const SizedBox(
-              width: 10,
+              width: 50,
             ),
           ],
         ),

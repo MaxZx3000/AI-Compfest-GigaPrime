@@ -77,14 +77,14 @@ class _TravellingPlaceLocationState extends State<TravellingPlacesWidgetLocation
     return GridView.builder(
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 600,
-          mainAxisExtent: 400,
+          mainAxisExtent: 405,
         ),
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
         itemCount: travellingPlaces.length,
         itemBuilder: (BuildContext ctx, index){
           return Padding(
-            padding: const EdgeInsets.all(5.0),
+            padding: const EdgeInsets.all(15.0),
             child: TopImageHorizontalItemWidget(
               imageURL: travellingPlaces[index].imageURL,
               titleText: travellingPlaces[index].placeName,

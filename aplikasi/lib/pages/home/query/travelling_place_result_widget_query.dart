@@ -70,7 +70,7 @@ class _TravellingPlaceQueryState extends State<TravellingPlacesWidgetQuery>{
         itemCount: travellingPlacesQuery.length,
         itemBuilder: (BuildContext ctx, index){
           return Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(15.0),
             child: TopImageHorizontalItemWidget(
               imageURL: travellingPlacesQuery[index].travellingPlace.imageURL,
               titleText: travellingPlacesQuery[index].travellingPlace.placeName,
@@ -89,7 +89,7 @@ class _TravellingPlaceQueryState extends State<TravellingPlacesWidgetQuery>{
                     thickness: 1.0,
                   ),
                   Container(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(15.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

@@ -57,6 +57,30 @@ class HttpHelpers{
       headers: getUrlHeader(),
     );
   }
+
+  static Future<http.Response> fetchTravellingPlacesUserBudgetList(
+      String categories,
+      String cities,
+      int ticketPrice
+      ){
+    var jsonRequestBody = {
+      "ticket_price": ticketPrice.toString(),
+      "categories": categories,
+      "cities": cities,
+    };
+
+    Uri uri = Uri.http(
+        ApiEndpoint.getBaseAPIUrl(),
+        ApiEndpoint.getTravellingPlacesUserBudgetLink(),
+        jsonRequestBody
+    );
+
+    return http.get(
+      uri,
+      headers: getUrlHeader(),
+    );
+  }
+
   static Future<http.Response> fetchNewsList(String query){
 
     var jsonRequestBody = {

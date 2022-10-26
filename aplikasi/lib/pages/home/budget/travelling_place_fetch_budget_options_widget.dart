@@ -1,5 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:travelling_app/globals/colors.dart';
@@ -8,44 +9,27 @@ import 'package:travelling_app/templates/circular_loading_element.dart';
 import 'package:travelling_app/utils/context.dart';
 import 'package:travelling_app/utils/geolocation_helpers.dart';
 
-class TravellingPlaceFetchLocationOptionsWidget extends StatefulWidget{
+class TravellingPlaceFetchBudgetOptionsWidget extends StatefulWidget{
 
-  TravellingPlaceFetchLocationOptionsWidget({
+  TravellingPlaceFetchBudgetOptionsWidget({
     super.key,
     required this.onSearchClick, }
   );
 
-  // final checkboxesCitiesValue = {
-  //   "Jakarta": false,
-  //   "Yogyakarta": false,
-  //   "Bandung": false,
-  //   "Semarang": false,
-  //   "Surabaya": false,
-  // };
-  //
-  // final checkboxesCategoriesValue = {
-  //   'Budaya': false,
-  //   'Taman Hiburan': false,
-  //   'Cagar Alam': false,
-  //   'Bahari': false,
-  //   'Pusat Perbelanjaan': false,
-  //   'Tempat Ibadah': false,
-  // };
-
   String categoryValue = "Budaya";
   String cityValue = "Jakarta";
 
-  double? latitude;
-  double? longitude;
+  int ticketPrice = 0;
+  late Widget slideUpPanelWidget;
 
   final Function onSearchClick;
 
   @override
-  State<StatefulWidget> createState() => _TravellingPlaceFetchLocationOptionsWidgetState();
+  State<StatefulWidget> createState() => _TravellingPlaceFetchBudgetOptionsWidgetState();
 
 }
 
-class _TravellingPlaceFetchLocationOptionsWidgetState extends State<TravellingPlaceFetchLocationOptionsWidget>{
+class _TravellingPlaceFetchBudgetOptionsWidgetState extends State<TravellingPlaceFetchBudgetOptionsWidget>{
 
   final List<String> cityNames = [
     "Jakarta",
@@ -64,6 +48,8 @@ class _TravellingPlaceFetchLocationOptionsWidgetState extends State<TravellingPl
     'Tempat Ibadah',
   ];
 
+  final PanelController _pc = PanelController();
+
   void refresh(){
     setState(() {});
   }
@@ -79,7 +65,7 @@ class _TravellingPlaceFetchLocationOptionsWidgetState extends State<TravellingPl
         mainAxisAlignment: MainAxisAlignment.center,
         children: const [
           Text(
-            "Penelusuran berdasarkan lokasi Anda",
+            "Penelusuran berdasarkan harga tiket",
             style: TextStyle(
                 color: Colors.white
             ),
@@ -133,6 +119,7 @@ class _TravellingPlaceFetchLocationOptionsWidgetState extends State<TravellingPl
     return radioButtonElements;
   }
 
+
   Widget _getHeadingWidget(String title, IconData iconData){
     return Container(
       decoration: BoxDecoration(
@@ -159,9 +146,9 @@ class _TravellingPlaceFetchLocationOptionsWidgetState extends State<TravellingPl
           Text(
             title,
             style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Colors.white
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: Colors.white
             ),
             textAlign: TextAlign.start,
           )
@@ -197,50 +184,50 @@ class _TravellingPlaceFetchLocationOptionsWidgetState extends State<TravellingPl
     );
   }
 
-  TableCell tableCellWithWidget(
-      double paddingLeft,
-      double paddingRight,
-      Widget widget,
-    ) {
-    return TableCell(
-      verticalAlignment: TableCellVerticalAlignment.top,
-      child: Padding(
-        padding: EdgeInsets.only(
-          top: 0,
-          bottom: 0,
-          left: paddingLeft,
-          right: paddingRight,
+  Table _getTicketPriceWidget() {
+    return Table(
+      columnWidths: const <int, TableColumnWidth>{
+        0: FlexColumnWidth(),
+        1: FlexColumnWidth(),
+      },
+      children: [
+        TableRow(
+          children: [
+            tableCellText(
+              text: "Silahkan input disini: ",
+              paddingLeft: 16.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                right: 32.0,
+              ),
+              child: TextFormField(
+                controller: TextEditingController(
+                  text: widget.ticketPrice.toString(),
+                ),
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  hintText: "0",
+                ),
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))
+                ],
+                onChanged: (String value){
+                  if (value.isNotEmpty){
+                    widget.ticketPrice = int.parse(value);
+                  }
+                  else{
+                    widget.ticketPrice = 0;
+                  }
+                },
+              ),
+            ),
+          ]
         ),
-        child: widget,
-      ),
+      ]
     );
   }
 
-  Widget _requestPermissionWidget(){
-    widget.latitude = null;
-    widget.longitude = null;
-    return Column(
-      children: [
-        const Text(
-          "Mohon bukakan akses untuk izin lokasi, agar bisa memberikan rekomendasi tempat wisata berdasarkan lokasi terdekat Anda.",
-        ),
-        ElevatedButton(
-          onPressed: () async{
-            String permissionResult = await GeolocationHelpers.checkLocationPermission();
-            Fluttertoast.showToast(
-                msg: permissionResult
-            );
-          },
-          style: ElevatedButton.styleFrom(
-            primary: Colors.red,
-          ),
-          child: const Text(
-            "Izinkan Fitur GPS"
-          ),
-        )
-      ],
-    );
-  }
 
   Widget _getChildWidget(){
     return SingleChildScrollView(
@@ -264,119 +251,39 @@ class _TravellingPlaceFetchLocationOptionsWidgetState extends State<TravellingPl
             children: _getAllCitiesCheckboxes(),
           ),
           _getHeadingWidget(
-            "Lokasi Anda",
-            Icons.place
+            "Harga Tiket",
+            Icons.money
           ),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 15.0,
-              bottom: 15.0,
-              right: 25.0,
-              left: 15.0
-            ),
-            child: FutureBuilder(
-              future: GeolocationHelpers.getLocation(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState != ConnectionState.done){
-                  return _getLoadingWidget();
-                }
-                if (snapshot.hasData){
-                  return getLocationWidget(snapshot.data as Position);
-                }
-                if (snapshot.error.toString() == "User denied permissions to access the device's location."){
-                  return _requestPermissionWidget();
-                }
-                print("Current Error: ${snapshot.error.toString()}");
-                return const Text(
-                  "Unknown Error Occured!"
-                );
-              },
-            ),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _getTicketPriceWidget()
+            ]
+          ),
+          const SizedBox(
+            height: 20,
           ),
           ElevatedButton(
-              onPressed: (){
-                widget.onSearchClick(
+            onPressed: (){
+              widget.onSearchClick(
                   widget.cityValue,
                   widget.categoryValue,
-                  widget.longitude,
-                  widget.latitude,
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                primary: Colors.red,
-              ),
-              child: const Text(
+                  widget.ticketPrice
+              );
+              _pc.close();
+            },
+            style: ElevatedButton.styleFrom(
+              primary: Colors.red,
+            ),
+            child: const Text(
                 "Lakukan Pencarian!"
-              ),
+            ),
           ),
           const SizedBox(
             height: 50,
           ),
         ]
       ),
-    );
-  }
-
-  Table getLocationWidget(Position position) {
-    widget.latitude = position.latitude;
-    widget.longitude = position.longitude;
-    return Table(
-      columnWidths: const <int, TableColumnWidth>{
-        0: FlexColumnWidth(),
-        1: FlexColumnWidth(),
-      },
-      children: [
-        TableRow(
-          children: [
-            tableCellText(
-              text: "Diambil dari GPS"
-            ),
-            tableCellWithWidget(
-              0.0,
-              0.0,
-              ElevatedButton(
-                onPressed: () async{
-                  setState((){});
-                },
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.red,
-                ),
-                child: const Text(
-                  "Muat Ulang"
-                ),
-              )
-            ),
-          ]
-        ),
-        TableRow(
-          children: [
-            tableCellText(
-              text: "Latitude",
-            ),
-            tableCellText(
-              text: position.latitude.toString(),
-              textAlign: TextAlign.end,
-            ),
-          ]
-        ),
-        TableRow(
-          children: [
-            tableCellText(
-              text: "Longitude",
-            ),
-            tableCellText(
-              text: position.longitude.toString(),
-              textAlign: TextAlign.end,
-            ),
-          ]
-        ),
-      ],
-    );
-  }
-
-  Widget _getLoadingWidget(){
-    return const CircularLoadingElement(
-      message: "Sedang Menentukan Lokasi Anda...",
     );
   }
 
@@ -397,8 +304,11 @@ class _TravellingPlaceFetchLocationOptionsWidgetState extends State<TravellingPl
         ),
       ],
       panel: _getChildWidget(),
+      controller: _pc,
       slideDirection: SlideDirection.DOWN,
+      onPanelClosed: (){
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
     );
   }
-
 }

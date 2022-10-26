@@ -25,24 +25,28 @@ class _HomeLocationPageState extends State<HomeLocationPage>{
     travellingPlacesWidgetLocation = TravellingPlacesWidgetLocation();
     travellingPlaceFetchOptionsWidget = TravellingPlaceFetchLocationOptionsWidget(
         onSearchClick: (
-            Map<String, bool> checkboxesCitiesValue,
-            Map<String, bool> checkboxesCategoriesValue,
+            // Map<String, bool> checkboxesCitiesValue,
+            // Map<String, bool> checkboxesCategoriesValue,
+            String city,
+            String category,
             double? latitude,
             double? longitude,
             ){
 
           double? latitude = travellingPlaceFetchOptionsWidget.latitude;
           double? longitude = travellingPlaceFetchOptionsWidget.longitude;
-          Map<String, bool> placenameBooleanMap = travellingPlaceFetchOptionsWidget.checkboxesCitiesValue;
-          Map<String, bool> categoryBooleanMap = travellingPlaceFetchOptionsWidget.checkboxesCategoriesValue;
+          String city = travellingPlaceFetchOptionsWidget.cityValue;
+          String category = travellingPlaceFetchOptionsWidget.categoryValue;
+          // Map<String, bool> placenameBooleanMap = travellingPlaceFetchOptionsWidget.checkboxesCitiesValue;
+          // Map<String, bool> categoryBooleanMap = travellingPlaceFetchOptionsWidget.checkboxesCategoriesValue;
 
-          String cityQuery = TextFormatter.convertTrueValueToString(
-            placenameBooleanMap,
-          );
-
-          String categoriesQuery = TextFormatter.convertTrueValueToString(
-            categoryBooleanMap,
-          );
+          // String cityQuery = TextFormatter.convertTrueValueToString(
+          //   placenameBooleanMap,
+          // );
+          //
+          // String categoriesQuery = TextFormatter.convertTrueValueToString(
+          //   categoryBooleanMap,
+          // );
 
           if (latitude == null){
             Fluttertoast.showToast(
@@ -50,20 +54,21 @@ class _HomeLocationPageState extends State<HomeLocationPage>{
             );
             return;
           }
-          if (cityQuery.trim() == ""){
-            cityQuery = "Jakarta Yogyakarta Bandung Semarang Surabaya";
-          }
-          if (categoriesQuery.trim() == ""){
-            categoriesQuery = "Budaya Taman Hiburan Cagar Alam Bahari Pusat Perbelanjaan Tempat Ibadah";
-          }
+          // if (cityQuery.trim() == ""){
+          //   cityQuery = "Jakarta Yogyakarta Bandung Semarang Surabaya";
+          // }
+          // if (categoriesQuery.trim() == ""){
+          //   categoriesQuery = "Budaya Taman Hiburan Cagar Alam Bahari Pusat Perbelanjaan Tempat Ibadah";
+          // }
           print("Position Parent Widget: $latitude, $longitude.");
-          print("City Query: $cityQuery.");
+          print("City Query: $city.");
+          print("Category Query: $category");
 
           travellingPlacesWidgetLocation.performSearch(
               latitude,
               longitude,
-              cityQuery,
-              categoriesQuery
+              city,
+              category
           );
         }
     );

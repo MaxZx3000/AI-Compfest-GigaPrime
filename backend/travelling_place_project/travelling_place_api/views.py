@@ -417,6 +417,85 @@ class ContentBasedRecommendationUserLocationAPI(APIView):
             status = status.HTTP_200_OK
         )
 
+class ContentBasedRecommendationUserBudgetAPI(APIView):
+    def transform_city(self, content_based_filtering_class, sample_cities):
+        city_count_vectorizer_path = os.path.join(os.path.dirname(__file__), "ml_models/city_count_vectorizer.pkl")
+        return content_based_filtering_class.transform_to_vector(city_count_vectorizer_path, sample_cities) * 100000
+
+    def transform_categories(self, content_based_filtering_class, sample_categories):
+        categories_count_vectorizer_path = os.path.join(os.path.dirname(__file__), "ml_models/categories_count_vectorizer.pkl")
+        return content_based_filtering_class.transform_to_vector(categories_count_vectorizer_path, sample_categories) * 100000
+
+    def _transform(self,
+                content_based_filtering_class,
+                sample_cities,
+                sample_categories,
+                sample_budget,):
+        # categories_vector_component = transform_categories([sample_categories])
+
+        city_vector_component = self.transform_city(
+            content_based_filtering_class,
+            [sample_cities]
+        )
+
+        categories_vector_component = self.transform_categories(
+            content_based_filtering_class,
+            [sample_categories]
+        )
+
+        all_vector_components = hstack([city_vector_component,
+                                        categories_vector_component,
+                                        sample_budget], format = 'csr')
+        
+        return all_vector_components
+
+    def get(self, request):
+        try:
+            data = request.data
+            ticket_price = float(data["ticket_price"])
+            categories = data["categories"]
+            cities = data["cities"]
+            print(f"Ticket price: {ticket_price}")
+        except:
+            categories = request.GET.get('categories', '')
+            cities = request.GET.get('cities', '')
+            ticket_price = float(request.GET.get('ticket_price', ''))
+
+        pandas_data_loader = PandasDataLoader()
+        travelling_places_df = pandas_data_loader.load_travelling_places_dataset()
+
+        content_based_filtering = ContentBasedFiltering()
+        
+        all_vector_components = self._transform(
+            content_based_filtering,
+            cities,
+            categories,
+            ticket_price
+        )
+
+        k_nearest_neighbors_path = os.path.join(os.path.dirname(__file__), "ml_models/tourism_place_user_budget_nearest_neighbors.pkl")
+
+        top_n_distances, top_n_indexes_ranking = content_based_filtering.recommend_travelling_places_using_knn(
+            all_vector_components,
+            k_nearest_neighbors_path
+        )
+        
+        top_n_df = content_based_filtering.get_top_n_recommendations_based_on_similarity_scores(
+            travelling_places_df, 
+            top_n_indexes_ranking.flatten()
+        )
+
+        top_n_df["Time_Minutes"] = top_n_df["Time_Minutes"].astype(float)
+        top_n_df["Rating"] = top_n_df["Rating"].astype(float)
+
+        json_result = top_n_df.to_json(orient = "records")
+
+        return HttpResponse(
+            json_result,
+            content_type = "application/json", 
+            status = status.HTTP_200_OK
+        )
+
 # Colab Based Filtering
 class ColabBasedRecommedationAPI(APIView):
 

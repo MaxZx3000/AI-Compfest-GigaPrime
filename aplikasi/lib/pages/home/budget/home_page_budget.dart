@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:travelling_app/pages/home/location/travelling_place_fetch_location_options_widget.dart';
-import 'package:travelling_app/pages/home/location/travelling_place_result_widget_location.dart';
-import 'package:travelling_app/utils/text-formatter.dart';
+import 'package:travelling_app/pages/home/budget/travelling_place_fetch_budget_options_widget.dart';
+import 'package:travelling_app/pages/home/budget/travelling_place_result_widget_budget.dart';
 
 class HomeBudgetPage extends StatefulWidget{
 
@@ -16,44 +15,33 @@ class HomeBudgetPage extends StatefulWidget{
 
 class _HomeBudgetPageState extends State<HomeBudgetPage>{
 
-  late TravellingPlaceFetchLocationOptionsWidget travellingPlaceFetchOptionsWidget;
-  late TravellingPlacesWidgetLocation travellingPlacesWidgetLocation;
+  late TravellingPlaceFetchBudgetOptionsWidget travellingPlaceFetchOptionsWidget;
+  late TravellingPlacesWidgetBudget travellingPlacesWidgetBudget;
 
   @override
   void initState() {
     super.initState();
-    travellingPlacesWidgetLocation = TravellingPlacesWidgetLocation();
-    travellingPlaceFetchOptionsWidget = TravellingPlaceFetchLocationOptionsWidget(
+    travellingPlacesWidgetBudget = TravellingPlacesWidgetBudget();
+    travellingPlaceFetchOptionsWidget = TravellingPlaceFetchBudgetOptionsWidget(
         onSearchClick: (
             // Map<String, bool> checkboxesCitiesValue,
             // Map<String, bool> checkboxesCategoriesValue,
             String city,
             String category,
-            double? latitude,
-            double? longitude,
+            int ticketPrice,
             ){
-
-
           String city = travellingPlaceFetchOptionsWidget.cityValue;
           String category = travellingPlaceFetchOptionsWidget.categoryValue;
 
-
-          if (latitude == null){
-            Fluttertoast.showToast(
-              msg: "Anda belum memberikan izin GPS, sehingga longitude dan langitude masih belum ada nilai. Mohon izinkan terlebih dahulu.",
-            );
-            return;
-          }
-          print("Position Parent Widget: $latitude, $longitude.");
           print("City Query: $city.");
           print("Category Query: $category");
 
-          travellingPlacesWidgetLocation.performSearch(
-              latitude,
-              longitude,
+          travellingPlacesWidgetBudget.performSearch(
+              ticketPrice,
               city,
               category
           );
+          FocusManager.instance.primaryFocus?.unfocus();
         }
     );
   }
@@ -68,7 +56,7 @@ class _HomeBudgetPageState extends State<HomeBudgetPage>{
               top: 50.0,
             ),
             child: Center(
-                child: travellingPlacesWidgetLocation
+                child: travellingPlacesWidgetBudget
             ),
           ),
           travellingPlaceFetchOptionsWidget,

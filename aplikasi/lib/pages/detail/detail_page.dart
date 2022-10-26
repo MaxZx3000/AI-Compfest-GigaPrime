@@ -176,7 +176,6 @@ class DetailPage extends StatelessWidget{
         appBarTitle: "Travelling Place Detail",
         rightMargin: 50
       ).getInstance(context),
-      extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
         primary: true,
         scrollDirection: Axis.vertical,

@@ -8,24 +8,21 @@ import 'package:travelling_app/templates/top_image_horizontal_item_view.dart';
 import 'package:travelling_app/templates/information_widget.dart';
 import 'package:travelling_app/templates/rating_widget.dart';
 
-class TravellingPlacesWidgetLocation extends StatefulWidget{
+class TravellingPlacesWidgetBudget extends StatefulWidget{
 
-  late _TravellingPlaceLocationState state;
+  late _TravellingPlaceBudgetState state;
 
-  double? latitude;
-  double? longitude;
+  int ticketPrice = 0;
   String cities = "";
   String categories = "";
 
   void performSearch(
-      double? latitude,
-      double? longitude,
+      int ticketPrice,
       String cities,
       String categories,
     ){
     state.performSearch(
-      latitude,
-      longitude,
+      ticketPrice,
       categories,
       cities
     );
@@ -33,24 +30,22 @@ class TravellingPlacesWidgetLocation extends StatefulWidget{
 
   @override
   State<StatefulWidget> createState() {
-    state = _TravellingPlaceLocationState();
+    state = _TravellingPlaceBudgetState();
     return state;
   }
 
 }
 
-class _TravellingPlaceLocationState extends State<TravellingPlacesWidgetLocation>{
+class _TravellingPlaceBudgetState extends State<TravellingPlacesWidgetBudget>{
 
   late Future<List<TravellingPlace>> futureTravellingPlaces;
 
   void performSearch(
-      double? latitude,
-      double? longitude,
+      int ticketPrice,
       String categories,
       String cities,){
     setState(() {
-      widget.latitude = latitude;
-      widget.longitude = longitude;
+      widget.ticketPrice = ticketPrice;
       widget.categories = categories;
       widget.cities = cities;
     });
@@ -77,14 +72,14 @@ class _TravellingPlaceLocationState extends State<TravellingPlacesWidgetLocation
     return GridView.builder(
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 600,
-          mainAxisExtent: 400,
+          mainAxisExtent: 405,
         ),
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
         itemCount: travellingPlaces.length,
         itemBuilder: (BuildContext ctx, index){
           return Padding(
-            padding: const EdgeInsets.all(5.0),
+            padding: const EdgeInsets.all(15.0),
             child: TopImageHorizontalItemWidget(
               imageURL: travellingPlaces[index].imageURL,
               titleText: travellingPlaces[index].placeName,
@@ -131,13 +126,13 @@ class _TravellingPlaceLocationState extends State<TravellingPlacesWidgetLocation
                         child: Row(
                           children: [
                             const Icon(
-                                Icons.place
+                                Icons.money
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Text(
-                                "${travellingPlaces[index].latitude.toString()}, ${travellingPlaces[index].longitude.toString()}"
+                              travellingPlaces[index].getPrice()
                             )
                           ],
                         ),
@@ -163,8 +158,6 @@ class _TravellingPlaceLocationState extends State<TravellingPlacesWidgetLocation
   @override
   Widget build(BuildContext context) {
     if (widget.categories.isEmpty ||
-        widget.longitude == null ||
-        widget.latitude == null ||
         widget.cities.isEmpty){
       return const InformationWidget(
         iconData: Icons.search,
@@ -174,11 +167,10 @@ class _TravellingPlaceLocationState extends State<TravellingPlacesWidgetLocation
     }
     else{
       return FutureBuilder(
-          future: DataFetcher.getTravellingPlacesByLocation(
+          future: DataFetcher.getTravellingPlaceByBudget(
             widget.categories,
             widget.cities,
-            widget.latitude!,
-            widget.longitude!,
+            widget.ticketPrice,
           ),
           builder: (context, snapshot) {
             if (snapshot.connectionState != ConnectionState.done){
@@ -187,8 +179,6 @@ class _TravellingPlaceLocationState extends State<TravellingPlacesWidgetLocation
             if (snapshot.hasData){
               return _getTravellingPlacesList(snapshot.data as List<TravellingPlace>);
             }
-            print("Position: ${widget.latitude}, ${widget.longitude}");
-            print("Cities: ${widget.cities}");
             print("Error: ${snapshot.error.toString()}");
             return const Text(
                 "Unknown Error Occured!"

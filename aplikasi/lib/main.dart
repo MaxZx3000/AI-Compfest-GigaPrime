@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Color(secondaryColors["white"] as int),
       ),
+      debugShowCheckedModeBanner: false,
       initialRoute: splashScreenRouteName,
       routes: routes,
     );

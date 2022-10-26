@@ -11,6 +11,9 @@ class ApiEndpoint{
   static String getTravellingPlacesUserLocationLink(){
     return "/travelling_api/travelling_places_user_location_list";
   }
+  static String getTravellingPlacesUserBudgetLink(){
+    return "/travelling_api/travelling_places_user_budget_list";
+  }
   static String getNewsListLink(){
     return "/travelling_api/news_list";
   }

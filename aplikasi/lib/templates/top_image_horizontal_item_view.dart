@@ -9,6 +9,7 @@ class TopImageHorizontalItemWidget extends StatelessWidget{
   final String imageURL;
   final Widget additionalWidget;
   final Widget? topRightWidget;
+  final int maxTitleTextLine;
 
   const TopImageHorizontalItemWidget({
     Key? key,
@@ -20,6 +21,7 @@ class TopImageHorizontalItemWidget extends StatelessWidget{
     required this.onClickCard,
     required this.imageURL,
     required this.additionalWidget,
+    this.maxTitleTextLine = 2,
   }) : super(key: key);
 
    Widget getSummaryWidget(){
@@ -40,6 +42,7 @@ class TopImageHorizontalItemWidget extends StatelessWidget{
                 fontWeight: FontWeight.bold,
                 fontSize: 20
             ),
+            maxLines: maxTitleTextLine,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.left,
           ),

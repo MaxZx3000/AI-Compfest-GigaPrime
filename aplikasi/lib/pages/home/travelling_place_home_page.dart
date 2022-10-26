@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:travelling_app/globals/asset.dart';
 import 'package:travelling_app/globals/colors.dart';
 import 'package:travelling_app/globals/route.dart';
+import 'package:travelling_app/pages/home/budget/home_page_budget.dart';
 import 'package:travelling_app/pages/home/location/home_page_location.dart';
 import 'package:travelling_app/pages/home/query/home_page_query.dart';
 
@@ -23,6 +24,7 @@ class _TravellingPlaceHomePageState extends State<TravellingPlaceHomePage>{
   List<Widget> widgetTabPage = [
     const HomeQueryPage(),
     const HomeLocationPage(),
+    const HomeBudgetPage(),
   ];
 
   @override
@@ -63,8 +65,13 @@ class _TravellingPlaceHomePageState extends State<TravellingPlaceHomePage>{
             ),
             BottomNavigationBarItem(
               icon: const Icon(Icons.location_on),
-              label: 'Location',
+              label: 'Lokasi Terdekat',
               backgroundColor: Color(colors['dark_orange'] as int),
+            ),
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.money),
+              label: 'Harga Tiket',
+              backgroundColor: Color(colors['dark_orange'] as int)
             ),
           ],
           currentIndex: widget.selectedPageIndex,
