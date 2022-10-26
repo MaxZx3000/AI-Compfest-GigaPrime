@@ -29,7 +29,8 @@ class AboutPage extends StatelessWidget{
             "Aplikasi ini bertujuan untuk mendapatkan informasi detail mengenai" +
               " tempat pariwisata di Indonesia menggunakan artificial intelligence." +
               " Tidak hanya itu, user juga bisa mendapatkan rekomendasi berdasarkan keyword pada pencarian" +
-              " dan rating tempat pariwisata yang diberikan",
+              " dan rating tempat pariwisata yang diberikan. Sebagai tambahan, terdapat fitur time series," +
+              " yang bertujuan untuk mendapatkan insight terkait forecasting pada suatu kasus tourism",
             textAlign: TextAlign.center,
           ),
           SizedBox(
@@ -50,6 +51,9 @@ class AboutPage extends StatelessWidget{
           ),
           Text(
             "4. Keyword Extraction",
+          ),
+          Text(
+            "5. Time Series Forecasting",
           ),
         ],
       ),
@@ -76,9 +80,13 @@ class AboutPage extends StatelessWidget{
         },
         rightMargin: 80,
       ).getInstance(context),
+      extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
         child: Column(
           children: [
+            const SizedBox(
+              height: 150,
+            ),
             _getLogoWidget(),
             const AppLogoTitle(),
             _getAboutWidget(),

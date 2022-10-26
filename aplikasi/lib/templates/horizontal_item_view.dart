@@ -8,6 +8,7 @@ class HorizontalItemWidget extends StatelessWidget{
   final Function onClickCard;
   final Widget additionalWidget;
   final Widget? topRightWidget;
+  final int maxLines;
 
   const HorizontalItemWidget({
     Key? key,
@@ -18,6 +19,7 @@ class HorizontalItemWidget extends StatelessWidget{
     required this.height,
     required this.onClickCard,
     required this.additionalWidget,
+    this.maxLines = 1,
   }) : super(key: key);
 
    Widget getSummaryWidget(){
@@ -52,6 +54,7 @@ class HorizontalItemWidget extends StatelessWidget{
             subtitleText,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.left,
+            maxLines: maxLines,
           ),
         ),
         additionalWidget

@@ -20,7 +20,7 @@ class TimeSeriesDataProvider{
     return [
       CountryTimeSeries(
         timeSeriesTitle: "Jumlah Wisatawan Mancanegara",
-        timeSeriesDescription: "Data ini Berisi Mengenai Data Kunjungan Wisatawan Mancanegara ke Jakart",
+        timeSeriesDescription: "Data ini berupa data kunjungan wisatawan mancanegara di Jakarta dengan menggunakan prediksi ARIMA.",
         timeSeriesURL: "time_series_jumlah_kunjungan_wisatawan_mancanegara_jakarta"
       ),
     ];
@@ -30,12 +30,12 @@ class TimeSeriesDataProvider{
     return [
       CountryTimeSeries(
           timeSeriesTitle: "Jumlah Wisatawan Nusantara",
-          timeSeriesDescription: "Data ini berupa data kunjungan wisatawan nusantara dengan menggunakan prediksi ARIMA dari tahun 2019 - 2023.",
+          timeSeriesDescription: "Data ini berupa data kunjungan wisatawan nusantara di Aceh dengan menggunakan prediksi ARIMA.",
           timeSeriesURL: "time_series_jumlah_kunjungan_wisatawan_nusantara_aceh"
       ),
       CountryTimeSeries(
           timeSeriesTitle: "Jumlah Wisatawan Mancanegara",
-          timeSeriesDescription: "Data ini berupa data kunjungan wisatawan mancanegara dengan menggunakan prediksi ARIMA dari tahun 2019 - 2023",
+          timeSeriesDescription: "Data ini berupa data kunjungan wisatawan mancanegara di Aceh dengan menggunakan prediksi ARIMA.",
           timeSeriesURL: "time_series_jumlah_kunjungan_wisatawan_mancanegara_aceh"
       ),
     ];

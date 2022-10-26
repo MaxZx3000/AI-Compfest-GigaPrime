@@ -74,13 +74,16 @@ class _TimeSeriesDetailPageState extends State<TimeSeriesDetailPage>{
             )
           ],
         ),
-        height: 80
+        height: 60
     );
   }
 
   Widget _getLoadingWidget(){
-    return const CircularLoadingElement(
-      message: "Sedang mengambil data..."
+    return const Padding(
+      padding: EdgeInsets.all(8.0),
+      child: CircularLoadingElement(
+        message: "Sedang mengambil data...",
+      ),
     );
   }
 

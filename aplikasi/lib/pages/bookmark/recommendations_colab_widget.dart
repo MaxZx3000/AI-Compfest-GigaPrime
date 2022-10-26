@@ -55,7 +55,11 @@ class _RecommendationState extends State<RecommendationColabWidget>{
                 width: 300,
                 height: 200,
                 additionalWidget: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.only(
+                    top: 10.0,
+                    left: 15.0,
+                    bottom: 10.0,
+                  ),
                   child: RatingWidget(
                     rating: recommendedTravellingPlace.rating.toString(),
                   ),
@@ -116,7 +120,7 @@ class _RecommendationState extends State<RecommendationColabWidget>{
   @override
   Widget build(BuildContext context) {
     return CardTemplate(
-      height: 310,
+      height: 320,
       title: "Rekomendasi berdasarkan rating Anda",
       contentWidget: _getRecommendationsContent(),
     );

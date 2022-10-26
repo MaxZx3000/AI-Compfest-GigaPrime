@@ -87,7 +87,11 @@ class _TravellingPlaceBudgetState extends State<TravellingPlacesWidgetBudget>{
               additionalWidget: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.only(
+                      left: 15.0,
+                      top: 10.0,
+                      bottom: 5.0,
+                    ),
                     child: RatingWidget(
                       rating: travellingPlaces[index].getRating(),
                     ),
@@ -100,7 +104,7 @@ class _TravellingPlaceBudgetState extends State<TravellingPlacesWidgetBudget>{
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(
-                          left: 10.0,
+                          left: 15.0,
                           right: 10.0,
                           bottom: 5.0,
                         ),
@@ -109,7 +113,7 @@ class _TravellingPlaceBudgetState extends State<TravellingPlacesWidgetBudget>{
                             const Icon(
                                 Icons.category
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Text(
@@ -120,7 +124,7 @@ class _TravellingPlaceBudgetState extends State<TravellingPlacesWidgetBudget>{
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                          left: 10.0,
+                          left: 15.0,
                           right: 10.0
                         ),
                         child: Row(

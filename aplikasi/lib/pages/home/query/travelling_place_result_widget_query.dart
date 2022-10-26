@@ -79,7 +79,11 @@ class _TravellingPlaceQueryState extends State<TravellingPlacesWidgetQuery>{
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.only(
+                      left: 15.0,
+                      top: 10.0,
+                      bottom: 5.0,
+                    ),
                     child: RatingWidget(
                         rating: travellingPlacesQuery[index].travellingPlace.getRating()
                     ),

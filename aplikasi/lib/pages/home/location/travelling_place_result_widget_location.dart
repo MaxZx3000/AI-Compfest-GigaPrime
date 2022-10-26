@@ -92,7 +92,11 @@ class _TravellingPlaceLocationState extends State<TravellingPlacesWidgetLocation
               additionalWidget: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.only(
+                      left: 15.0,
+                      top: 10.0,
+                      bottom: 5.0,
+                    ),
                     child: RatingWidget(
                       rating: travellingPlaces[index].getRating(),
                     ),
@@ -105,7 +109,7 @@ class _TravellingPlaceLocationState extends State<TravellingPlacesWidgetLocation
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(
-                          left: 10.0,
+                          left: 15.0,
                           right: 10.0,
                           bottom: 5.0,
                         ),
@@ -125,7 +129,7 @@ class _TravellingPlaceLocationState extends State<TravellingPlacesWidgetLocation
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                          left: 10.0,
+                          left: 15.0,
                           right: 10.0
                         ),
                         child: Row(

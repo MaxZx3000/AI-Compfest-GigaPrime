@@ -21,7 +21,7 @@ class TopImageHorizontalItemWidget extends StatelessWidget{
     required this.onClickCard,
     required this.imageURL,
     required this.additionalWidget,
-    this.maxTitleTextLine = 2,
+    this.maxTitleTextLine = 1,
   }) : super(key: key);
 
    Widget getSummaryWidget(){
@@ -32,9 +32,9 @@ class TopImageHorizontalItemWidget extends StatelessWidget{
       children: [
         Padding(
           padding: const EdgeInsets.only(
-            top: 10,
-            left: 10,
-            right: 10,
+            top: 15,
+            left: 15,
+            right: 20,
           ),
           child: Text(
             titleText,
@@ -50,7 +50,7 @@ class TopImageHorizontalItemWidget extends StatelessWidget{
         Padding(
           padding: const EdgeInsets.only(
             top: 10,
-            left: 10,
+            left: 15,
             right: 10,
           ),
           child: Text(
@@ -102,16 +102,33 @@ class TopImageHorizontalItemWidget extends StatelessWidget{
           )
         ]
       ),
-      child: Column(
-        children: [
-          Image.network(
-            imageURL,
-            width: double.infinity,
-            fit: BoxFit.cover,
-            height: 175,
-          ),
-          _getChildCardWidget(childWidget),
-        ],
+      child: TextButton(
+        style: TextButton.styleFrom(
+          primary: Colors.black,
+          padding: EdgeInsets.zero
+        ),
+        onPressed: (){
+          onClickCard();
+        },
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(10.0),
+                topRight: Radius.circular(10.0),
+                bottomLeft: Radius.circular(10.0),
+                bottomRight: Radius.circular(10.0),
+              ),
+              child: Image.network(
+                imageURL,
+                width: double.infinity,
+                fit: BoxFit.cover,
+                height: 190,
+              ),
+            ),
+            _getChildCardWidget(childWidget),
+          ],
+        ),
       ),
     );
   }
@@ -119,15 +136,7 @@ class TopImageHorizontalItemWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return getCardWidget(
-      TextButton(
-        onPressed: (){
-          onClickCard();
-        },
-        style: TextButton.styleFrom(
-            primary: Colors.black
-        ),
-        child: getSummaryWidget()
-      )
+      getSummaryWidget()
     );
   }
 }

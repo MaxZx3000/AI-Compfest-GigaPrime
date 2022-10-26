@@ -91,6 +91,9 @@ class _NewsElementState extends State<NewsElement>{
               fontSize: 22
             ),
           ),
+          const SizedBox(
+            height: 20,
+          ),
           FutureBuilder(
             future: DataFetcher.getNewsList(widget.query),
             builder: (context, snapshot) {

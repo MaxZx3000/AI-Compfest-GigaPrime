@@ -54,7 +54,7 @@ class TimeSeriesPerCountryPage extends StatelessWidget{
       padding: const EdgeInsets.all(12.0),
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 400,
-        mainAxisExtent: 105
+        mainAxisExtent: 120
       ),
       itemCount: countryTimeSeries.length,
       shrinkWrap: true,
@@ -64,7 +64,8 @@ class TimeSeriesPerCountryPage extends StatelessWidget{
           child: HorizontalItemWidget(
             titleText: countryTimeSeries[index].timeSeriesTitle,
             subtitleText: countryTimeSeries[index].timeSeriesDescription,
-            height: 120,
+            height: 160,
+            maxLines: 2,
             width: double.infinity,
             topRightWidget: null,
             onClickCard: (){

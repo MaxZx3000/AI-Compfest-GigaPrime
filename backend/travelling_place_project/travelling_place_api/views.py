@@ -252,7 +252,7 @@ class TimeSeriesWisatawanMancanegaraJakartaAPI(APIView):
         arima_model_result = time_series.load_model("arima_kunjungan_wisatawan_mancanegara_jakarta")
         prediction_result_df = time_series.get_forecast(
             arima_model_result = arima_model_result,
-            n_samples = 58
+            n_samples = 78
         )
 
         prediction_result_df["value"] = np.exp(prediction_result_df["value"])
@@ -282,7 +282,7 @@ class TimeSeriesWisatawanMancanegaraAcehAPI(APIView):
         
         prediction_result_df = time_series.get_forecast(
             arima_model_result = arima_model_result,
-            n_samples = 23
+            n_samples = 36
         )
 
         json_result = prediction_result_df.to_dict(orient = "records")
@@ -310,7 +310,7 @@ class TimeSeriesWisatawanNusantaraAcehAPI(APIView):
         
         prediction_result_df = time_series.get_forecast(
             arima_model_result = arima_model_result,
-            n_samples = 19
+            n_samples = 36
         )
 
         json_result = prediction_result_df.to_dict(orient = "records")

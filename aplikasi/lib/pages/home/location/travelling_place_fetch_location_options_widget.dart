@@ -232,6 +232,7 @@ class _TravellingPlaceFetchLocationOptionsWidgetState extends State<TravellingPl
             Fluttertoast.showToast(
                 msg: permissionResult
             );
+            setState(() {});
           },
           style: ElevatedButton.styleFrom(
             primary: Colors.red,
@@ -289,8 +290,29 @@ class _TravellingPlaceFetchLocationOptionsWidgetState extends State<TravellingPl
                     return _requestPermissionWidget();
                   }
                   print("Current Error: ${snapshot.error.toString()}");
-                  return const Text(
-                      "Unknown Error Occured!"
+                  Fluttertoast.showToast(
+                    msg: "Sepertinya Anda belum mengaktifkan GPS! Silahkan nyalakan GPS terlebih dahulu!"
+                  );
+                  return Column(
+                    children: [
+                      Text(
+                        "Mohon nyalakan GPS terlebih dahulu!",
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      ElevatedButton(
+                        onPressed: () async{
+                          setState((){});
+                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.red,
+                        ),
+                        child: const Text(
+                          "Coba Ulang"
+                        ),
+                      )
+                    ],
                   );
                 },
               ),
