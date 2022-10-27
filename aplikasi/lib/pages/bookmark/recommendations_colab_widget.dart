@@ -38,7 +38,7 @@ class _RecommendationState extends State<RecommendationColabWidget>{
   Widget _getRecommendationsWidget(List<TravellingPlace> recommendedTravellingPlaces){
     return SizedBox(
       width: double.infinity,
-      height: 130,
+      height: 300,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         primary: false,
@@ -51,9 +51,8 @@ class _RecommendationState extends State<RecommendationColabWidget>{
                 imageURL: recommendedTravellingPlace.imageURL,
                 titleText: recommendedTravellingPlace.placeName,
                 subtitleText: recommendedTravellingPlace.city,
-                maxTitleTextLine: 1,
                 width: 300,
-                height: 200,
+                height: 220,
                 additionalWidget: Padding(
                   padding: const EdgeInsets.only(
                     top: 10.0,
@@ -104,7 +103,6 @@ class _RecommendationState extends State<RecommendationColabWidget>{
           return _getLoadingWidget();
         }
         if (snapshot.hasError){
-          print(snapshot.error);
           return const Text(
             "Unknown Error Occured!",
           );

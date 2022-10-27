@@ -77,7 +77,7 @@ class _BookmarkState extends State<BookmarkPage>{
 
   Widget _getBookmarkedItems(List<BookmarkedTravellingPlace> bookmarkedTravellingPlaces){
     return SizedBox(
-      height: 310,
+      height: 350,
       width: double.infinity,
       child: ListView.builder(
           shrinkWrap: true,
@@ -91,7 +91,7 @@ class _BookmarkState extends State<BookmarkPage>{
                 titleText: bookmarkedTravellingPlace.travellingPlace.placeName,
                 subtitleText: bookmarkedTravellingPlace.travellingPlace.city,
                 imageURL: bookmarkedTravellingPlace.travellingPlace.imageURL,
-                maxTitleTextLine: 1,
+                maxTitleTextLine: 2,
                 additionalWidget: Padding(
                   padding: const EdgeInsets.only(
                     top: 10.0,

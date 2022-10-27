@@ -281,10 +281,8 @@ class _RatingState extends State<RatingElement>{
         if (snapshot.hasData){
           BookmarkedTravellingPlace bookmarkedTravellingPlace =
           snapshot.data as BookmarkedTravellingPlace;
-          print("Initializing Bookmark Rating...");
           return _getRatingWidget(bookmarkedTravellingPlace.rating);
         }
-        print("Something error occured: ${snapshot.error}");
         return _getRatingWidget(0);
       },
     );

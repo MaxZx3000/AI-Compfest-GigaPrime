@@ -36,10 +36,8 @@ class TravellingPlaceBookmarkDB{
     );
 
     String key = bookmarkedTravellingPlace.travellingPlace.placeId.toString();
-    print("Key: ${key}");
 
     await travellingPlaceBox.put(key, bookmarkedTravellingPlace);
-    print("Your data has been saved!");
   }
 
   Future<BookmarkedTravellingPlace> getOneBookmarkByKey(String placeIdKey) async{
@@ -52,7 +50,6 @@ class TravellingPlaceBookmarkDB{
 
   Future<List<BookmarkedTravellingPlace>> getAllBookmarks() async{
     await initBox();
-    print("Travelling Place Box content: ${travellingPlaceBox.values.toList()}");
     return travellingPlaceBox.values.toList().map<BookmarkedTravellingPlace>(
       (bookmarkedTravellingPlace) => bookmarkedTravellingPlace as BookmarkedTravellingPlace
     ).toList();

@@ -15,12 +15,11 @@ class HttpHelpers{
   static Future<http.Response> fetchTravellingPlacesUserQueryList(
       String query,
     ){
-    print("Query on Future: ${query}");
     var jsonRequestBody = {
       "query": query,
     };
 
-    Uri uri = Uri.http(
+    Uri uri = Uri.https(
         ApiEndpoint.getBaseAPIUrl(),
         ApiEndpoint.getTravellingPlacesUserQueryLink(),
         jsonRequestBody
@@ -46,7 +45,7 @@ class HttpHelpers{
       "cities": cities,
     };
 
-    Uri uri = Uri.http(
+    Uri uri = Uri.https(
       ApiEndpoint.getBaseAPIUrl(),
       ApiEndpoint.getTravellingPlacesUserLocationLink(),
       jsonRequestBody
@@ -69,7 +68,7 @@ class HttpHelpers{
       "cities": cities,
     };
 
-    Uri uri = Uri.http(
+    Uri uri = Uri.https(
         ApiEndpoint.getBaseAPIUrl(),
         ApiEndpoint.getTravellingPlacesUserBudgetLink(),
         jsonRequestBody
@@ -87,7 +86,7 @@ class HttpHelpers{
       "title": query
     };
 
-    Uri uri = Uri.http(
+    Uri uri = Uri.https(
       ApiEndpoint.getBaseAPIUrl(),
       ApiEndpoint.getNewsListLink(),
       jsonRequestBody,
@@ -103,7 +102,7 @@ class HttpHelpers{
       "url_link": newsURL,
     };
 
-    Uri uri = Uri.http(
+    Uri uri = Uri.https(
       ApiEndpoint.getBaseAPIUrl(),
       ApiEndpoint.getNewsDetailsLink(),
       jsonRequestBody,
@@ -116,7 +115,7 @@ class HttpHelpers{
   }
 
   static Future<http.Response> fetchTimeSeriesData(String timeSeriesURL){
-    Uri uri = Uri.http(
+    Uri uri = Uri.https(
         ApiEndpoint.getBaseAPIUrl(),
         timeSeriesURL,
     );
@@ -140,15 +139,11 @@ class HttpHelpers{
       "data": jsonEncode(userRatingJSON),
     };
 
-    print("Current: $jsonRequestBody");
-
-    Uri uri = Uri.http(
+    Uri uri = Uri.https(
       ApiEndpoint.getBaseAPIUrl(),
       ApiEndpoint.getColabTravellingPlacesLink(),
       jsonRequestBody,
     );
-
-    print("User Rating JSON: $jsonRequestBody");
 
     return http.get(
       uri,

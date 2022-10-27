@@ -65,7 +65,7 @@ class DataFetcher{
   }
 
   static Future<List<News>> getNewsList(String query) async {
-    String newsQuery = "Berita $query";
+    String newsQuery = "$query Berita";
     final response = await HttpHelpers.fetchNewsList(newsQuery);
     dynamic jsonDecoded = jsonDecode(response.body)["info"];
 
@@ -74,8 +74,6 @@ class DataFetcher{
       News oneNews = News.setFromJSON(element);
       news.add(oneNews);
     });
-
-    print(news);
 
     return news;
   }
@@ -91,8 +89,6 @@ class DataFetcher{
       news,
       jsonDecoded,
     );
-
-    print("News Detail: $newsDetail");
 
     return newsDetail;
   }

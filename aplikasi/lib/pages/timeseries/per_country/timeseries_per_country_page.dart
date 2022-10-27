@@ -89,7 +89,7 @@ class TimeSeriesPerCountryPage extends StatelessWidget{
     final City city = ContextUtils.getArguments(context) as City;
     return Scaffold(
       appBar: BackableAppBar(
-        rightMargin: 150,
+        rightMargin: 50,
         onBackIconPressed: (){
           Navigator.pop(context);
         },

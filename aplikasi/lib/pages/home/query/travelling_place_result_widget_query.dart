@@ -63,7 +63,7 @@ class _TravellingPlaceQueryState extends State<TravellingPlacesWidgetQuery>{
     return GridView.builder(
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 600,
-          mainAxisExtent: 480,
+          mainAxisExtent: 500,
         ),
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
@@ -99,8 +99,8 @@ class _TravellingPlaceQueryState extends State<TravellingPlacesWidgetQuery>{
                       children: [
                         Text(
                           travellingPlacesQuery[index].relatedSentences,
-                          maxLines: 5,
                           overflow: TextOverflow.ellipsis,
+                          maxLines: 5,
                           style: const TextStyle(
                             fontWeight: FontWeight.normal,
                             height: 1.4
@@ -146,8 +146,7 @@ class _TravellingPlaceQueryState extends State<TravellingPlacesWidgetQuery>{
           if (snapshot.hasData){
             return _getTravellingPlacesList(snapshot.data as List<TravellingPlaceQuery>);
           }
-          print("Query: ${widget.query}");
-          print("Error: ${snapshot.error}");
+
           return const Text(
               "Unknown Error Occured!"
           );

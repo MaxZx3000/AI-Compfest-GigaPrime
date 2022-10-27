@@ -51,7 +51,6 @@ class _TimeSeriesDetailPageState extends State<TimeSeriesDetailPage>{
                 if (snapshot.hasData){
                   return _getTimeSeriesWidget(snapshot.data as TimeSeriesHeader);
                 }
-                print("Error: ${snapshot.error}");
                 return const Text(
                     "Unknown Error Occured!"
                 );
@@ -74,7 +73,7 @@ class _TimeSeriesDetailPageState extends State<TimeSeriesDetailPage>{
             )
           ],
         ),
-        height: 60
+        height: 100
     );
   }
 

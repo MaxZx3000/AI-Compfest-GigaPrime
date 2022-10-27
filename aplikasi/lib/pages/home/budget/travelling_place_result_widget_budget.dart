@@ -72,7 +72,7 @@ class _TravellingPlaceBudgetState extends State<TravellingPlacesWidgetBudget>{
     return GridView.builder(
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 600,
-          mainAxisExtent: 405,
+          mainAxisExtent: 410,
         ),
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
