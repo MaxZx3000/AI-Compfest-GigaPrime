@@ -29,6 +29,7 @@ from string import digits
 from scipy.sparse import hstack, vstack
 from datetime import date
 
+
 # Create your views here.
 # News API
 class PreprocessingTemplate():
@@ -47,6 +48,11 @@ class PreprocessingTemplate():
             tokenized_descriptions.append(tokenized_sentence)
 
         return tokenized_descriptions
+
+    @staticmethod
+    def perform_lemmatizer(word):
+        indo_lemmatizer = Lemmatizer()
+        return indo_lemmatizer.lemmatize(word)
 
 class NewsFetchLinksAPI(APIView):
     def get(self, request):
@@ -110,26 +116,13 @@ class NewsFetchDetailsAPI(APIView):
         
         lda = pickle.load(open(lda_model_path, 'rb'))
         count_vectorizer_lda = pickle.load(open(count_vectorizer_lda_path, 'rb'))
-        # count_vectorizer = CountVectorizer()
-        preprocessed_sentence = self._preprocess_keywords_text([sentences])
-        pretty_printer = PrettyPrint()
-        pretty_print_text = pretty_printer.pretty_print_tokenized_document(preprocessed_sentence)
+        preprocessed_sentences = self._preprocess_keywords_text([sentences])
 
-        print(f"Preprocessed sentence: {pretty_print_text}")
-
-        top_words = keywords_extraction.perform_keyword_extraction(lda, count_vectorizer_lda, [pretty_print_text])
+        lemmatized_sentences = [PreprocessingTemplate.perform_lemmatizer(word) for word in preprocessed_sentences]
         
-
-        # indonesian_stopwords = set(stopwords.words("indonesian"))
-        # indonesian_stopwords.union({
-        #     "republika", "photo", "wib", "indonesia", "bandung", 
-        #     "peserta", "co", "peserta", "baca", "kota", 
-        #     "peristiwa", "rakyat", "jalan", "balai", 
-        #     "januari", "februari", "maret", "april", "mei",
-        #     "juni", "juli", "agustus", "september", "oktober", 
-        #     "november", "desember", "berita", "dapat", "warga",
-        #     "pulau", "kota"
-        # })
+        pretty_printer = PrettyPrint()
+        pretty_print_text = pretty_printer.pretty_print_tokenized_document(lemmatized_sentences)
+        top_words = keywords_extraction.perform_keyword_extraction(lda, count_vectorizer_lda, [pretty_print_text])
     
         return top_words
 
@@ -151,9 +144,9 @@ class NewsFetchDetailsAPI(APIView):
         summarized_news = self._get_summarized_news(preprocessed_relevant_paragraphs)
         pretty_print = PrettyPrint()
         
-        pretty_printed_relevant_paragraphs = pretty_print.pretty_print_tokenized_document(relevant_paragraphs)
+        # pretty_printed_relevant_paragraphs = pretty_print.pretty_print_tokenized_document(relevant_paragraphs)
         pretty_printed_summarized_news = pretty_print.pretty_print_tokenized_document(summarized_news)
-        top_words = self._get_keywords(pretty_printed_relevant_paragraphs)
+        top_words = self._get_keywords(pretty_printed_summarized_news)
 
         summarized_text_json = json.dumps({
             "summarized_text": pretty_printed_summarized_news,
