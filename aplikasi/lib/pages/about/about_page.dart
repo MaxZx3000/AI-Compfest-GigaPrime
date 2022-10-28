@@ -28,7 +28,7 @@ class AboutPage extends StatelessWidget{
           Text(
             "Aplikasi ini bertujuan untuk mendapatkan informasi detail mengenai" +
               " tempat pariwisata di Indonesia menggunakan artificial intelligence." +
-              " Tidak hanya itu, user juga bisa mendapatkan rekomendasi berdasarkan keyword pada pencarian" +
+              " Tidak hanya itu, user juga bisa mendapatkan rekomendasi berdasarkan keyword, lokasi, harga tiket, " +
               " dan rating tempat pariwisata yang diberikan. Sebagai tambahan, terdapat fitur time series," +
               " yang bertujuan untuk mendapatkan insight terkait forecasting pada suatu kasus tourism",
             textAlign: TextAlign.center,

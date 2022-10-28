@@ -3,7 +3,7 @@ from ..templates.pretty_print import PrettyPrint
 from sklearn.feature_extraction.text import CountVectorizer
 
 class KeywordExtraction:
-    def _get_top_words_from_range_of_topics(self, model, feature_names, n_top_words = 12):
+    def _get_top_words_from_range_of_topics(self, model, feature_names, n_top_words = 8):
         top_features_per_document = []
         for topic_idx, topic in enumerate(model.components_):
             top_features_ind = topic.argsort()[: -n_top_words - 1 : -1]
